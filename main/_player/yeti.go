@@ -1,6 +1,6 @@
 components {
-  id: "yeti"
-  component: "/scripts/yeti.script"
+  id: "freeMode"
+  component: "/_scripts/yeti.script"
 }
 embedded_components {
   id: "sprite"

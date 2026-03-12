@@ -4,7 +4,7 @@ embedded_instances {
   id: "SceneParent"
   data: "components {\n"
   "  id: \"Main\"\n"
-  "  component: \"/scripts/Main.script\"\n"
+  "  component: \"/_scripts/Main.script\"\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"MiniGame\"\n"

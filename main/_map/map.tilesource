@@ -1,7 +1,7 @@
-image: "/assets/map.png"
+image: "/_assets/map.png"
 tile_width: 64
 tile_height: 64
-collision: "/assets/map.png"
+collision: "/_assets/map.png"
 convex_hulls {
   index: 0
   count: 4
