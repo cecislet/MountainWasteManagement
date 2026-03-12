@@ -1,0 +1,35 @@
+local GameManager = require("scripts.GameManager")
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	msg.post("#StartPage", "load")
+	GameManager.set_current_level("StartPage")
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender, "init")
+		msg.post(sender, "enable")
+	end
+	
+	if message_id == hash("change_level") then
+		if GameManager.get_current_level == "StartPage" then
+			switch_to_level("StartPage", "MiniGame")
+		end
+	end
+end
+
+function proxy_exists(proxy_name)
+	return proxy_name == "StartPage" or proxy_name == "MiniGame"
+end
+
+function switch_to_level(current_level, next_level)
+	if not proxy_exists(current_level) or not proxy_exists(next_level) then
+		print("Invalid level name: ", current_level, next_level)
+	end
+
+	msg.post("main:/" .. current_level, "disable")
+	msg.post("main:/" .. current_level, "unload")
+	msg.post("main:/" .. next_level, "load")
+	GameManager.set_current_level(next_level)
+end	
