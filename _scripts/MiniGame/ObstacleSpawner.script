@@ -1,0 +1,16 @@
+local function spawn_obstacle(self)
+	-- Definisci l'intervallo orizzontale (es. tra x=50 e x=910 per uno schermo da 960)
+	local x_pos = math.random(50, 910)
+	local y_pos = 700 -- Appena fuori dallo schermo in alto
+	local pos = vmath.vector3(x_pos, y_pos, 0)
+
+	-- Crea l'ostacolo tramite la factory
+	factory.create("MiniGame:obstacleFactory/#obstacle_factory", pos)
+end
+
+function init(self)
+	-- Inizializza il generatore di numeri casuali
+	math.randomseed(os.time())
+	-- Timer che chiama spawn_obstacle ogni 1.5 secondi
+	timer.delay(1.5, true, spawn_obstacle)
+end
