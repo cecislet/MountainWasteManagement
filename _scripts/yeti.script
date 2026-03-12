@@ -1,5 +1,5 @@
 local speed = 300
-local GameManager = require("scripts.GameManager")
+local GameManager = require("_scripts.GameManager")
 local current_level_name
 local WINDOW_WIDTH = tonumber(sys.get_config("display.width"))
 local WINDOW_HEIGHT = tonumber(sys.get_config("display.height"))
@@ -9,6 +9,8 @@ function init(self)
 	current_level_name = GameManager.get_current_level()
 	self.dir = vmath.vector3()
 	self.current_anim = nil
+	pprint("height: ".. WINDOW_HEIGHT)
+	pprint("width: " .. WINDOW_WIDTH)
 end
 
 function final(self)
@@ -18,7 +20,7 @@ function final(self)
 end
 
 function update(self, dt)
-	if vmath.length_sqr(self.dir) > 1 then
+	if vmath.length_sqr(self.dir) > 0 then
 		self.dir = vmath.normalize(self.dir)
 	end
 	local p = go.get_position()
@@ -41,16 +43,12 @@ function update(self, dt)
 	end
 	--pprint("new pos " .. new_p)
 	go.set_position(new_p)
-	local anim = hash("front")
 
-	if self.dir.x > 0 then
-		anim = hash("right")
-	elseif self.dir.x < 0 then
-		anim = hash("left")
-	elseif self.dir.y > 0 then
-		anim = hash("back")
-	elseif self.dir.y < 0 then
-		anim = hash("front")
+	local anim = hash("front")
+	if self.dir.x > 0 then anim = hash("right")
+	elseif self.dir.x < 0 then anim = hash("left")
+	elseif self.dir.y > 0 then anim = hash("back")
+	elseif self.dir.y < 0 then anim = hash("front")
 	end
 
 	if anim ~= self.current_anim then
@@ -77,9 +75,9 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message == hash("trigger_response") and
-	message.other_group == hash("house") then
-		msg.post("main:/Main#Main", "change_level")
+	if message_id == hash("trigger_response") and
+	message.other_group == hash("House") then
+		msg.post("main:/SceneParent#Main", "change_level")		
 	end
 end
 
