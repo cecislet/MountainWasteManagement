@@ -1,0 +1,15 @@
+animations {
+  id: "background"
+  images {
+    image: "/_assets/MiniGame/map/bg_1.png"
+  }
+  images {
+    image: "/_assets/MiniGame/map/bg_2.png"
+  }
+  images {
+    image: "/_assets/MiniGame/map/bg_3.png"
+  }
+  playback: PLAYBACK_LOOP_PINGPONG
+  fps: 5
+}
+extrude_borders: 2
