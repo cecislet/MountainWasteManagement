@@ -1,7 +1,7 @@
 name: "StartPage"
 instances {
   id: "yeti"
-  prototype: "/main/player/yeti.go"
+  prototype: "/main/_player/yeti.go"
   position {
     x: 356.0
     y: 147.0
@@ -17,13 +17,13 @@ embedded_instances {
   id: "map"
   data: "components {\n"
   "  id: \"map\"\n"
-  "  component: \"/main/map/map.tilemap\"\n"
+  "  component: \"/main/_map/map.tilemap\"\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"MiniGameHouse\"\n"
   "  type: \"collisionobject\"\n"
-  "  data: \"type: COLLISION_OBJECT_TYPE_DYNAMIC\\n"
-  "mass: 1.0\\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
+  "mass: 0.0\\n"
   "friction: 0.1\\n"
   "restitution: 0.5\\n"
   "group: \\\"House\\\"\\n"
