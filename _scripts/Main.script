@@ -1,0 +1,34 @@
+local GameManager = require("_scripts.GameManager")
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	msg.post("#StartPage", "load")
+	GameManager.set_current_level("StartPage")
+end
+
+function switch_to_level(self, current_level, next_level)
+	-- Scarica il vecchio
+	msg.post("#" .. current_level, "unload")
+	-- Carica il nuovo
+	msg.post("#" .. next_level, "load")
+
+	-- Nota: Non facciamo il setup degli script qui perché 
+	-- la collezione non è ancora stata caricata fisicamente.
+	-- Lo faremo nel proxy_loaded.
+	GameManager.set_current_level(next_level)
+end	
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender, "enable")
+	end
+
+	if message_id == hash("change_level") then
+		local current = GameManager.get_current_level()
+		if current == "StartPage" then
+			switch_to_level(self, "StartPage", "MiniGame")
+		else
+			switch_to_level(self, "MiniGame", "StartPage")
+		end
+	end
+end
