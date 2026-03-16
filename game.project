@@ -21,3 +21,6 @@ scale_mode = stretch
 [project]
 title = MountainWasteManagement
 
+[input]
+game_binding = /_input/game.input_bindingc
+
