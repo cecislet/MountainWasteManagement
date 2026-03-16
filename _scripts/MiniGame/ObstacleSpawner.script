@@ -1,16 +1,72 @@
+local state = require "_scripts/MiniGame.Game_State"
+
 local function spawn_obstacle(self)
 	-- Definisci l'intervallo orizzontale (es. tra x=50 e x=910 per uno schermo da 960)
-	local x_pos = math.random(50, 910)
-	local y_pos = 700 -- Appena fuori dallo schermo in alto
-	local pos = vmath.vector3(x_pos, y_pos, 0)
+	local x_pos = math.random(10, 760)
+	local pos = vmath.vector3(x_pos, -50, 0.1)
+	local obstacle 
+	if math.random(1,2) == 1 then
+		obstacle = "#tree_Factory"
+		print("Spawning tree")
+	else
+		obstacle = "#rock_Factory"
+		print("Spawning rock")
+	end
+	factory.create(obstacle, pos)
+	
+end
 
-	-- Crea l'ostacolo tramite la factory
-	factory.create("MiniGame:obstacleFactory/#obstacle_factory", pos)
+-- Funzione che aumenta la difficoltà
+local function aumenta_difficolta(self)
+	if not state.active then 
+		return
+	end	
+	
+	if self.spawn_interval == 0.3 then
+		for i = 1, 4 do
+			spawn_obstacle()
+		end
+	end
+	-- Riduciamo l'intervallo (es. togliamo 0.2 secondi ogni volta)
+	self.spawn_interval = self.spawn_interval - 0.05
+
+	-- Limite minimo per non rendere il gioco impossibile (es. 0.4 secondi)
+	if self.spawn_interval < 0.3 then
+		self.spawn_interval = 0.3
+	end
+
+	-- 1. Cancella il vecchio timer di spawn
+	timer.cancel(self.spawn_timer_handle)
+
+	-- 2. Crea il nuovo timer con il tempo aggiornato
+	self.spawn_timer_handle = timer.delay(self.spawn_interval, true, spawn_obstacle)
+
+	print("Difficoltà aumentata! Nuovo intervallo: " .. self.spawn_interval)
 end
 
 function init(self)
-	-- Inizializza il generatore di numeri casuali
 	math.randomseed(os.time())
-	-- Timer che chiama spawn_obstacle ogni 1.5 secondi
-	timer.delay(1.5, true, spawn_obstacle)
+	self.spawn_interval = 1.0
+	self.spawn_timer_handle = timer.delay(self.spawn_interval, true, spawn_obstacle)
+	
+	timer.delay(1, true, aumenta_difficolta)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("stop_spawning") then
+		-- 1. Cancella il timer che crea gli ostacoli
+		if self.spawn_timer_handle then
+			timer.cancel(self.spawn_timer_handle)
+			self.spawn_timer_handle = nil
+		end
+
+		-- 2. Cancella il timer della difficoltà (quello dei 30 secondi)
+		-- Supponendo che tu lo abbia salvato in self.diff_timer_handle
+		if self.diff_timer_handle then
+			timer.cancel(self.diff_timer_handle)
+			self.diff_timer_handle = nil
+		end
+
+		print("Spawner fermato dal giocatore.")
+	end
 end

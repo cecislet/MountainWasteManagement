@@ -1,6 +1,7 @@
 local WINDOW_WIDTH = tonumber(sys.get_config("display.width"))
 local GameManager = require("_scripts.GameManager")
 local speed = 500
+local state = require "_scripts/MiniGame.Game_State"
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
@@ -55,9 +56,10 @@ end
 function on_message(self, message_id, message, sender)
 	-- Se il giocatore tocca un trigger (l'ostacolo)
 	if message_id == hash("trigger_response") and message.enter then
-		print("Game Over! Hai preso un albero.")
-		-- Qui puoi ricaricare la scena o fermare il gioco
-		-- msg.post("#", "disable") 
+		print("Game Over! Hai preso un ostacolo")
+		msg.post("spawner#ObstacleSpawner", "stop_spawning")
+		state.active = false
+		msg.post("#", "disable") 
 	end
 end
 
