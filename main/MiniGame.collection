@@ -15,8 +15,8 @@ instances {
   id: "yeti_miniGame"
   prototype: "/main/_player/yeti_miniGame.go"
   position {
-    x: 386.0
-    y: 501.0
+    x: 384.0
+    y: 403.0
     z: 0.1
   }
   scale3 {
@@ -26,11 +26,21 @@ instances {
 }
 scale_along_z: 0
 embedded_instances {
-  id: "obstacleFactory"
-  data: "embedded_components {\n"
-  "  id: \"obstacle_Factory\"\n"
+  id: "spawner"
+  data: "components {\n"
+  "  id: \"ObstacleSpawner\"\n"
+  "  component: \"/_scripts/MiniGame/ObstacleSpawner.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"rock_Factory\"\n"
   "  type: \"factory\"\n"
-  "  data: \"prototype: \\\"/main/_player/yeti.go\\\"\\n"
+  "  data: \"prototype: \\\"/main/_obstacles/Rock.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"tree_Factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/_obstacles/Tree.go\\\"\\n"
   "\"\n"
   "}\n"
   ""
