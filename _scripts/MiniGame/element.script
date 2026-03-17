@@ -1,0 +1,32 @@
+go.property("speed", 300)
+local state = require "_scripts/MiniGame.Game_State"
+local TARGET_GROUPS = {
+	[hash("Tree")] = true,
+	[hash("Rock")] = true,
+	[hash("FinishLine")] = true,
+	[hash("Coin")] = true
+}
+
+function update(self, dt)
+	if not state.active then
+		return
+	end
+	local p = go.get_position()
+	p.y = p.y + (self.speed * dt)
+	go.set_position(p)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("trigger_response") and message.enter then
+		local other_group = message.other_group
+
+		if other_group == hash("Player") or
+			other_group == hash("Map") then
+			go.delete()
+		elseif TARGET_GROUPS[other_group] then
+			if go.get_id() > message.other_id then
+				go.delete()
+			end
+		end
+	end
+end
