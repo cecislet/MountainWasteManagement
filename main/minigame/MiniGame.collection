@@ -1,7 +1,7 @@
 name: "MiniGame"
 instances {
   id: "MiniGameMap"
-  prototype: "/main/MiniGameMap.go"
+  prototype: "/main/minigame/MiniGameMap.go"
   position {
     x: 384.0
     y: 384.0

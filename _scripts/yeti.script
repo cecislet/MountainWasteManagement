@@ -75,9 +75,15 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("trigger_response") and
-	message.other_group == hash("House") then
-		msg.post("main:/SceneParent#Main", "change_level")		
+	-- AGGIUNGI QUESTA RIGA PER IL TEST:
+	if message_id == hash("trigger_response") then
+		print("Ho toccato qualcosa che appartiene al gruppo: " .. tostring(message.other_group))
+
+		if message.other_group == hash("Game") then
+			msg.post("main:/SceneParent#Main", "change_level", { target = "MiniGame" })
+		elseif message.other_group == hash("School") then
+			msg.post("main:/SceneParent#Main", "change_level", { target = "School" })
+		end
 	end
 end
 

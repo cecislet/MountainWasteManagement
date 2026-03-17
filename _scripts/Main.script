@@ -20,15 +20,16 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("proxy_loaded") then
-		msg.post(sender, "enable")
+		msg.post(sender, "enable") 
 	end
 
 	if message_id == hash("change_level") then
 		local current = GameManager.get_current_level()
-		if current == "StartPage" then
-			switch_to_level(self, "StartPage", "MiniGame")
-		else
-			switch_to_level(self, "MiniGame", "StartPage")
+		local next_level = message.target -- Legge il target inviato dallo yeti
+
+		-- Se il target esiste ed è diverso dal livello attuale, cambia 
+		if next_level and next_level ~= current then
+			switch_to_level(self, current, next_level)
 		end
 	end
 end
