@@ -1,6 +1,6 @@
 components {
   id: "obstacle"
-  component: "/_scripts/MiniGame/obstacle.script"
+  component: "/_scripts/MiniGame/element.script"
 }
 embedded_components {
   id: "sprite"
@@ -9,7 +9,7 @@ embedded_components {
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/main/_obstacles/obstacles.atlas\"\n"
+  "  texture: \"/main/_miniGame/_obstacles/obstacles.atlas\"\n"
   "}\n"
   ""
   scale {
@@ -27,6 +27,9 @@ embedded_components {
   "group: \"Tree\"\n"
   "mask: \"Player\"\n"
   "mask: \"Map\"\n"
+  "mask: \"Tree\"\n"
+  "mask: \"Rock\"\n"
+  "mask: \"Coin\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"

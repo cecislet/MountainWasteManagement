@@ -5,7 +5,7 @@ embedded_components {
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/main/MiniGameMap.atlas\"\n"
+  "  texture: \"/main/_miniGame/MiniGameMap.atlas\"\n"
   "}\n"
   ""
 }
@@ -19,6 +19,8 @@ embedded_components {
   "group: \"Map\"\n"
   "mask: \"Tree\"\n"
   "mask: \"Rock\"\n"
+  "mask: \"Coin\"\n"
+  "mask: \"FinishLine\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
