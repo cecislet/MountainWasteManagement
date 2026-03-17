@@ -1,0 +1,13 @@
+images {
+  image: "/_assets/School/buttons/exit.png"
+}
+images {
+  image: "/_assets/School/buttons/neutral.png"
+}
+images {
+  image: "/_assets/School/buttons/right.png"
+}
+images {
+  image: "/_assets/School/buttons/wrong.png"
+}
+extrude_borders: 2

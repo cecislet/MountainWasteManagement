@@ -88,15 +88,24 @@ function on_message(self, message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
+	local used_input = false -- Track if we actually used the input
+
 	if action_id == hash("down") then
 		self.dir.y = -1
+		used_input = true
 	elseif action_id == hash("up") then
 		self.dir.y = 1
+		used_input = true
 	elseif action_id == hash("left") then
 		self.dir.x = -1
+		used_input = true
 	elseif action_id == hash("right") then
 		self.dir.x = 1
+		used_input = true
 	end
+
+	-- IMPORTANT: Return false so the "touch" action can fall through to the GUI
+	return used_input 
 end
 
 function on_reload(self)

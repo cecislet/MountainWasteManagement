@@ -1,0 +1,80 @@
+function init(self)
+	-- 1. Store the nodes
+	self.quiz_buttons = {
+		gui.get_node("button1"),
+		gui.get_node("button2"),
+		gui.get_node("button3"),
+		gui.get_node("button4")
+	}
+	self.exit_button = gui.get_node("exit")
+
+	-- 2. Define which button is correct (e.g., if button 2 is "15000 liters")
+	self.correct_index = 2 
+
+	-- 3. Flag to prevent clicking after an answer is chosen
+	self.answered = false
+
+	msg.post(".", "acquire_input_focus")
+end
+
+function on_input(self, action_id, action)
+	-- 1. Check for touch/click first
+	if action_id == hash("touch") and action.pressed then
+
+		-- 2. EXIT BUTTON: Always check this, regardless of if they answered
+		if gui.pick_node(self.exit_button, action.x, action.y) then
+			print("Exit button clicked!")
+			msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage" })
+			return -- Stop here so we don't check the quiz buttons
+		end
+
+		-- 3. QUIZ BUTTONS: Only check these if they HAVEN'T answered yet
+		if not self.answered then
+			for i, node in ipairs(self.quiz_buttons) do
+				if gui.pick_node(node, action.x, action.y) then
+					print("Answer selected!")
+					self.answered = true
+					reveal_answers(self) -- The function we made earlier
+					break
+				end
+			end
+		end
+	end
+end
+
+-- Helper function to change all textures at once
+function reveal_answers(self)
+	for i, node in ipairs(self.quiz_buttons) do
+		if i == self.correct_index then
+			gui.play_flipbook(node, hash("right"))
+		else
+			gui.play_flipbook(node, hash("wrong"))
+		end
+	end
+end
+
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end
