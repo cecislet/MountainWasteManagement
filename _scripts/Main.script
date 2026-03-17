@@ -6,29 +6,33 @@ function init(self)
 	GameManager.set_current_level("StartPage")
 end
 
-function switch_to_level(self, current_level, next_level)
-	-- Scarica il vecchio
+local function switch_to_level(self, current_level, next_level)
 	msg.post("#" .. current_level, "unload")
-	-- Carica il nuovo
 	msg.post("#" .. next_level, "load")
-
-	-- Nota: Non facciamo il setup degli script qui perché 
-	-- la collezione non è ancora stata caricata fisicamente.
-	-- Lo faremo nel proxy_loaded.
 	GameManager.set_current_level(next_level)
 end	
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("proxy_loaded") then
 		msg.post(sender, "enable")
+		if self.pending_end_message then
+			msg.post("Menu:/Gui#Menu", "show_end_menu", self.pending_end_message)
+			self.pending_end_message = nil
+		end
 	end
 
 	if message_id == hash("change_level") then
 		local current = GameManager.get_current_level()
-		if current == "StartPage" then
-			switch_to_level(self, "StartPage", "MiniGame")
-		else
-			switch_to_level(self, "MiniGame", "StartPage")
+		local next_level = message.target -- Legge il target inviato dallo yeti
+
+		if next_level and next_level ~= current then
+			switch_to_level(self, current, next_level)
 		end
+	elseif message_id == hash("show_end_menu") then
+		self.pending_end_message = {
+			coins = message.coins,
+			reason = message.reason
+		}
+		switch_to_level(self, "MiniGame", "MiniGameMenu")
 	end
 end
