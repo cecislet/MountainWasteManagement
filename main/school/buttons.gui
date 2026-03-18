@@ -1,4 +1,4 @@
-script: "/_scripts/buttons.gui_script"
+script: "/_scripts/School/buttons.gui_script"
 fonts {
   name: "pixelFont"
   font: "/_assets/fonts/pixelFont.font"
@@ -27,7 +27,11 @@ nodes {
 nodes {
   position {
     x: 1.330071
-    y: 6.676615
+    y: 10.009949
+  }
+  scale {
+    x: 0.585321
+    y: 0.638711
   }
   size {
     x: 200.0
@@ -66,7 +70,11 @@ nodes {
 nodes {
   position {
     x: 1.330071
-    y: 6.676615
+    y: 10.009949
+  }
+  scale {
+    x: 0.585321
+    y: 0.638711
   }
   size {
     x: 200.0
@@ -105,7 +113,11 @@ nodes {
 nodes {
   position {
     x: 1.330071
-    y: 6.676615
+    y: 10.009949
+  }
+  scale {
+    x: 0.585321
+    y: 0.638711
   }
   size {
     x: 200.0
@@ -144,7 +156,11 @@ nodes {
 nodes {
   position {
     x: 1.330071
-    y: 6.676615
+    y: 10.009949
+  }
+  scale {
+    x: 0.585321
+    y: 0.638711
   }
   size {
     x: 200.0

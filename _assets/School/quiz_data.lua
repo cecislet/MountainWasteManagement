@@ -11,6 +11,11 @@ M.questions = {
 		question = "Roughly what percentage of all food produced globally is lost or wasted?",
 		answers = {"5%", "15%", "33%", "60%"},
 		correct_index = 3
+	},
+	{
+		question = "True or False: Frozen foods generally have a higher nutrient loss over time than fresh produce sitting on a shelf.",
+		answers = {"True", "False"},
+		correct_index = 2 -- The answer is False; freezing often preserves nutrients.
 	}
 }
 
