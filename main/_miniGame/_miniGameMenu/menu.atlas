@@ -1,0 +1,10 @@
+images {
+  image: "/_assets/Menu/background.png"
+}
+images {
+  image: "/_assets/Menu/button.png"
+}
+images {
+  image: "/_assets/Menu/NineRect.png"
+}
+extrude_borders: 2
