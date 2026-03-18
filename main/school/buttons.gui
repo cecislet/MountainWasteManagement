@@ -39,7 +39,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "150 liters"
+  text: "placeholder"
   font: "pixelFont"
   id: "text1"
   line_break: true
@@ -78,7 +78,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "1500 liters"
+  text: "placeholder"
   font: "pixelFont"
   id: "text4"
   line_break: true
@@ -117,7 +117,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "15000 liters"
+  text: "placeholder"
   font: "pixelFont"
   id: "text2"
   line_break: true
@@ -156,7 +156,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "150000 liters"
+  text: "placeholder"
   font: "pixelFont"
   id: "text3"
   line_break: true
@@ -198,7 +198,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "What is the water footprint of 1 kg of beef?"
+  text: "placeholder"
   font: "pixelFont"
   id: "questionText"
   line_break: true
