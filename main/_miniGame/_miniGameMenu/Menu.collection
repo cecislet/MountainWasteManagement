@@ -1,0 +1,10 @@
+name: "Menu"
+scale_along_z: 0
+embedded_instances {
+  id: "Gui"
+  data: "components {\n"
+  "  id: \"Menu\"\n"
+  "  component: \"/main/_miniGame/_miniGameMenu/Menu.gui\"\n"
+  "}\n"
+  ""
+}

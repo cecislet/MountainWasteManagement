@@ -1,0 +1,59 @@
+name: "MiniGame"
+instances {
+  id: "MiniGameMap"
+  prototype: "/main/_miniGame/MiniGameMap.go"
+  position {
+    x: 384.0
+    y: 384.0
+  }
+  scale3 {
+    x: 1.2
+    y: 1.335
+  }
+}
+instances {
+  id: "yeti_miniGame"
+  prototype: "/main/_player/yeti_miniGame.go"
+  position {
+    x: 384.0
+    y: 403.0
+    z: 0.1
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "spawner"
+  data: "components {\n"
+  "  id: \"ObstacleSpawner\"\n"
+  "  component: \"/_scripts/MiniGame/ObstacleSpawner.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"rock_Factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/_miniGame/_obstacles/Rock.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"tree_Factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/_miniGame/_obstacles/Tree.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"finish_Factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/_miniGame/finishLine.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"coin_Factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/_miniGame/coin.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}

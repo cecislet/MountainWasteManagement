@@ -1,0 +1,39 @@
+name: "School"
+scale_along_z: 0
+embedded_instances {
+  id: "schoolBg"
+  data: "embedded_components {\n"
+  "  id: \"schoolBg\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"Bg\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/main/school/SchoolBg.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 384.0
+    y: 384.0
+  }
+  scale3 {
+    x: 1.2
+    y: 1.339355
+    z: 1.2
+  }
+}
+embedded_instances {
+  id: "buttonsGui"
+  data: "components {\n"
+  "  id: \"buttons\"\n"
+  "  component: \"/main/school/buttons.gui\"\n"
+  "}\n"
+  ""
+  scale3 {
+    x: 1.002453
+    y: 0.99851
+    z: 0.304819
+  }
+}

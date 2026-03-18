@@ -5,9 +5,8 @@ main_collection = /main/main.collectionc
 shared_state = 1
 
 [display]
-width = 960
-height = 640
-high_dpi = 1
+width = 768
+height = 768
 
 [android]
 input_method = HiddenInputField
@@ -21,4 +20,7 @@ scale_mode = stretch
 
 [project]
 title = MountainWasteManagement
+
+[input]
+game_binding = /_input/game.input_bindingc
 

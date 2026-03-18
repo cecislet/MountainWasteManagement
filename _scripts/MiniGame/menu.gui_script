@@ -1,0 +1,30 @@
+local function handle_game_over(self, message)
+	local coin_label = gui.get_node("coinLabel")
+	local finish_label = gui.get_node("finishLabel")
+	local exit_node = gui.get_node("ExitButton")
+
+	gui.set_text(coin_label, "COINS GAINED: " .. tostring(message.coins))
+	gui.set_text(finish_label, message.reason)		
+	gui.set_enabled(finish_label, true)
+	gui.set_enabled(coin_label, true)
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	gui.set_enabled(gui.get_node("Background"), true)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("show_end_menu") then
+		handle_game_over(self, message)
+	end
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.pressed then
+		local exit_button = gui.get_node("ExitButton")
+		if gui.pick_node(exit_button, action.x, action.y) then
+			msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage"})
+		end
+	end
+end
