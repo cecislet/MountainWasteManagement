@@ -24,5 +24,11 @@ embedded_instances {
   "  data: \"collection: \\\"/main/_miniGame/_miniGameMenu/Menu.collection\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"School\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/main/school/School.collection\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
