@@ -1,0 +1,39 @@
+fonts {
+  name: "pixelFont"
+  font: "/_assets/fonts/pixelFont.font"
+}
+textures {
+  name: "buttons"
+  texture: "/_assets/School/buttons.atlas"
+}
+nodes {
+  size {
+    x: 250.0
+    y: 150.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "button_root"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 230.0
+    y: 130.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "label"
+  line_break: true
+  parent: "button_root"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
