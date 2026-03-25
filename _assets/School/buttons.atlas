@@ -2,12 +2,12 @@ images {
   image: "/_assets/School/buttons/exit.png"
 }
 images {
-  image: "/_assets/School/buttons/neutral.png"
+  image: "/_assets/School/buttons/9SliceButton.png"
 }
 images {
-  image: "/_assets/School/buttons/right.png"
+  image: "/_assets/School/buttons/9SliceRightButton.png"
 }
 images {
-  image: "/_assets/School/buttons/wrong.png"
+  image: "/_assets/School/buttons/9SliceWrongButton.png"
 }
 extrude_borders: 2

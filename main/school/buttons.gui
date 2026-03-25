@@ -1,4 +1,4 @@
-script: "/_scripts/buttons.gui_script"
+script: "/_scripts/School/buttons.gui_script"
 fonts {
   name: "pixelFont"
   font: "/_assets/fonts/pixelFont.font"
@@ -6,204 +6,6 @@ fonts {
 textures {
   name: "buttons"
   texture: "/_assets/School/buttons.atlas"
-}
-nodes {
-  position {
-    x: 133.90773
-    y: 345.18735
-    z: 0.1
-  }
-  scale {
-    x: 1.5
-    y: 1.5
-    z: 1.0E-6
-  }
-  type: TYPE_BOX
-  texture: "buttons/neutral"
-  id: "button1"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
-    x: 1.330071
-    y: 6.676615
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "150 liters"
-  font: "pixelFont"
-  id: "text1"
-  line_break: true
-  parent: "button1"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 343.2251
-    y: 233.285
-    z: 0.1
-  }
-  scale {
-    x: 1.5
-    y: 1.5
-    z: 1.0E-6
-  }
-  type: TYPE_BOX
-  texture: "buttons/neutral"
-  id: "button4"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
-    x: 1.330071
-    y: 6.676615
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "1500 liters"
-  font: "pixelFont"
-  id: "text4"
-  line_break: true
-  parent: "button4"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 342.90744
-    y: 345.18735
-    z: 0.1
-  }
-  scale {
-    x: 1.5
-    y: 1.5
-    z: 1.0E-6
-  }
-  type: TYPE_BOX
-  texture: "buttons/neutral"
-  id: "button2"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
-    x: 1.330071
-    y: 6.676615
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "15000 liters"
-  font: "pixelFont"
-  id: "text2"
-  line_break: true
-  parent: "button2"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 132.84575
-    y: 234.15793
-    z: 0.1
-  }
-  scale {
-    x: 1.5
-    y: 1.5
-    z: 1.0E-6
-  }
-  type: TYPE_BOX
-  texture: "buttons/neutral"
-  id: "button3"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
-    x: 1.330071
-    y: 6.676615
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "150000 liters"
-  font: "pixelFont"
-  id: "text3"
-  line_break: true
-  parent: "button3"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 239.29619
-    y: 497.71222
-    z: 0.1
-  }
-  scale {
-    x: 3.0
-    y: 3.0
-    z: 0.5
-  }
-  type: TYPE_BOX
-  texture: "buttons/neutral"
-  id: "question"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
-    y: 9.890068
-  }
-  scale {
-    x: 0.567744
-    y: 0.624594
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "What is the water footprint of 1 kg of beef?"
-  font: "pixelFont"
-  id: "questionText"
-  line_break: true
-  parent: "question"
-  inherit_alpha: true
 }
 nodes {
   position {
@@ -219,6 +21,143 @@ nodes {
   id: "exit"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 148.6354
+    y: 292.43573
+  }
+  type: TYPE_TEMPLATE
+  id: "button1"
+  inherit_alpha: true
+  template: "/_assets/School/button_template.gui"
+}
+nodes {
+  position {
+    y: 29.043274
+  }
+  type: TYPE_BOX
+  id: "button1/button_root"
+  parent: "button1"
+  overridden_fields: 1
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 230.0
+    y: 130.0
+  }
+  type: TYPE_TEXT
+  id: "button1/label"
+  parent: "button1/button_root"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 275.32465
+    y: 428.63867
+  }
+  type: TYPE_TEMPLATE
+  id: "question"
+  inherit_alpha: true
+  template: "/_assets/School/button_template.gui"
+}
+nodes {
+  position {
+    y: 84.12534
+  }
+  size {
+    x: 400.0
+    y: 200.0
+  }
+  type: TYPE_BOX
+  id: "question/button_root"
+  parent: "question"
+  overridden_fields: 1
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 380.0
+    y: 180.0
+  }
+  type: TYPE_TEXT
+  id: "question/label"
+  parent: "question/button_root"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  position {
+    x: -9.97553
+  }
+  type: TYPE_TEMPLATE
+  id: "button2"
+  inherit_alpha: true
+  template: "/_assets/School/button_template.gui"
+}
+nodes {
+  position {
+    x: 424.95758
+    y: 322.4805
+  }
+  type: TYPE_BOX
+  id: "button2/button_root"
+  parent: "button2"
+  overridden_fields: 1
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "button2/label"
+  parent: "button2/button_root"
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 148.6354
+    y: 154.2298
+  }
+  type: TYPE_TEMPLATE
+  id: "button3"
+  inherit_alpha: true
+  template: "/_assets/School/button_template.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "button3/button_root"
+  parent: "button3"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "button3/label"
+  parent: "button3/button_root"
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 416.97717
+    y: 152.22682
+  }
+  type: TYPE_TEMPLATE
+  id: "button4"
+  inherit_alpha: true
+  template: "/_assets/School/button_template.gui"
+}
+nodes {
+  type: TYPE_BOX
+  id: "button4/button_root"
+  parent: "button4"
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "button4/label"
+  parent: "button4/button_root"
+  template_node_child: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
