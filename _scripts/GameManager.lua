@@ -1,7 +1,8 @@
 local M = {
 	current_level = "",
 	money_amount = 0,
-	knowledge_amount = 0
+	knowledge_amount = 0,
+	hunger_amount = 100
 }
 
 function M.set_current_level(new_level)

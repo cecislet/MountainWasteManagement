@@ -1,0 +1,70 @@
+script: "/_ui/hud.gui_script"
+fonts {
+  name: "pixelFont"
+  font: "/_assets/fonts/pixelFont.font"
+}
+nodes {
+  position {
+    x: 568.0
+    y: 768.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "money_text"
+  pivot: PIVOT_NE
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 368.0
+    y: 768.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "knowledge_text"
+  pivot: PIVOT_NE
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 768.0
+    y: 768.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "hunger_text"
+  pivot: PIVOT_NE
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
