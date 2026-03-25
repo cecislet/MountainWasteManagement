@@ -3,14 +3,18 @@ fonts {
   name: "pixelFont"
   font: "/_assets/fonts/pixelFont.font"
 }
+textures {
+  name: "icons"
+  texture: "/_assets/icons/icons.atlas"
+}
 nodes {
   position {
-    x: 568.0
-    y: 768.0
+    x: 512.0
+    y: 714.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 80.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -18,20 +22,19 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "<text>"
+  text: "money"
   font: "pixelFont"
   id: "money_text"
-  pivot: PIVOT_NE
   inherit_alpha: true
 }
 nodes {
   position {
-    x: 368.0
-    y: 768.0
+    x: 329.0
+    y: 713.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 80.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -39,20 +42,19 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "<text>"
+  text: "know"
   font: "pixelFont"
   id: "knowledge_text"
-  pivot: PIVOT_NE
   inherit_alpha: true
 }
 nodes {
   position {
-    x: 768.0
-    y: 768.0
+    x: 700.0
+    y: 712.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 80.0
+    y: 80.0
   }
   color {
     x: 0.0
@@ -60,11 +62,63 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "<text>"
+  text: "hunger"
   font: "pixelFont"
   id: "hunger_text"
-  pivot: PIVOT_NE
   inherit_alpha: true
+}
+nodes {
+  position {
+    x: 463.0
+    y: 710.0
+  }
+  size {
+    x: 580.0
+    y: 100.0
+  }
+  color {
+    x: 0.3019608
+    y: 0.4
+    z: 0.8
+  }
+  type: TYPE_BOX
+  id: "hud_bg"
+  inherit_alpha: true
+  alpha: 0.5
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 421.0
+    y: 711.0
+  }
+  type: TYPE_BOX
+  texture: "icons/money"
+  id: "money_icon"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 606.0
+    y: 710.0
+  }
+  type: TYPE_BOX
+  texture: "icons/food"
+  id: "hunger_icon"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 235.0
+    y: 710.0
+  }
+  type: TYPE_BOX
+  texture: "icons/knowledge"
+  id: "know_icon"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

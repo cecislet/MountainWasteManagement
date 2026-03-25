@@ -1,0 +1,10 @@
+images {
+  image: "/_assets/icons/food.png"
+}
+images {
+  image: "/_assets/icons/knowledge.png"
+}
+images {
+  image: "/_assets/icons/money.png"
+}
+extrude_borders: 2

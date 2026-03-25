@@ -37,3 +37,11 @@ embedded_instances {
     z: 0.304819
   }
 }
+embedded_instances {
+  id: "ui_handler"
+  data: "components {\n"
+  "  id: \"hud\"\n"
+  "  component: \"/_assets/hud.gui\"\n"
+  "}\n"
+  ""
+}
