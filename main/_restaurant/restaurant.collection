@@ -1,0 +1,10 @@
+name: "restaurant"
+scale_along_z: 0
+embedded_instances {
+  id: "map"
+  data: "components {\n"
+  "  id: \"restaurantMap\"\n"
+  "  component: \"/main/_map/restaurantMap.tilemap\"\n"
+  "}\n"
+  ""
+}
