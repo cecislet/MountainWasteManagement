@@ -1,8 +1,0 @@
-animations {
-  id: "Bg"
-  images {
-    image: "/_assets/School/background/SchoolBg.png"
-  }
-  playback: PLAYBACK_LOOP_FORWARD
-}
-extrude_borders: 2
