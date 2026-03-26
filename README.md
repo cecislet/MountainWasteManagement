@@ -6,6 +6,8 @@ The settings in ["game.project"](defold://open?path=/game.project) are all the d
 
 Check out [the documentation pages](https://defold.com/learn) for examples, tutorials, manuals and API docs.
 
+https://cecislet.github.io/MountainWasteManagement/
+
 If you run into trouble, help is available in [our forum](https://forum.defold.com).
 
 Happy Defolding!
