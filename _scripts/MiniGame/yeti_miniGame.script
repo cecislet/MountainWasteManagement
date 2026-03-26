@@ -47,6 +47,7 @@ function on_message(self, message_id, message, sender)
 			GameManager.money_amount = GameManager.money_amount + gainedCoins
 			msg.post("#", "disable")
 			if group == hash("Tree") or group == hash("Rock") then
+				GameManager.hunger_amount = GameManager.hunger_amount - 10
 				print("Game Over! You smashed yourself against an obstacle")
 				data.reason = "GAME OVER!!!!!"
 			elseif group == hash("FinishLine") then
