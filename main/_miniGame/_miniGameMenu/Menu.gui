@@ -3,13 +3,29 @@ fonts {
   name: "default"
   font: "/builtins/fonts/default.font"
 }
+fonts {
+  name: "pixelFont"
+  font: "/_assets/fonts/pixelFont.font"
+}
 textures {
   name: "menu"
   texture: "/main/_miniGame/_miniGameMenu/menu.atlas"
 }
+textures {
+  name: "buttons"
+  texture: "/_assets/School/buttons.atlas"
+}
+textures {
+  name: "icons"
+  texture: "/_assets/icons/icons.atlas"
+}
+textures {
+  name: "MiniGameMap"
+  texture: "/main/_miniGame/MiniGameMap.atlas"
+}
 nodes {
   position {
-    x: 384.0
+    x: 385.0
     y: 384.0
   }
   size {
@@ -17,7 +33,7 @@ nodes {
     y: 768.0
   }
   type: TYPE_BOX
-  texture: "menu/background"
+  texture: "MiniGameMap/background"
   id: "Background"
   inherit_alpha: true
 }
@@ -25,23 +41,23 @@ nodes {
   position {
     y: -198.0
   }
-  scale {
-    x: 5.0
-    y: 5.0
+  size {
+    x: 200.0
+    y: 100.0
   }
   type: TYPE_BOX
-  texture: "menu/button"
+  texture: "buttons/9SliceButton"
   id: "ExitButton"
   parent: "Background"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
 }
 nodes {
-  scale {
-    x: 0.6
-    y: 0.6
-    z: 0.6
-  }
   size {
     x: 200.0
     y: 100.0
@@ -53,7 +69,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "EXIT"
-  font: "default"
+  font: "pixelFont"
   id: "text"
   parent: "ExitButton"
   inherit_alpha: true
@@ -62,27 +78,28 @@ nodes {
   position {
     y: -53.0
   }
-  scale {
-    x: 10.0
-    y: 5.0
+  size {
+    x: 400.0
+    y: 100.0
   }
   type: TYPE_BOX
-  texture: "menu/button"
+  texture: "buttons/9SliceButton"
   id: "Coin_Label"
   parent: "Background"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
 }
 nodes {
   position {
-    x: -2.0
-  }
-  scale {
-    x: 0.194518
-    y: 0.582742
+    x: -50.0
   }
   size {
-    x: 200.0
+    x: 300.0
     y: 100.0
   }
   color {
@@ -92,36 +109,51 @@ nodes {
   }
   type: TYPE_TEXT
   text: "COINS GAINED: "
-  font: "default"
+  font: "pixelFont"
   id: "coinLabel"
+  line_break: true
   parent: "Coin_Label"
   inherit_alpha: true
 }
 nodes {
   position {
-    x: -1.0
-    y: 138.0
+    x: 110.0
+    y: 1.0
   }
-  scale {
-    x: 17.016949
-    y: 5.662388
+  size {
+    x: 64.0
+    y: 64.0
   }
   type: TYPE_BOX
-  texture: "menu/button"
+  texture: "icons/money"
+  id: "coinIcon"
+  parent: "Coin_Label"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 138.0
+  }
+  size {
+    x: 400.0
+    y: 200.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
   id: "box"
   parent: "Background"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
 }
 nodes {
-  scale {
-    x: 0.159712
-    y: 0.258831
-    z: 0.9
-  }
   size {
-    x: 200.0
-    y: 100.0
+    x: 400.0
+    y: 200.0
   }
   color {
     x: 0.0
@@ -129,8 +161,11 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  font: "default"
+  text: "placeholder\n"
+  ""
+  font: "pixelFont"
   id: "finishLabel"
+  line_break: true
   parent: "box"
   inherit_alpha: true
 }
