@@ -183,10 +183,10 @@ archive_location_prefix = archive
 archive_location_suffix = 
 engine_arguments = --verify-graphics-calls=false
 wasm_streaming = 0
-show_fullscreen_button = 1
+show_fullscreen_button = 0
 show_made_with_defold = 1
 show_console_banner = 1
-scale_mode = stretch
+scale_mode = downscale_fit
 transparent_graphics_context = 0
 
 [particle_fx]
