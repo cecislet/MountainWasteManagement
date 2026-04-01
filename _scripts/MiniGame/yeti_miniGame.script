@@ -39,6 +39,7 @@ function on_message(self, message_id, message, sender)
 
 		if group == hash("Coin") then
 			gainedCoins = gainedCoins + 1
+			msg.post("hud_gui#hud", "update_coins", {coins = gainedCoins})
 			print("YEAH: you gained a coin")
 		else
 			local data = {coins = gainedCoins, reason = ""}
