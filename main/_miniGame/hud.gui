@@ -3,6 +3,10 @@ fonts {
   name: "pixelFont"
   font: "/_assets/fonts/pixelFont.font"
 }
+textures {
+  name: "movingButtons"
+  texture: "/main/movingButtons.atlas"
+}
 nodes {
   position {
     x: 54.0
@@ -22,6 +26,39 @@ nodes {
   font: "pixelFont"
   id: "score_label"
   inherit_alpha: true
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "mobileControls"
+  inherit_alpha: true
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 556.0
+    y: 57.0
+  }
+  type: TYPE_BOX
+  texture: "movingButtons/leftbutton"
+  id: "leftButton"
+  parent: "mobileControls"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 671.0
+    y: 57.0
+  }
+  type: TYPE_BOX
+  texture: "movingButtons/rightbutton"
+  id: "rightButton"
+  parent: "mobileControls"
+  size_mode: SIZE_MODE_AUTO
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
