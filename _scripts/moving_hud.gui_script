@@ -1,0 +1,39 @@
+local function handle_button(self, node_id, action, message_to_player)
+	local node = gui.get_node(node_id)
+
+	if gui.pick_node(node, action.x, action.y) then
+		if action.pressed then
+			msg.post("yeti#freeMode", message_to_player, { pressed = true })
+			gui.set_color(node, vmath.vector4(1, 1, 1, 0.5)) 
+		elseif action.released then
+			msg.post("yeti#freeMode", message_to_player, { pressed = false })
+			gui.set_color(node, vmath.vector4(1, 1, 1, 1))
+		end
+	end
+end
+
+function init(self)
+	local mobile_root = gui.get_node("mobileControls")
+
+	local is_mobile = false
+	if sys.get_sys_info().system_name == "HTML5" then
+		local js_code = " /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) "
+		is_mobile = html5.run(js_code) == "true"
+	end
+
+	if is_mobile then
+		gui.set_enabled(mobile_root, true)
+		msg.post(".", "acquire_input_focus")
+	else
+		gui.set_enabled(mobile_root, false)
+	end
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") then
+		handle_button(self, "upButton", action, "move_up")
+		handle_button(self, "downButton", action, "move_down")
+		handle_button(self, "leftButton", action, "move_left")
+		handle_button(self, "rightButton", action, "move_right")
+	end
+end

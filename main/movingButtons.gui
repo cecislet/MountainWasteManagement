@@ -1,0 +1,62 @@
+script: "/_scripts/moving_hud.gui_script"
+textures {
+  name: "movingButtons"
+  texture: "/main/movingButtons.atlas"
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "mobileControls"
+  inherit_alpha: true
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 532.0
+    y: 55.0
+  }
+  type: TYPE_BOX
+  texture: "movingButtons/leftbutton"
+  id: "leftButton"
+  parent: "mobileControls"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 692.0
+    y: 55.0
+  }
+  type: TYPE_BOX
+  texture: "movingButtons/rightbutton"
+  id: "rightButton"
+  parent: "mobileControls"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 612.0
+    y: 133.0
+  }
+  type: TYPE_BOX
+  texture: "movingButtons/upbutton"
+  id: "upButton"
+  parent: "mobileControls"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 612.0
+    y: 55.0
+  }
+  type: TYPE_BOX
+  texture: "movingButtons/downbutton"
+  id: "downButton"
+  parent: "mobileControls"
+  size_mode: SIZE_MODE_AUTO
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
