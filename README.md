@@ -1,15 +1,27 @@
-# Welcome to Defold
+🏔️ Yeti Sustainability Project
+Play the Demo here: https://cecislet.github.io/MountainWasteManagement/
 
-This project was created from the "empty" project template.
+Welcome to the first demo of our interactive educational game! This project combines fast-paced gameplay with essential lessons on Food Waste Management. By blending action-based mechanics with educational rewards, we aim to make learning about sustainability both engaging and necessary for player progress.
 
-The settings in ["game.project"](defold://open?path=/game.project) are all the default. A bootstrap empty ["main.collection"](defold://open?path=/main/main.collection) is included.
+🎮 The Gameplay Loop
+Our project is built around a "hook and reward" cycle designed to keep players learning:
 
-Check out [the documentation pages](https://defold.com/learn) for examples, tutorials, manuals and API docs.
+The Hook (The Ski Lift): A high-energy minigame where players control a Yeti, dodging obstacles and collecting coins for future customization.
 
-https://cecislet.github.io/MountainWasteManagement/
+The Maintenance: Crashing during the minigame reduces health. To keep the Yeti alive and continue playing, players must provide food.
 
-If you run into trouble, help is available in [our forum](https://forum.defold.com).
+The Learning (The School): Food can only be obtained using Knowledge Points, which are earned by completing quizzes on food waste, sustainability, and proper storage.
 
-Happy Defolding!
+🚀 What’s in this Demo?
+Main Hub: The central snowy environment for world navigation.
 
----
+Ski Lift Minigame: A stress test for our movement engine and responsive controls.
+
+The School: An interactive quiz module focused on environmental education.
+
+🗺️ Future Outlook
+We are currently expanding the world to include:
+
+The Shop: A dedicated space to spend coins on Yeti customization and skins.
+
+The Market: A shopping simulation where players learn to read expiration dates, understand labels, and practice smart food storage to minimize waste.
