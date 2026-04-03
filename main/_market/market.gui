@@ -1,4 +1,4 @@
-script: "/_scripts/School/buttons.gui_script"
+script: "/_scripts/Market/market.gui_script"
 fonts {
   name: "pixelFont"
   font: "/_assets/fonts/pixelFont.font"
@@ -6,6 +6,14 @@ fonts {
 textures {
   name: "buttons"
   texture: "/_assets/School/buttons.atlas"
+}
+textures {
+  name: "market"
+  texture: "/_assets/Market/market.atlas"
+}
+textures {
+  name: "food"
+  texture: "/_assets/Market/foods/food.atlas"
 }
 nodes {
   position {
@@ -19,6 +27,7 @@ nodes {
   type: TYPE_BOX
   texture: "buttons/exit"
   id: "exit"
+  layer: "ui"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -30,10 +39,12 @@ nodes {
   size {
     x: 100.0
     y: 50.0
+    z: 0.1
   }
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
   id: "previous"
+  layer: "ui"
   inherit_alpha: true
   slice9 {
     x: 20.0
@@ -67,6 +78,7 @@ nodes {
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
   id: "next"
+  layer: "ui"
   inherit_alpha: true
   slice9 {
     x: 20.0
@@ -87,6 +99,107 @@ nodes {
   line_break: true
   parent: "next"
   inherit_alpha: true
+}
+nodes {
+  position {
+    x: 113.86787
+    y: 726.06696
+    z: 0.1
+  }
+  scale {
+    z: 0.1
+  }
+  type: TYPE_BOX
+  texture: "buttons/info"
+  id: "info"
+  layer: "ui"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  type: TYPE_TEMPLATE
+  id: "food_template"
+  layer: "ui"
+  inherit_alpha: true
+  template: "/_assets/Market/food_template.gui"
+}
+nodes {
+  position {
+    x: -204.0
+    y: 576.0
+  }
+  size {
+    x: 16.0
+    y: 16.0
+  }
+  type: TYPE_BOX
+  id: "food_template/item_template"
+  parent: "food_template"
+  layer: "ui"
+  overridden_fields: 1
+  overridden_fields: 3
+  overridden_fields: 4
+  overridden_fields: 20
+  overridden_fields: 45
+  template_node_child: true
+}
+nodes {
+  type: TYPE_BOX
+  texture: "food/cake_strawberry"
+  id: "food_template/item_icon"
+  parent: "food_template/item_template"
+  overridden_fields: 3
+  overridden_fields: 9
+  template_node_child: true
+}
+nodes {
+  type: TYPE_TEXT
+  id: "food_template/item_price"
+  parent: "food_template/item_template"
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 281.0
+    y: 315.0
+  }
+  scale {
+    x: 3.733745
+    y: 4.671636
+    z: 1.0E-6
+  }
+  type: TYPE_BOX
+  texture: "market/fridge"
+  id: "fridge"
+  layer: "bgProps"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 281.0
+    y: 315.0
+  }
+  scale {
+    x: 4.459911
+    y: 4.671636
+    z: 1.0E-6
+  }
+  type: TYPE_BOX
+  texture: "market/shelf"
+  id: "shelf"
+  layer: "bgProps"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+layers {
+  name: "bgProps"
+}
+layers {
+  name: "ui"
+}
+layers {
+  name: "food"
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

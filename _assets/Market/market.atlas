@@ -1,0 +1,7 @@
+images {
+  image: "/_assets/Market/shelf.png"
+}
+images {
+  image: "/_assets/Market/fridge.png"
+}
+extrude_borders: 2

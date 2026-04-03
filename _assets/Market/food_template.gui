@@ -1,0 +1,39 @@
+fonts {
+  name: "pixelFont"
+  font: "/_assets/fonts/pixelFont.font"
+}
+textures {
+  name: "food"
+  texture: "/_assets/Market/foods/food.atlas"
+}
+nodes {
+  size {
+    x: 16.0
+    y: 16.0
+  }
+  type: TYPE_BOX
+  id: "item_template"
+  alpha: 0.42
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  type: TYPE_BOX
+  texture: "food/boba_coffee"
+  id: "item_icon"
+  parent: "item_template"
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "$0"
+  font: "pixelFont"
+  id: "item_price"
+  parent: "item_template"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

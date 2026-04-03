@@ -111,11 +111,11 @@ embedded_instances {
   id: "ui_handler"
   data: "components {\n"
   "  id: \"hud\"\n"
-  "  component: \"/main/_player/hud.gui\"\n"
+  "  component: \"/_assets/hud.gui\"\n"
   "}\n"
   "components {\n"
   "  id: \"buttons\"\n"
-  "  component: \"/main/_player/movingButtons.gui\"\n"
+  "  component: \"/main/movingButtons.gui\"\n"
   "}\n"
   ""
 }

@@ -1,0 +1,301 @@
+images {
+  image: "/_assets/Market/foods/boba_coffee.png"
+}
+images {
+  image: "/_assets/Market/foods/boba_mango.png"
+}
+images {
+  image: "/_assets/Market/foods/boba_matcha.png"
+}
+images {
+  image: "/_assets/Market/foods/boba_milktea.png"
+}
+images {
+  image: "/_assets/Market/foods/boba_strawberry.png"
+}
+images {
+  image: "/_assets/Market/foods/boba_taro.png"
+}
+images {
+  image: "/_assets/Market/foods/boba_thai.png"
+}
+images {
+  image: "/_assets/Market/foods/cake_cheese.png"
+}
+images {
+  image: "/_assets/Market/foods/cake_chocolate.png"
+}
+images {
+  image: "/_assets/Market/foods/cake_matcha.png"
+}
+images {
+  image: "/_assets/Market/foods/cake_redvelvet.png"
+}
+images {
+  image: "/_assets/Market/foods/cake_strawberry.png"
+}
+images {
+  image: "/_assets/Market/foods/canned_soup.png"
+}
+images {
+  image: "/_assets/Market/foods/cheese_blue.png"
+}
+images {
+  image: "/_assets/Market/foods/cheese_camembert.png"
+}
+images {
+  image: "/_assets/Market/foods/cheese_gouda.png"
+}
+images {
+  image: "/_assets/Market/foods/cheese_mozzarella.png"
+}
+images {
+  image: "/_assets/Market/foods/coffee_darkroast.png"
+}
+images {
+  image: "/_assets/Market/foods/coffee_espresso.png"
+}
+images {
+  image: "/_assets/Market/foods/coffee_foam.png"
+}
+images {
+  image: "/_assets/Market/foods/coffee_greentea.png"
+}
+images {
+  image: "/_assets/Market/foods/coffee_lightroast.png"
+}
+images {
+  image: "/_assets/Market/foods/coffee_mediumroast.png"
+}
+images {
+  image: "/_assets/Market/foods/coffee_milkjug.png"
+}
+images {
+  image: "/_assets/Market/foods/coffee_mocha.png"
+}
+images {
+  image: "/_assets/Market/foods/coffee_raw.png"
+}
+images {
+  image: "/_assets/Market/foods/coffee_tea.png"
+}
+images {
+  image: "/_assets/Market/foods/eggs_brown.png"
+}
+images {
+  image: "/_assets/Market/foods/eggs_fried.png"
+}
+images {
+  image: "/_assets/Market/foods/eggs_overeasy.png"
+}
+images {
+  image: "/_assets/Market/foods/eggs_scrambled.png"
+}
+images {
+  image: "/_assets/Market/foods/eggs_softboiled.png"
+}
+images {
+  image: "/_assets/Market/foods/eggs_white.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_apple-slice.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_apple.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_banana.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_blueberry.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_cherry.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_grape_red.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_greengrape.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_kiwi.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_lemon.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_lime.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_orange.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_orange_slice.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_peach.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_strawberry.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_watermelon.png"
+}
+images {
+  image: "/_assets/Market/foods/fruit_watermelon_slice.png"
+}
+images {
+  image: "/_assets/Market/foods/icecream_1scoop.png"
+}
+images {
+  image: "/_assets/Market/foods/icecream_2scoops.png"
+}
+images {
+  image: "/_assets/Market/foods/icecream_3scoops.png"
+}
+images {
+  image: "/_assets/Market/foods/jam_blueberry.png"
+}
+images {
+  image: "/_assets/Market/foods/jam_grape.png"
+}
+images {
+  image: "/_assets/Market/foods/jam_kiwi.png"
+}
+images {
+  image: "/_assets/Market/foods/jam_peach.png"
+}
+images {
+  image: "/_assets/Market/foods/jam_strawberry.png"
+}
+images {
+  image: "/_assets/Market/foods/onigiri_1.png"
+}
+images {
+  image: "/_assets/Market/foods/onigiri_2.png"
+}
+images {
+  image: "/_assets/Market/foods/onigiri_3.png"
+}
+images {
+  image: "/_assets/Market/foods/onigiri_4.png"
+}
+images {
+  image: "/_assets/Market/foods/onigiri_5.png"
+}
+images {
+  image: "/_assets/Market/foods/pastry_baguette.png"
+}
+images {
+  image: "/_assets/Market/foods/pastry_bread.png"
+}
+images {
+  image: "/_assets/Market/foods/pastry_brioche.png"
+}
+images {
+  image: "/_assets/Market/foods/pastry_croissant.png"
+}
+images {
+  image: "/_assets/Market/foods/pastry_pretzel.png"
+}
+images {
+  image: "/_assets/Market/foods/popsicle_blue.png"
+}
+images {
+  image: "/_assets/Market/foods/popsicle_green.png"
+}
+images {
+  image: "/_assets/Market/foods/popsicle_pink.png"
+}
+images {
+  image: "/_assets/Market/foods/popsicle_red.png"
+}
+images {
+  image: "/_assets/Market/foods/popsicle_yellow.png"
+}
+images {
+  image: "/_assets/Market/foods/soda_coke.png"
+}
+images {
+  image: "/_assets/Market/foods/soda_fanta.png"
+}
+images {
+  image: "/_assets/Market/foods/soda_pepsi.png"
+}
+images {
+  image: "/_assets/Market/foods/soda_sprite.png"
+}
+images {
+  image: "/_assets/Market/foods/soymilk_almond.png"
+}
+images {
+  image: "/_assets/Market/foods/soymilk_banana.png"
+}
+images {
+  image: "/_assets/Market/foods/soymilk_choco.png"
+}
+images {
+  image: "/_assets/Market/foods/soymilk_chocomint.png"
+}
+images {
+  image: "/_assets/Market/foods/soymilk_coffee.png"
+}
+images {
+  image: "/_assets/Market/foods/soymilk_mango.png"
+}
+images {
+  image: "/_assets/Market/foods/soymilk_match.png"
+}
+images {
+  image: "/_assets/Market/foods/soymilk_peach.png"
+}
+images {
+  image: "/_assets/Market/foods/soymilk_soy.png"
+}
+images {
+  image: "/_assets/Market/foods/soymilk_strawberry.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_bellpepper_green.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_bellpepper_red.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_bellpepper_yellow.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_carrot.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_corn.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_cucumber.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_eggplant.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_garlic.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_ginger.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_jalapeno.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_onion.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_potato.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_pumpkin.png"
+}
+images {
+  image: "/_assets/Market/foods/vegetable_tomato.png"
+}
+extrude_borders: 2

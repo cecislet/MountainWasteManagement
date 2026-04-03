@@ -10,4 +10,7 @@ images {
 images {
   image: "/_assets/School/buttons/9SliceWrongButton.png"
 }
+images {
+  image: "/_assets/School/buttons/info.png"
+}
 extrude_borders: 2

@@ -39,7 +39,7 @@ embedded_instances {
 embedded_instances {
   id: "marketGui"
   data: "components {\n"
-  "  id: \"buttons\"\n"
+  "  id: \"market\"\n"
   "  component: \"/main/_market/market.gui\"\n"
   "}\n"
   ""

@@ -159,5 +159,20 @@ nodes {
   parent: "button4/button_root"
   template_node_child: true
 }
+nodes {
+  position {
+    x: 113.86787
+    y: 726.06696
+    z: 0.1
+  }
+  scale {
+    z: 0.1
+  }
+  type: TYPE_BOX
+  texture: "buttons/info"
+  id: "info"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

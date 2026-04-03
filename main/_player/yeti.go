@@ -23,6 +23,7 @@ embedded_components {
   "group: \"Player\"\n"
   "mask: \"Game\"\n"
   "mask: \"School\"\n"
+  "mask: \"Market\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
