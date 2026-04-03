@@ -1,0 +1,46 @@
+name: "Market"
+scale_along_z: 0
+embedded_instances {
+  id: "marketBg"
+  data: "embedded_components {\n"
+  "  id: \"marketBg\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"Bg\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/main/school/SchoolBg.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 384.0
+    y: 384.0
+  }
+  scale3 {
+    x: 1.2
+    y: 1.339355
+    z: 1.2
+  }
+}
+embedded_instances {
+  id: "ui_handler"
+  data: "components {\n"
+  "  id: \"hud\"\n"
+  "  component: \"/_assets/hud.gui\"\n"
+  "}\n"
+  ""
+  position {
+    x: 1.000013
+    y: 1.041459
+  }
+}
+embedded_instances {
+  id: "marketGui"
+  data: "components {\n"
+  "  id: \"buttons\"\n"
+  "  component: \"/main/_market/market.gui\"\n"
+  "}\n"
+  ""
+}
