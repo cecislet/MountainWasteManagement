@@ -98,7 +98,7 @@ images {
   image: "/_assets/Market/foods/eggs_white.png"
 }
 images {
-  image: "/_assets/Market/foods/fruit_apple-slice.png"
+  image: "/_assets/Market/foods/fruit_apple_slice.png"
 }
 images {
   image: "/_assets/Market/foods/fruit_apple.png"

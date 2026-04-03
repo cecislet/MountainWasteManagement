@@ -1,12 +1,6 @@
-local market_info = require "_scripts.Market.marketInfo" -- Carica il file marketInfo.lua
-local ITEMS = {
-		{ name = "Cheese Cake", price = 15, icon = "cake_cheese" },
-		{ name = "Boba Coffee", price = 10, icon = "boba_coffee" },
-		{ name = "Canned Soup", price = 5,  icon = "canned_soup" },
-		{ name = "Gouda",       price = 12, icon = "cheese_gouda" },
-		{ name = "Apple Juice", price = 8,  icon = "cake_redvelvet" }, 
-		{ name = "Sandwich",    price = 10, icon = "fruit_apple" }    
-}
+local market_info = require "_scripts.Market.marketInfo"
+local GameManager = require "_scripts.GameManager"
+local items_data = require "_scripts.Market.items_data" -- Nota: niente .lua qui
 
 local PAGE_SHELF = hash("shelf")
 local PAGE_FRIDGE = hash("fridge")
@@ -14,48 +8,70 @@ local PAGE_FRIDGE = hash("fridge")
 local function update_ui_visibility(self)
 	local is_fridge = (self.current_page == PAGE_FRIDGE)
 	local is_shelf = (self.current_page == PAGE_SHELF)
+	local ui_blocked = self.info_open or self.food_box_open
 
-	local showing_info = self.info_open
+	-- Popup
+	gui.set_enabled(gui.get_node("infoBox"), self.info_open)
+	gui.set_enabled(gui.get_node("foodBox"), self.food_box_open)
 
-	gui.set_enabled(gui.get_node("infoBox"), showing_info)
-	gui.set_enabled(gui.get_node("fridge"), is_fridge)
-	gui.set_enabled(gui.get_node("shelf"), is_shelf)
+	-- Bottoni principali
+	gui.set_enabled(gui.get_node("next"), not ui_blocked)
+	gui.set_enabled(gui.get_node("previous"), not ui_blocked)
+	gui.set_enabled(gui.get_node("info"), not ui_blocked)
+	gui.set_enabled(gui.get_node("exit"), not ui_blocked)
 
-	-- Toggle fridge items
+	-- Contenitori
+	gui.set_enabled(gui.get_node("fridge"), is_fridge and not ui_blocked)
+	gui.set_enabled(gui.get_node("shelf"), is_shelf and not ui_blocked)
+
+	-- Sincronizza visibilità item con ui_blocked
 	for _, item in ipairs(self.fridge_items or {}) do
-		gui.set_enabled(item.root, is_fridge)
+		gui.set_enabled(item.root, is_fridge and not ui_blocked)
 	end
-
-	-- Toggle shelf items
 	for _, item in ipairs(self.shelf_items or {}) do
-		gui.set_enabled(item.root, is_shelf)
+		gui.set_enabled(item.root, is_shelf and not ui_blocked)
 	end
 end
 
--- 1. REFACTORED GENERATOR FUNCTION
 local function generate_inventory(self, page_type)
-	-- Determine which table and parent node to use based on page_type
 	local items_table = (page_type == PAGE_FRIDGE) and self.fridge_items or self.shelf_items
 	local parent_id = (page_type == PAGE_FRIDGE) and "fridge" or "shelf"
 	local parent_node = gui.get_node(parent_id)
 
-	-- Clear old items if any exist
+	-- 1. Pulizia nodi esistenti
 	for _, item in ipairs(items_table or {}) do
 		gui.delete_node(item.root)
 	end
-
-	-- Reset the specific table
 	if page_type == PAGE_FRIDGE then self.fridge_items = {} else self.shelf_items = {} end
-	-- Re-reference the fresh table
 	items_table = (page_type == PAGE_FRIDGE) and self.fridge_items or self.shelf_items
 
-	-- Grid Settings
-	local spacing_y = 25
+	-- 2. Filtra gli item per categoria
+	local filtered_items = {}
+	local target_category = (page_type == PAGE_FRIDGE) and "fridge" or "shelf"
+
+	for _, data in ipairs(items_data.ITEMS) do
+		if data.category == target_category then
+			table.insert(filtered_items, data)
+		end
+	end
+
+	-- 3. Mescola la lista (Shuffle)
+	math.randomseed(os.time()) -- Inizializza il seme per la casualità
+	for i = #filtered_items, 2, -1 do
+		local j = math.random(i)
+		filtered_items[i], filtered_items[j] = filtered_items[j], filtered_items[i]
+	end
+
+	-- 4. Genera solo i primi 6 (o meno se non ce ne sono abbastanza)
 	local items_per_row = 2
+	local spacing_y = 25
 	local x_offset = 25
 	local y_offset = 25
+	local max_to_show = 6
 
-	for i, data in ipairs(ITEMS) do
+	for display_index = 1, math.min(#filtered_items, max_to_show) do
+		local data = filtered_items[display_index]
+
 		local nodes = gui.clone_tree(gui.get_node("food_template/item_template"))
 		local root = nodes[hash("food_template/item_template")]
 		local icon = nodes[hash("food_template/item_icon")]
@@ -66,90 +82,115 @@ local function generate_inventory(self, page_type)
 			gui.set_layer(root, "food")
 			gui.set_enabled(root, true)
 
-			-- Setup Visuals
 			gui.set_texture(icon, "food")
 			gui.play_flipbook(icon, data.icon)
-			gui.set_text(price_tag, "$" .. data.price)
+			gui.set_text(price_tag, (data.price or "0"))
 
-			-- Calculate Grid Position
-			local col = (i - 1) % items_per_row
-			local row = math.floor((i - 1) / items_per_row)
+			-- Calcolo Griglia
+			local col = (display_index - 1) % items_per_row
+			local row = math.floor((display_index - 1) / items_per_row)
 			local px = (col == 0) and -x_offset or x_offset
 			local py = y_offset - (row * spacing_y)
 
 			gui.set_position(root, vmath.vector3(px, py, 0.5))
 			gui.set_scale(root, vmath.vector3(1, 1, 1)) 
 
-			-- Insert into the correct table
 			table.insert(items_table, { root = root, data = data })
 		end
 	end
 end
 
--- 2. UPDATED LIFECYCLE
 function init(self)
 	msg.post(".", "acquire_input_focus")
-
 	self.current_page = PAGE_SHELF
 	self.fridge_items = {}
 	self.shelf_items = {}
 	self.info_open = false
+	self.food_box_open = false
+	self.selected_item = nil
 
-
-	local text_node = gui.get_node("infoText")
-	gui.set_text(text_node, market_info.store_guide or "No info available")
+	gui.set_text(gui.get_node("infoText"), market_info.store_guide or "No info")
 
 	generate_inventory(self, PAGE_FRIDGE)
 	generate_inventory(self, PAGE_SHELF)
-
 	update_ui_visibility(self)
 end
 
 function on_input(self, action_id, action)
 	if action_id == hash("touch") and action.pressed then
-
-		local info_btn_node = gui.get_node("info")
-		local info_box_exit = gui.get_node("box") -- Il tasto rosso dentro la infoBox
-		local market_exit_btn = gui.get_node("exit") -- Il tasto rosso in alto a sinistra
-
-		-- 1. LOGICA FINESTRA INFO (Precedenza assoluta)
-		if self.info_open then
-			if gui.pick_node(info_box_exit, action.x, action.y) then
-				self.info_open = false
+		-- 1. LOGICA FOOD BOX (Popup Acquisto)
+		if self.food_box_open then
+			if gui.pick_node(gui.get_node("close"), action.x, action.y) then
+				self.food_box_open = false
 				update_ui_visibility(self)
-			end
-			return true -- Blocca altri input mentre la infoBox è aperta
-		end
+			elseif gui.pick_node(gui.get_node("buy"), action.x, action.y) then
+				if GameManager.knowledge_amount >= self.selected_item.price then
+					GameManager.knowledge_amount = GameManager.knowledge_amount - self.selected_item.price
+					for i, data in ipairs(items_data.ITEMS) do
+						if data == self.selected_item then
+							table.remove(items_data.ITEMS, i)
+							break
+						end
+					end
 
-		-- 2. APRI INFO
-		if gui.pick_node(info_btn_node, action.x, action.y) then
-			self.info_open = true
-			update_ui_visibility(self)
+					local active_list = (self.current_page == PAGE_FRIDGE) and self.fridge_items or self.shelf_items
+					for i, item in ipairs(active_list) do
+						if item.data == self.selected_item then
+							gui.delete_node(item.root) -- Elimina il nodo GUI
+							table.remove(active_list, i) -- Rimuove dalla lista di gestione
+							break
+						end
+					end
+					
+					print("Comprato: " .. self.selected_item.name)
+					self.food_box_open = false
+					update_ui_visibility(self)
+				else
+					print("Fondi insufficienti!")
+				end
+			end
 			return true
 		end
 
-		-- 3. ESCI DAL MERCATO (Tasto in alto a SX)
-		if gui.pick_node(market_exit_btn, action.x, action.y) then
+		-- 2. LOGICA INFO BOX
+		if self.info_open then
+			if gui.pick_node(gui.get_node("box"), action.x, action.y) then
+				self.info_open = false
+				update_ui_visibility(self)
+			end
+			return true
+		end
+
+		-- 3. BOTTONI UI FISSI
+		if gui.pick_node(gui.get_node("info"), action.x, action.y) then
+			self.info_open = true
+			update_ui_visibility(self)
+			return true
+		elseif gui.pick_node(gui.get_node("exit"), action.x, action.y) then
 			msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage" })
 			return true
 		end
 
-		-- 4. NAVIGAZIONE PAGINE
-		local next_btn = gui.get_node("next")
-		local prev_btn = gui.get_node("previous")
-		if gui.pick_node(next_btn, action.x, action.y) or gui.pick_node(prev_btn, action.x, action.y) then
+		-- 4. CAMBIO PAGINA
+		if gui.pick_node(gui.get_node("next"), action.x, action.y) or 
+		gui.pick_node(gui.get_node("previous"), action.x, action.y) then
 			self.current_page = (self.current_page == PAGE_SHELF) and PAGE_FRIDGE or PAGE_SHELF
 			update_ui_visibility(self)
 			return true
 		end
 
-		-- 5. LOGICA ITEM
+		-- 5. CLICK SUI CIBI
 		local active_list = (self.current_page == PAGE_FRIDGE) and self.fridge_items or self.shelf_items
 		for _, item in ipairs(active_list) do
 			if gui.pick_node(item.root, action.x, action.y) then
-				print("Bought: " .. item.data.name)
+				self.selected_item = item.data
+				gui.play_flipbook(gui.get_node("icon"), item.data.icon)
+				gui.set_text(gui.get_node("foodName"), item.data.name)
+				gui.set_text(gui.get_node("foodText"), market_info[item.data.name] or "Nessuna descrizione")
+				self.food_box_open = true
+				update_ui_visibility(self)
+				return true
 			end
 		end
 	end
 end
-

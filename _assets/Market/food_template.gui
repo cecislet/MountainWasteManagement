@@ -2,6 +2,10 @@ fonts {
   name: "pixelFont"
   font: "/_assets/fonts/pixelFont.font"
 }
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
 textures {
   name: "food"
   texture: "/_assets/Market/foods/food.atlas"
@@ -24,16 +28,48 @@ nodes {
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
+  position {
+    x: 6.0
+    y: -5.0
+  }
+  scale {
+    x: 0.029107
+    y: 0.057643
+    z: 0.98
+  }
   size {
     x: 200.0
     y: 100.0
   }
-  type: TYPE_TEXT
-  text: "$0"
-  font: "pixelFont"
-  id: "item_price"
+  type: TYPE_BOX
+  id: "box"
   parent: "item_template"
-  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -10.0
+    y: -5.0
+  }
+  scale {
+    x: 17.047623
+    y: 8.070643
+    z: 1.4
+  }
+  size {
+    x: 1.0
+    y: 1.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "0"
+  font: "default"
+  id: "item_price"
+  parent: "box"
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

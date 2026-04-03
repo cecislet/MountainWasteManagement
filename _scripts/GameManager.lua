@@ -1,7 +1,7 @@
 local M = {
 	current_level = "",
 	money_amount = 0,
-	knowledge_amount = 0,
+	knowledge_amount = 100,
 	hunger_amount = 100
 }
 
