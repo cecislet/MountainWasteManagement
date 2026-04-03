@@ -1,0 +1,25 @@
+images {
+  image: "/_assets/movingButtons/downbutton.png"
+}
+images {
+  image: "/_assets/movingButtons/downbuttonpressed.png"
+}
+images {
+  image: "/_assets/movingButtons/leftbutton.png"
+}
+images {
+  image: "/_assets/movingButtons/leftbuttonpressed.png"
+}
+images {
+  image: "/_assets/movingButtons/rightbutton.png"
+}
+images {
+  image: "/_assets/movingButtons/rightbuttonpressed.png"
+}
+images {
+  image: "/_assets/movingButtons/upbutton.png"
+}
+images {
+  image: "/_assets/movingButtons/upbuttonpressed.png"
+}
+extrude_borders: 2
