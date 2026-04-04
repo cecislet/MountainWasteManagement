@@ -40,8 +40,12 @@ nodes {
 }
 nodes {
   position {
-    x: 556.0
+    x: 105.0
     y: 57.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
   }
   type: TYPE_BOX
   texture: "movingButtons/leftbutton"
@@ -53,6 +57,10 @@ nodes {
   position {
     x: 671.0
     y: 57.0
+  }
+  scale {
+    x: 1.5
+    y: 1.5
   }
   type: TYPE_BOX
   texture: "movingButtons/rightbutton"
