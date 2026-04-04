@@ -450,7 +450,7 @@ layers {
   cell {
     x: 5
     y: 7
-    tile: 0
+    tile: 6
   }
   cell {
     x: 6
@@ -510,7 +510,7 @@ layers {
   cell {
     x: 5
     y: 8
-    tile: 0
+    tile: 38
   }
   cell {
     x: 6

@@ -24,6 +24,8 @@ embedded_components {
   "mask: \"Game\"\n"
   "mask: \"School\"\n"
   "mask: \"Market\"\n"
+  "mask: \"Restaurant\"\n"
+  "mask: \"Fence\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
