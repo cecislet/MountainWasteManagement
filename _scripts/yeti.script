@@ -62,7 +62,7 @@ function on_message(self, message_id, message, sender)
 		if message.other_group == hash("Game") then target = "MiniGame"
 		elseif message.other_group == hash("School") then target = "School"
 		elseif message.other_group == hash("Market") then target = "Market"
-		--elseif message.other_group == hash("Restaurant") then target = "Restaurant"
+		elseif message.other_group == hash("Restaurant") then target = "Restaurant"
 		end
 
 		if target then
