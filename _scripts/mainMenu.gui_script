@@ -1,0 +1,30 @@
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	-- Ensure the menu is visible when initialized
+	gui.set_enabled(gui.get_node("Background"), true)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("show_end_menu") then
+		handle_game_over(self, message)
+	end
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.pressed then
+		-- 1. Reference your button nodes from the Outline
+		local play_button = gui.get_node("PlayButton")
+		local exit_button = gui.get_node("ExitButton")
+
+		-- 2. Handle Play Button logic
+		if gui.pick_node(play_button, action.x, action.y) then
+			-- Send message to change level to StartPage
+			msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage"})
+
+			-- 3. Handle Exit Button logic
+		elseif gui.pick_node(exit_button, action.x, action.y) then
+			-- This built-in message tells the engine to shut down
+			sys.exit(0) 
+		end
+	end
+end

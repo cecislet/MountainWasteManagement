@@ -2,8 +2,8 @@ local GameManager = require("_scripts.GameManager")
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	msg.post("#StartPage", "load")
-	GameManager.set_current_level("StartPage")
+	msg.post("#MainMenu", "load")
+	GameManager.set_current_level("MainMenu")
 end
 
 local function switch_to_level(self, current_level, next_level)

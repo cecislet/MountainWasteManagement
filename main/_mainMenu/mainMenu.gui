@@ -1,0 +1,192 @@
+script: "/_scripts/mainMenu.gui_script"
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+fonts {
+  name: "pixelFont"
+  font: "/_assets/fonts/pixelFont.font"
+}
+fonts {
+  name: "pixelFont_Title"
+  font: "/_assets/fonts/pixelFont_Title.font"
+}
+textures {
+  name: "menu"
+  texture: "/main/_miniGame/_miniGameMenu/menu.atlas"
+}
+textures {
+  name: "buttons"
+  texture: "/_assets/School/buttons.atlas"
+}
+textures {
+  name: "icons"
+  texture: "/_assets/icons/icons.atlas"
+}
+textures {
+  name: "MiniGameMap"
+  texture: "/main/_miniGame/MiniGameMap.atlas"
+}
+nodes {
+  position {
+    x: 385.0
+    y: 384.0
+  }
+  size {
+    x: 768.0
+    y: 768.0
+  }
+  type: TYPE_BOX
+  texture: "MiniGameMap/background"
+  id: "Background"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -295.0
+  }
+  size {
+    x: 400.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "ExitButton"
+  parent: "Background"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "EXIT"
+  font: "pixelFont_Title"
+  id: "text"
+  parent: "ExitButton"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -77.0
+  }
+  size {
+    x: 400.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "PlayButton"
+  parent: "Background"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "PLAY"
+  font: "pixelFont_Title"
+  id: "playTxt"
+  parent: "PlayButton"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 176.0
+  }
+  scale {
+    y: 1.922356
+  }
+  size {
+    x: 400.0
+    y: 200.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "Logo"
+  parent: "Background"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  scale {
+    x: 0.606156
+    y: 0.301371
+    z: 0.1692
+  }
+  type: TYPE_BOX
+  texture: "icons/logo"
+  id: "box"
+  parent: "Logo"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: -185.0
+  }
+  size {
+    x: 400.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "Credits"
+  parent: "Background"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "CREDITS"
+  font: "pixelFont_Title"
+  id: "creditsTxt"
+  parent: "Credits"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
