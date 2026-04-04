@@ -1,0 +1,77 @@
+name: "restaurant"
+instances {
+  id: "yeti_restaurant"
+  prototype: "/main/_player/yeti_restaurant.go"
+  position {
+    x: 387.0
+    y: 322.0
+    z: 0.1
+  }
+  scale3 {
+    x: 0.3
+    y: 0.3
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "map"
+  data: "components {\n"
+  "  id: \"restaurantMap\"\n"
+  "  component: \"/main/_restaurant/RestaurantMap.tilemap\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"mapCollision\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"map\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "      x: 354.0\\n"
+  "      y: 413.0\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "    id: \\\"goBackHitbox\\\"\\n"
+  "  }\\n"
+  "  data: 17.967651\\n"
+  "  data: 17.516373\\n"
+  "  data: 10.0\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "environmnentSpawner"
+  data: "components {\n"
+  "  id: \"spawner\"\n"
+  "  component: \"/_scripts/Restaurant/spawner.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"treeFactory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/_restaurant/environment/tree.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"rockFactory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/_restaurant/environment/rock.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"tableFactory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/_restaurant/environment/table.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
