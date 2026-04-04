@@ -1,0 +1,10 @@
+images {
+  image: "/_assets/restaurant/rock_transparent.png"
+}
+images {
+  image: "/_assets/restaurant/table_transparent.png"
+}
+images {
+  image: "/_assets/restaurant/tree_transparent.png"
+}
+extrude_borders: 2
