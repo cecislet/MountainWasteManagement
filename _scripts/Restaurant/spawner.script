@@ -1,0 +1,55 @@
+local function spawn_item(self, factory_id, x, y)
+	local pos = vmath.vector3(x, y, 0.1)
+	factory.create(factory_id, pos)
+	print("spawned item at z: ".. pos.z)
+end
+
+local function is_too_close(x, y, existing_positions, min_dist)
+	for _, pos in ipairs(existing_positions) do
+		local dist = math.sqrt((x - pos.x)^2 + (y - pos.y)^2)
+		if dist < min_dist then
+			return true
+		end
+	end
+	return false
+end
+
+function init(self)
+	math.randomseed(os.time())
+
+	local width = tonumber(sys.get_config("display.width"))
+	local height = tonumber(sys.get_config("display.height"))
+	local edge_margin = 50
+	local center_x = width / 2
+	local center_y = height / 2
+	local exclusion_zone = 200 
+	local min_dist_between_items = 80
+
+	local spawned_positions = {}
+
+	local i = 1
+	while i <= 20 do
+		local x = math.random(edge_margin, width - edge_margin)
+		local y = math.random(edge_margin, height - edge_margin)
+		local dist_from_center = math.sqrt((x - center_x)^2 + (y - center_y)^2)
+
+		if dist_from_center > exclusion_zone and not is_too_close(x, y, spawned_positions, min_dist_between_items) then
+			spawn_item(self, "#treeFactory", x, y)
+			table.insert(spawned_positions, {x = x, y = y})
+			i = i + 1
+		end
+	end
+
+	local j = 1
+	while j <= 10 do
+		local x = math.random(edge_margin, width - edge_margin)
+		local y = math.random(edge_margin, height - edge_margin)
+		local dist_from_center = math.sqrt((x - center_x)^2 + (y - center_y)^2)
+
+		if dist_from_center > exclusion_zone and not is_too_close(x, y, spawned_positions, min_dist_between_items) then
+			spawn_item(self, "#rockFactory", x, y)
+			table.insert(spawned_positions, {x = x, y = y})
+			j = j + 1
+		end
+	end
+end
