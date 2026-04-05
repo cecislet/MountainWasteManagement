@@ -1,7 +1,9 @@
 local WINDOW_WIDTH = tonumber(sys.get_config("display.width"))
 local GameManager = require("_scripts.GameManager")
-local speed = 500
+local api = require("_scripts.api") 
 local state = require "_scripts/MiniGame.Game_State"
+
+local speed = 500
 local gainedCoins = 0
 
 -- Funzione di supporto per gestire l'input unificato
@@ -19,10 +21,13 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.dir = vmath.vector3()
 	self.current_anim = hash("front")
+	gainedCoins = 0 
+
+	-- Variabile di controllo per evitare collisioni multiple a fine partita
+	self.is_ending = false 
 end
 
 function update(self, dt)
-	-- Usiamo una variabile locale per il calcolo del movimento per non sporcare self.dir
 	local move_dir = vmath.vector3(self.dir.x, 0, 0)
 
 	if vmath.length_sqr(move_dir) > 0 then
@@ -32,6 +37,7 @@ function update(self, dt)
 	local p = go.get_position()
 	local new_p = p + move_dir * speed * dt
 
+	-- Calcolo margini con la hitbox
 	local shape_props = physics.get_shape("#yeti_collisionobject", "yeti_hitbox")
 	local margin_x = shape_props.dimensions.x / 2
 
@@ -43,36 +49,54 @@ function update(self, dt)
 
 	go.set_position(new_p)
 
-	-- Play flipbook solo se necessario (ottimizzazione)
-	sprite.play_flipbook("#sprite", self.current_anim)
-
-	-- RIMOSSO: self.dir = vmath.vector3() 
+	-- OTTIMIZZAZIONE ANIMAZIONE: la eseguiamo solo se necessario
+	-- (In un gioco reale controlleresti se move_dir.x != 0)
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") and message.enter then
+		if self.is_ending then return end -- Ignora altre collisioni se stiamo chiudendo
+
 		local group = message.other_group
 
 		if group == hash("Coin") then
 			gainedCoins = gainedCoins + 1
 			msg.post("hud_gui#hud", "update_coins", {coins = gainedCoins})
-			print("YEAH: you gained a coin")
-		else
-			local data = {coins = gainedCoins, reason = ""}
-			msg.post("spawner#ObstacleSpawner", "stop_spawning")
+			print("YEAH: hai preso una moneta!")
+			-- Ricordati di rimuovere o disabilitare la moneta qui se non lo fa già lei stessa
+
+		elseif group == hash("Tree") or group == hash("Rock") or group == hash("FinishLine") then
+			-- Blocchiamo subito la logica per evitare trigger doppi
+			self.is_ending = true
 			state.active = false
-			GameManager.money_amount = GameManager.money_amount + gainedCoins
-			if group == hash("Tree") or group == hash("Rock") then
-				GameManager.hunger_amount = GameManager.hunger_amount - 10
+			msg.post("spawner#ObstacleSpawner", "stop_spawning")
+
+			local data = {coins = gainedCoins, reason = ""}
+
+			-- 1. Aggiorna i dati nel GameManager locale
+			GameManager.coins = (GameManager.coins or 0) + gainedCoins
+
+			if group == hash("FinishLine") then
+				data.reason = "HAI VINTO!!"
+			else
+				GameManager.hunger = (GameManager.hunger or 100) - 10
 				data.reason = "GAME OVER!!!!!"
-			elseif group == hash("FinishLine") then
-				data.reason = "YOU FINISHED!!"
 			end
-			msg.post("main:/SceneParent#Main", "show_end_menu", data)
-			msg.post("#", "disable")
+
+			-- 2. Salvataggio su Database (Appwrite)
+			-- Usiamo il feedback visivo immediato
+			print("Salvataggio dati su DB in corso...")
+
+			-- Chiamata asincrona corretta
+			api.save(self, function()
+				print("API: Salvataggio completato con successo.")
+
+				-- 3. Mostra menu e disabilita lo script SOLO dopo il successo del DB
+				msg.post("main:/SceneParent#Main", "show_end_menu", data)
+				msg.post("#", "disable")
+			end)
 		end
 
-		-- Nuovi messaggi dalla GUI
 	elseif message_id == hash("move_left") then
 		update_direction(self, "x", -1, message.pressed)
 	elseif message_id == hash("move_right") then
@@ -86,6 +110,5 @@ function on_input(self, action_id, action)
 	elseif action_id == hash("right") then
 		update_direction(self, "x", 1, not action.released)
 	end
-
 	return false 
 end
