@@ -40,11 +40,11 @@ end
 
 -- Funzione per ottenere il nome dell'animazione per l'HUD
 function M.get_mood_state_name()
-	if M.mood >= 80 then return "HAPPY"
-	elseif M.mood >= 60 then return "NEUTRAL"
-	elseif M.mood >= 40 then return "SAD"
-	elseif M.mood >= 20 then return "ANGRY"
-	else return "FURIOUS"
+	if M.mood >= 80 then return "happy"
+	elseif M.mood >= 60 then return "neutral"
+	elseif M.mood >= 40 then return "sad"
+	elseif M.mood >= 20 then return "angry"
+	else return "furious"
 	end
 end
 

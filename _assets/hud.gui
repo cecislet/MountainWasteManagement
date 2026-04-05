@@ -7,69 +7,13 @@ textures {
   name: "icons"
   texture: "/_assets/icons/icons.atlas"
 }
-nodes {
-  position {
-    x: 512.0
-    y: 714.0
-  }
-  size {
-    x: 80.0
-    y: 80.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "money"
-  font: "pixelFont"
-  id: "money_text"
-  inherit_alpha: true
+textures {
+  name: "yetiFaces"
+  texture: "/_assets/yeti/yetiFaces.atlas"
 }
 nodes {
   position {
-    x: 315.0
-    y: 713.0
-  }
-  size {
-    x: 80.0
-    y: 80.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "know"
-  font: "pixelFont"
-  id: "knowledge_text"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 700.0
-    y: 712.0
-  }
-  size {
-    x: 80.0
-    y: 80.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "hunger"
-  font: "pixelFont"
-  id: "hunger_text"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 460.0
+    x: 472.0
     y: 710.0
   }
   size {
@@ -89,36 +33,113 @@ nodes {
 }
 nodes {
   position {
-    x: 410.0
-    y: 711.0
+    x: 240.0
+  }
+  size {
+    x: 90.0
+    y: 90.0
+  }
+  type: TYPE_BOX
+  texture: "yetiFaces/happy"
+  id: "yetiMood"
+  parent: "hud_bg"
+}
+nodes {
+  position {
+    x: -91.0
   }
   type: TYPE_BOX
   texture: "icons/money"
   id: "money_icon"
+  parent: "hud_bg"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: 606.0
-    y: 710.0
+    x: 79.0
+  }
+  size {
+    x: 80.0
+    y: 80.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "money"
+  font: "pixelFont"
+  id: "money_text"
+  parent: "money_icon"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 70.0
+    y: -1.0
   }
   type: TYPE_BOX
   texture: "icons/food"
   id: "hunger_icon"
+  parent: "hud_bg"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: 221.0
-    y: 710.0
+    x: 78.0
+    y: 2.0
+  }
+  size {
+    x: 80.0
+    y: 80.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "hunger"
+  font: "pixelFont"
+  id: "hunger_text"
+  parent: "hunger_icon"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -252.0
+    y: -1.0
   }
   type: TYPE_BOX
   texture: "icons/knowledge"
   id: "know_icon"
+  parent: "hud_bg"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 78.0
+    y: 1.0
+  }
+  size {
+    x: 80.0
+    y: 80.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "know"
+  font: "pixelFont"
+  id: "knowledge_text"
+  parent: "know_icon"
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
