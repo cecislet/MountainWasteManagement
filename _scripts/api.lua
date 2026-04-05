@@ -7,6 +7,12 @@ local COLLECTION_ID = "users"
 
 local gm = require "_scripts.GameManager"
 
+-- FUNZIONE MAGICA: Restituisce i secondi attuali UTC (Londra)
+-- Funziona identico in USA, Italia o Svizzera.
+local function get_now_utc()
+	return os.time(os.date("!*t"))
+end
+
 local function create_user_document(self, payload, headers, callback)
 	local url = BASE_URL .. "/databases/" .. DATABASE_ID .. "/collections/" .. COLLECTION_ID .. "/documents"
 	local create_payload = {
@@ -16,11 +22,11 @@ local function create_user_document(self, payload, headers, callback)
 
 	http.request(url, "POST", function(self, id, response)
 		if response.status == 201 then
-			print("API: Profilo database creato!")
+			print("API: Profilo creato!")
 		else
 			print("API: Errore creazione: " .. response.status)
 		end
-		if callback then callback() end
+		if callback then callback(response.status == 201) end
 	end, headers, json.encode(create_payload))
 end
 
@@ -32,17 +38,34 @@ function M.load(self, callback)
 
 	http.request(url, "GET", function(self, id, response)
 		if response.status == 200 then
-			local response_data = json.decode(response.response)
-			local data = response_data -- Appwrite restituisce i campi direttamente nel corpo della risposta
+			local data = json.decode(response.response)
 
-			-- SINCRONIZZAZIONE CON GAMEMANAGER
-			-- Usiamo i nomi esatti delle tue colonne DB (knowledgePoints)
+			-- 1. Caricamento Dati
 			gm.knowledge_amount = tonumber(data.knowledgePoints) or 0
 			gm.coins = tonumber(data.coins) or 0
-			gm.hunger = tonumber(data.hunger) or 50
-			gm.inventory = json.decode(data.inventory or "[]")
+			local hunger_from_db = tonumber(data.hunger) or 0
+			gm.inventory = (type(data.inventory) == "string" and data.inventory ~= "") and json.decode(data.inventory) or {}
 
-			print("API LOAD OK - Punti: " .. gm.knowledge_amount .. " Monete: " .. gm.coins)
+			-- 2. Calcolo Fame Offline (Metodo dei Secondi Puri)
+			local last_save = tonumber(data.lastSave) or 0
+
+			if last_save > 0 then
+				local current_time = get_now_utc()
+				local seconds_passed = current_time - last_save
+
+				-- Protezione contro furbi che spostano l'ora indietro
+				if seconds_passed > 0 then
+					local rate = gm.hunger_rate_offline or 0.00115 -- USA QUELLO LENTO
+					gm.hunger = math.min(100, hunger_from_db + (seconds_passed * rate))
+					print("API: Passati " .. math.floor(seconds_passed / 60) .. " minuti reali (UTC).")
+				else
+					gm.hunger = hunger_from_db
+				end
+			else
+				gm.hunger = hunger_from_db
+			end
+
+			print("API LOAD OK - Fame finale: " .. math.floor(gm.hunger))
 			if callback then callback(true) end
 		else
 			print("API LOAD FALLITO: " .. response.status)
@@ -52,21 +75,18 @@ function M.load(self, callback)
 end
 
 function M.save(self, callback)
-	if not gm.player_id then 
-		print("API SAVE: Errore, player_id mancante!")
-		if callback then callback() end 
-		return 
-	end
+	if not gm.player_id then return end
 
 	local url = BASE_URL .. "/databases/" .. DATABASE_ID .. "/collections/" .. COLLECTION_ID .. "/documents/" .. gm.player_id
 
-	-- I nomi a sinistra (es: knowledgePoints) DEVONO essere identici a quelli su Appwrite
+	-- Salviamo i dati + il timestamp UTC attuale
 	local payload = {
 		data = {
-			knowledgePoints = math.floor(tonumber(gm.knowledge_amount) or 0),
-			coins = math.floor(tonumber(gm.coins) or 0),
-			hunger = math.floor(tonumber(gm.hunger) or 50),
-			inventory = json.encode(gm.inventory or {})
+			knowledgePoints = math.floor(gm.knowledge_amount or 0),
+			coins = math.floor(gm.coins or 0),
+			hunger = math.floor(gm.hunger or 0),
+			inventory = json.encode(gm.inventory or {}),
+			lastSave = get_now_utc() -- SALVIAMO IL MOMENTO ESATTO IN SECONDI
 		}
 	}
 
@@ -77,14 +97,13 @@ function M.save(self, callback)
 
 	http.request(url, "PATCH", function(self, id, response)
 		if response.status == 200 then
-			print("API SAVE: Dati salvati con successo!")
-			if callback then callback() end
+			print("API SAVE: Successo!")
+			if callback then callback(true) end
 		elseif response.status == 404 then
-			print("API SAVE: Documento non trovato, provo a crearlo...")
 			create_user_document(self, payload, headers, callback)
 		else
-			print("API SAVE ERRORE: " .. response.status .. " - " .. response.response)
-			if callback then callback() end
+			print("API SAVE ERRORE: " .. response.status)
+			if callback then callback(false) end
 		end
 	end, headers, json.encode(payload))
 end

@@ -1,9 +1,26 @@
 local GameManager = require("_scripts.GameManager")
 
+-- Rate di aumento: 100 punti / 86400 secondi (24h) = ~0.00115
+local HUNGER_RATE = 0.00115 
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	msg.post("#MainMenu", "load")
 	GameManager.set_current_level("MainMenu")
+end
+
+-- --- LOGICA FAME GLOBALE ---
+function update(self, dt)
+	local online_rate = GameManager.hunger_rate_online or 0.00345
+	-- Aumentiamo la fame solo se il giocatore è loggato
+	if GameManager.player_id then
+		GameManager.hunger = (GameManager.hunger or 0) + (online_rate * dt)
+
+		-- Limite massimo 100
+		if GameManager.hunger > 100 then
+			GameManager.hunger = 100
+		end
+	end
 end
 
 local function switch_to_level(self, current_level, next_level)
@@ -19,16 +36,15 @@ function on_message(self, message_id, message, sender)
 			msg.post("Menu:/Gui#Menu", "show_end_menu", self.pending_end_message)
 			self.pending_end_message = nil
 		end
-	end
 
-	if message_id == hash("change_level") then
+	elseif message_id == hash("change_level") then
 		local current = GameManager.get_current_level()
-		local next_level = message.target -- Legge il target inviato dallo yeti
+		local next_level = message.target 
 
-		-- Se il target esiste ed è diverso dal livello attuale, cambia 
 		if next_level and next_level ~= current then
 			switch_to_level(self, current, next_level)
 		end
+
 	elseif message_id == hash("show_end_menu") then
 		self.pending_end_message = {
 			coins = message.coins,
@@ -36,4 +52,4 @@ function on_message(self, message_id, message, sender)
 		}
 		switch_to_level(self, "MiniGame", "MiniGameMenu")
 	end
-end
+end -- <--- Questo chiude on_message
