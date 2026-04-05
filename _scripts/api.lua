@@ -41,6 +41,7 @@ function M.load(self, callback)
 			local data = json.decode(response.response)
 
 			-- 1. Caricamento Dati
+			gm.mood = tonumber(data.mood) or 100
 			gm.knowledge_amount = tonumber(data.knowledgePoints) or 0
 			gm.coins = tonumber(data.coins) or 0
 			local hunger_from_db = tonumber(data.hunger) or 0
@@ -82,6 +83,7 @@ function M.save(self, callback)
 	-- Salviamo i dati + il timestamp UTC attuale
 	local payload = {
 		data = {
+			mood = math.floor(gm.mood or 0),
 			knowledgePoints = math.floor(gm.knowledge_amount or 0),
 			coins = math.floor(gm.coins or 0),
 			hunger = math.floor(gm.hunger or 0),

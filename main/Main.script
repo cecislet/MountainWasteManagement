@@ -11,15 +11,14 @@ end
 
 -- --- LOGICA FAME GLOBALE ---
 function update(self, dt)
-	local online_rate = GameManager.hunger_rate_online or 0.00345
-	-- Aumentiamo la fame solo se il giocatore è loggato
 	if GameManager.player_id then
-		GameManager.hunger = (GameManager.hunger or 0) + (online_rate * dt)
+		local base_rate = GameManager.hunger_rate_online or 0.00345
 
-		-- Limite massimo 100
-		if GameManager.hunger > 100 then
-			GameManager.hunger = 100
-		end
+		-- Otteniamo il moltiplicatore dinamico dalle soglie
+		local multiplier = GameManager.get_mood_multiplier()
+
+		local total_increase = base_rate * multiplier * dt
+		GameManager.hunger = math.min(100, (GameManager.hunger or 0) + total_increase)
 	end
 end
 

@@ -78,9 +78,11 @@ function on_message(self, message_id, message, sender)
 
 			if group == hash("FinishLine") then
 				data.reason = "HAI VINTO!!"
+				GameManager.add_mood(20)
 			else
 				-- Se è un albero o una roccia
 				GameManager.hunger = (GameManager.hunger or 100) - 10
+				GameManager.add_mood(-10)
 				data.reason = "GAME OVER!!!!!"
 			end -- <--- QUESTO END MANCAVA!
 

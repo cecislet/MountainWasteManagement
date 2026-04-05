@@ -158,8 +158,10 @@ function on_input(self, action_id, action)
 					self.answered = true
 
 					if i == self.correct_index then
-						-- Aggiorna il valore globale nel GameManager
+						gm.add_mood(5)
 						gm.knowledge_amount = (gm.knowledge_amount or 0) + 1
+					else
+						gm.add_mood(-10)
 					end
 
 					reveal_answers(self)
