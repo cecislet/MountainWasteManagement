@@ -1,6 +1,23 @@
 local data = require "_assets.School.quiz_data"
--- 1. Import your GameManager
+
 local gm = require "_scripts.GameManager" -- Adjust path to where GameManager.lua is
+local school_info = require "_scripts.School.SchoolInfo"
+
+local function update_ui_visibility(self)
+	-- Hide/Show the info box based on state
+	gui.set_enabled(self.info_box_node, self.info_open)
+
+	-- Optional: If you want to dim or disable quiz buttons when info is open
+	local quiz_enabled = not self.info_open
+	for _, node in ipairs(self.quiz_buttons) do
+		-- We only re-enable buttons that were actually supposed to be visible for this question
+		if self.active_buttons[node] then
+			gui.set_enabled(node, quiz_enabled)
+		end
+	end
+	gui.set_enabled(self.exit_button, quiz_enabled)
+	gui.set_enabled(self.info_button, quiz_enabled)
+end
 
 local function reveal_answers(self)
 	for i, node in ipairs(self.quiz_buttons) do
@@ -11,17 +28,16 @@ local function reveal_answers(self)
 	end
 end
 
-local load_question 
-
-load_question = function(self, index)
-	if not data.questions[index] then
+local load_question = function(self, index)
+	-- Use self.selected_questions instead of data.questions
+	if not self.selected_questions[index] then
 		print("Quiz Finished! Total Knowledge: " .. gm.knowledge_amount)
 		msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage" })
 		return
 	end
 
 	self.current_question_index = index
-	local q = data.questions[index]
+	local q = self.selected_questions[index] -- Change here
 	self.correct_index = q.correct_index
 
 	gui.set_text(self.question_text, q.question)
@@ -32,45 +48,97 @@ load_question = function(self, index)
 			gui.set_text(self.button_labels[i], q.answers[i])
 			gui.play_flipbook(node, hash("9SliceButton"))
 		else
-			gui.set_enabled(node, false) -- Hide buttons 3 and 4 if only 2 answers exist
+			gui.set_enabled(node, false) 
 		end
 	end
 
 	self.answered = false
 end
 
+local function get_random_questions(all_questions, count)
+	local shuffled = {}
+	-- Copy original questions into a temporary table
+	for i, v in ipairs(all_questions) do
+		shuffled[i] = v
+	end
+
+	-- Fisher-Yates shuffle algorithm
+	for i = #shuffled, 2, -1 do
+		local j = math.random(i)
+		shuffled[i], shuffled[j] = shuffled[j], shuffled[i]
+	end
+
+	-- Trim to the desired count
+	local result = {}
+	for i = 1, math.min(count, #shuffled) do
+		table.insert(result, shuffled[i])
+	end
+	return result
+end
+
 function init(self)
-	-- Your question text isn't visible in the screenshot, 
-	-- but if it's the node named 'question', it should be:
-	self.question_text = gui.get_node("question/label") 
+	-- Seed the randomizer so it's different every time the game runs
+	math.randomseed(os.time())
+	-- Pop a few random numbers to "warm up" the seed (standard Lua practice)
+	math.random(); math.random(); math.random()
+
+	-- Generate a list of 5 random questions from your data
+	self.selected_questions = get_random_questions(data.questions, 5)
+	
+	self.question_text = gui.get_node("question/label")
 
 	-- Your buttons are templates. Use the IDs from your outline:
 	self.quiz_buttons = {
-		gui.get_node("button1/button_root"), 
+		gui.get_node("button1/button_root"),
 		gui.get_node("button2/button_root"),
-		gui.get_node("button3/button_root"), 
+		gui.get_node("button3/button_root"),
 		gui.get_node("button4/button_root")
 	}
 
 	-- Your labels are inside those templates:
 	self.button_labels = {
-		gui.get_node("button1/label"), 
+		gui.get_node("button1/label"),
 		gui.get_node("button2/label"),
-		gui.get_node("button3/label"), 
+		gui.get_node("button3/label"),
 		gui.get_node("button4/label")
 	}
 
-	-- Exit is a direct child of 'Nodes'
+	self.info_button = gui.get_node("info")
+	self.info_box_node = gui.get_node("infoBox")
+	self.info_text_node = gui.get_node("infoText")
+	self.info_click_shield = gui.get_node("box") -- The background of the info box to click and close
+
 	self.exit_button = gui.get_node("exit")
 
+	self.info_open = false
+	self.active_buttons = {}
+
+	gui.set_text(self.info_text_node, school_info.school_guide or "Study hard to earn knowledge!")
+
 	load_question(self, 1)
+	update_ui_visibility(self)
 	msg.post(".", "acquire_input_focus")
 end
+
+
 
 function on_input(self, action_id, action)
 	if action_id == hash("touch") and action.pressed then
 
-		-- 1. Check the Exit Button FIRST
+		if self.info_open then
+			if gui.pick_node(self.info_click_shield, action.x, action.y) then
+				self.info_open = false
+				update_ui_visibility(self)
+			end
+			return true -- Consume input so we don't click quiz buttons "through" the box
+		end
+
+		if gui.pick_node(self.info_button, action.x, action.y) then
+			self.info_open = true
+			update_ui_visibility(self)
+			return true
+		end
+
 		if gui.pick_node(self.exit_button, action.x, action.y) then
 			print("Exiting Quiz...")
 			-- Navigate back to the start page or menu
