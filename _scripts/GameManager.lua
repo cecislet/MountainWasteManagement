@@ -38,6 +38,36 @@ function M.get_mood_multiplier()
 	end
 end
 
+function M.eat_food(index)
+	local item = M.inventory[index]
+	local now = os.time(os.date("!*t"))
+
+	if item then
+		-- Controllo se il cibo è scaduto
+		local is_expired = now > item.expires_at
+
+		if is_expired then
+			-- CASO CIBO SCADUTO:
+			-- Aumenta la fame (perché fa male/non nutre)
+			M.hunger = math.min(100, M.hunger + 10) 
+			-- Diminuisce il mood (il Yeti è triste/arrabbiato)
+			M.add_mood(-15)
+			print("Schifo! Cibo scaduto. Fame: " .. M.hunger .. " Mood: " .. M.mood)
+		else
+			-- CASO CIBO BUONO:
+			-- Diminuisce la fame (valore più basso = meno fame)
+			local nutrizione = item.nutrition or 20
+			M.hunger = math.max(0, M.hunger - nutrizione)
+			-- Aumenta il mood
+			M.add_mood(10)
+			print("Gnam! Cibo buono. Fame: " .. M.hunger .. " Mood: " .. M.mood)
+		end
+
+		-- Rimuovi l'oggetto mangiato in ogni caso
+		table.remove(M.inventory, index)
+	end
+end
+
 -- Funzione per ottenere il nome dell'animazione per l'HUD
 function M.get_mood_state_name()
 	if M.mood >= 80 then return "happy"
