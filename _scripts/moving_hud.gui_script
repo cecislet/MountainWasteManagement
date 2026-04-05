@@ -1,24 +1,29 @@
 local function handle_button(self, node_id, action, message_to_player)
 	local node = gui.get_node(node_id)
+	local inside = gui.pick_node(node, action.x, action.y)
 
-	if gui.pick_node(node, action.x, action.y) then
-		if action.pressed then
-			msg.post("yeti#freeMode", message_to_player, { pressed = true })
-			gui.set_color(node, vmath.vector4(1, 1, 1, 0.5)) 
-		elseif action.released then
-			msg.post("yeti#freeMode", message_to_player, { pressed = false })
-			gui.set_color(node, vmath.vector4(1, 1, 1, 1))
-		end
+	-- Se premo il bottone
+	if inside and action.pressed then
+		msg.post("yeti#freeMode", message_to_player, { pressed = true })
+		gui.set_color(node, vmath.vector4(1, 1, 1, 0.5)) 
+
+		-- Se rilascio il tocco (ovunque sia il dito) O se esco dal raggio d'azione
+	elseif action.released or (not inside and not action.pressed) then
+		-- Invia lo stop solo se il tasto era effettivamente attivo per questo messaggio
+		msg.post("yeti#freeMode", message_to_player, { pressed = false })
+		gui.set_color(node, vmath.vector4(1, 1, 1, 1))
 	end
 end
 
 function init(self)
 	local mobile_root = gui.get_node("mobileControls")
 
-	local is_mobile = false
-	if sys.get_sys_info().system_name == "HTML5" then
-		local js_code = " /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) "
-		is_mobile = html5.run(js_code) == "true"
+	-- Controllo piattaforma (HTML5 o Mobile Nativo)
+	local system = sys.get_sys_info().system_name
+	local is_mobile = (system == "Android" or system == "iPhone OS")
+
+	if system == "HTML5" then
+		is_mobile = html5.run(" /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ") == "true"
 	end
 
 	if is_mobile then
@@ -30,6 +35,7 @@ function init(self)
 end
 
 function on_input(self, action_id, action)
+	-- Usiamo l'ID del tocco per supportare il Multi-touch (opzionale ma consigliato)
 	if action_id == hash("touch") then
 		handle_button(self, "upButton", action, "move_up")
 		handle_button(self, "downButton", action, "move_down")
