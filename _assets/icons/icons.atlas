@@ -16,4 +16,7 @@ images {
 images {
   image: "/_assets/icons/view.png"
 }
+images {
+  image: "/_assets/icons/arrowHud.png"
+}
 extrude_borders: 2

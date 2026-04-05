@@ -1,29 +1,135 @@
 local data = require "_scripts.GameManager" 
+local api = require "_scripts.api"
 
--- Funzione locale per gestire il cambio della faccia e della barra
-local function update_yeti_visuals(self)
-	-- 1. Otteniamo il nome dello stato (HAPPY, SAD, ecc.) basato sul punteggio 0-100
-	local state_name = data.get_mood_state_name()
-	local face_node = gui.get_node("yetiMood")
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.inventory_open = false
+	self.food_box_open = false
+	self.selected_item_index = nil 
 
-	-- 2. Cambiamo l'immagine nel flipbook
-	gui.play_flipbook(face_node, hash(state_name))
+	-- Inizializzazione UI
+	gui.set_enabled(gui.get_node("inventory_bg"), false)
+	gui.set_enabled(gui.get_node("foodBox"), false)
+end
+
+local function refresh_inventory_slots(self)
+	local inv = data.inventory or {}
+	local now = os.time(os.date("!*t")) 
+
+	for i = 1, 5 do
+		local slot_node = gui.get_node("item" .. i)
+		local icon_node = gui.get_node("itemIcon" .. i)
+
+		if inv[i] then
+			gui.set_enabled(slot_node, true)
+			gui.play_flipbook(icon_node, hash(inv[i].icon))
+
+			-- Controllo scadenza
+			if now > inv[i].expires_at then
+				gui.play_flipbook(slot_node, hash("9SliceWrongButton")) 
+				gui.set_color(icon_node, vmath.vector4(0.5, 0.5, 0.5, 0.8))
+			else
+				gui.play_flipbook(slot_node, hash("9SliceRightButton"))
+				gui.set_color(icon_node, vmath.vector4(1, 1, 1, 1))
+			end
+		else
+			gui.set_enabled(slot_node, false)
+		end
+	end
 end
 
 function update(self, dt)
-	-- 1. Update Money node (Cash)
-	local money_node = gui.get_node("money_text")
-	gui.set_text(money_node, "Cash: $" .. math.floor(data.coins or 0))
+	gui.set_text(gui.get_node("money_text"), math.floor(data.coins or 0))
+	gui.set_text(gui.get_node("knowledge_text"), math.floor(data.knowledge_amount or 0))
+	gui.set_text(gui.get_node("hunger_text"), math.ceil(data.hunger or 0) .. "%")
 
-	-- 2. Update Knowledge node (Brain)
-	local info_node = gui.get_node("knowledge_text")
-	gui.set_text(info_node, "Brain: " .. math.floor(data.knowledge_amount or 0))
+	-- Aggiorna l'icona del mood del Yeti
+	local state_name = data.get_mood_state_name()
+	gui.play_flipbook(gui.get_node("yetiMood"), hash(state_name))
+end
 
-	-- 3. Update Hunger node (Fame)
-	local hunger_node = gui.get_node("hunger_text")
-	gui.set_text(hunger_node, "Hunger: " .. math.ceil(data.hunger or 0) .. "%")
+function on_input(self, action_id, action)
+	if action_id ~= hash("touch") then return false end
 
-	-- 4. NUOVO: Update Mood & Face
-	-- Chiamiamo la funzione ogni frame per riflettere i cambiamenti di stato
-	update_yeti_visuals(self)
+	-- 1. LOGICA CHIUSURA TOTALE (inventoryClose)
+	if action.pressed and gui.pick_node(gui.get_node("inventoryClose"), action.x, action.y) then
+		self.inventory_open = false
+		self.food_box_open = false
+		self.selected_item_index = nil -- Resettiamo la selezione
+		gui.set_enabled(gui.get_node("inventory_bg"), false)
+		gui.set_enabled(gui.get_node("foodBox"), false)
+
+		gui.set_enabled(gui.get_node("inventoryOpen"), true)
+		gui.set_enabled(gui.get_node("inventoryClose"), false)
+		return true
+	end
+
+	-- 2. LOGICA FOOD BOX (Popup aperto)
+	-- Nota: Spostiamo la logica degli slot PRIMA del blocco totale del popup 
+	-- se vogliamo che ricliccare lo slot funzioni come interruttore.
+
+	if action.pressed and self.inventory_open then
+		for i = 1, 5 do
+			local node = gui.get_node("item" .. i)
+			if gui.is_enabled(node) and gui.pick_node(node, action.x, action.y) then
+				-- SE RICLICCATO LO STESSO SLOT: CHIUDI
+				if self.food_box_open and self.selected_item_index == i then
+					self.food_box_open = false
+					self.selected_item_index = nil
+					gui.set_enabled(gui.get_node("foodBox"), false)
+				else
+					-- ALTRIMENTI: APRI O CAMBIA CONTENUTO
+					local item = data.inventory[i]
+					if item then
+						self.selected_item_index = i
+						self.food_box_open = true
+
+						-- Aggiorna UI FoodBox
+						gui.play_flipbook(gui.get_node("icon"), hash(item.icon))
+						gui.set_text(gui.get_node("foodName"), item.name or "Cibo")
+						gui.set_enabled(gui.get_node("foodBox"), true)
+					end
+				end
+				return true
+			end
+		end
+	end
+
+	-- 3. GESTIONE PULSANTI INTERNI AL FOOD BOX (Eat / Close)
+	if self.food_box_open then
+		if action.pressed then
+			if gui.pick_node(gui.get_node("eat"), action.x, action.y) then
+				local item = data.inventory[self.selected_item_index]
+				if item then
+					data.eat_food(self.selected_item_index)
+				end
+				self.food_box_open = false
+				self.selected_item_index = nil
+				gui.set_enabled(gui.get_node("foodBox"), false)
+				refresh_inventory_slots(self)
+				return true
+			end
+		end
+		-- Blocca input che passano attraverso il box (ma non gli slot gestiti sopra)
+		if gui.pick_node(gui.get_node("foodBox"), action.x, action.y) then
+			return true
+		end
+	end
+
+	-- 4. APERTURA INVENTARIO (inventoryOpen)
+	if action.pressed and gui.pick_node(gui.get_node("inventoryOpen"), action.x, action.y) then
+		self.inventory_open = true
+		gui.set_enabled(gui.get_node("inventory_bg"), true)
+		gui.set_enabled(gui.get_node("inventoryOpen"), false)
+		gui.set_enabled(gui.get_node("inventoryClose"), true)
+		refresh_inventory_slots(self)
+		return true
+	end
+
+	-- Blocca click sullo sfondo dell'inventario per non cliccare il gioco "sotto"
+	if self.inventory_open and action.pressed and gui.pick_node(gui.get_node("inventory_bg"), action.x, action.y) then
+		return true
+	end
+
+	return false
 end

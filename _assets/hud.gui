@@ -3,6 +3,10 @@ fonts {
   name: "pixelFont"
   font: "/_assets/fonts/pixelFont.font"
 }
+fonts {
+  name: "pixelFont_Title"
+  font: "/_assets/fonts/pixelFont_Title.font"
+}
 textures {
   name: "icons"
   texture: "/_assets/icons/icons.atlas"
@@ -10,6 +14,14 @@ textures {
 textures {
   name: "yetiFaces"
   texture: "/_assets/yeti/yetiFaces.atlas"
+}
+textures {
+  name: "food"
+  texture: "/_assets/Market/foods/food.atlas"
+}
+textures {
+  name: "buttons"
+  texture: "/_assets/School/buttons.atlas"
 }
 nodes {
   position {
@@ -28,7 +40,6 @@ nodes {
   type: TYPE_BOX
   id: "hud_bg"
   inherit_alpha: true
-  alpha: 0.5
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
@@ -140,6 +151,319 @@ nodes {
   id: "knowledge_text"
   parent: "know_icon"
   inherit_alpha: true
+}
+nodes {
+  position {
+    x: 270.0
+    y: -418.0
+  }
+  size {
+    x: 50.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "icons/arrowHud"
+  id: "inventoryOpen"
+  parent: "hud_bg"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 701.0
+    y: 291.0
+  }
+  size {
+    x: 120.0
+    y: 560.0
+  }
+  color {
+    x: 0.3019608
+    y: 0.4
+    z: 0.8
+  }
+  type: TYPE_BOX
+  id: "inventory_bg"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: 221.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "item1"
+  parent: "inventory_bg"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  scale {
+    x: 5.0
+    y: 5.0
+  }
+  type: TYPE_BOX
+  texture: "food/fruit_lemon"
+  id: "itemIcon1"
+  parent: "item1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: 109.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "item2"
+  parent: "inventory_bg"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  scale {
+    x: 5.0
+    y: 5.0
+  }
+  type: TYPE_BOX
+  texture: "food/fruit_lemon"
+  id: "itemIcon2"
+  parent: "item2"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "item3"
+  parent: "inventory_bg"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  scale {
+    x: 5.0
+    y: 5.0
+  }
+  type: TYPE_BOX
+  texture: "food/fruit_lemon"
+  id: "itemIcon3"
+  parent: "item3"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: -109.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "item4"
+  parent: "inventory_bg"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  scale {
+    x: 5.0
+    y: 5.0
+  }
+  type: TYPE_BOX
+  texture: "food/fruit_lemon"
+  id: "itemIcon4"
+  parent: "item4"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: -218.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "item5"
+  parent: "inventory_bg"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  scale {
+    x: 5.0
+    y: 5.0
+  }
+  type: TYPE_BOX
+  texture: "food/fruit_lemon"
+  id: "itemIcon5"
+  parent: "item5"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -400.0
+    y: -2.0
+  }
+  size {
+    x: 500.0
+    y: 560.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "foodBox"
+  parent: "inventory_bg"
+  layer: "ui"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    x: 105.0
+  }
+  size {
+    x: 200.0
+    y: 300.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "foodText"
+  line_break: true
+  parent: "foodBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -8.0
+    y: -214.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "eat"
+  parent: "foodBox"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "EAT"
+  font: "pixelFont"
+  id: "eatText"
+  parent: "eat"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -124.0
+    y: -15.0
+  }
+  size {
+    x: 200.0
+    y: 200.0
+  }
+  type: TYPE_BOX
+  texture: "food/fruit_lemon"
+  id: "icon"
+  parent: "foodBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 211.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont_Title"
+  id: "foodName"
+  parent: "foodBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -88.0
+    y: 3.0
+  }
+  rotation {
+    z: 180.0
+  }
+  size {
+    x: 50.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "icons/arrowHud"
+  id: "inventoryClose"
+  parent: "inventory_bg"
+  inherit_alpha: true
+}
+layers {
+  name: "ui"
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
