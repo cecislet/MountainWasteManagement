@@ -1,84 +1,72 @@
 local M = {}
 
--- CONFIGURAZIONE
 local PROJECT_ID = "69d189c1001e4c58e744"
 local BASE_URL = "https://cloud.appwrite.io/v1"
 local DATABASE_ID = "69d18a00001d8c68673f"
 local COLLECTION_ID = "users"
-local SUFFIX = "@game.io"
 
 local gm = require "_scripts.GameManager"
 
--- Funzione interna corretta per creare il documento (POST)
 local function create_user_document(self, payload, headers, callback)
-	-- CORREZIONE: L'URL per il POST si ferma a /documents
-	-- NON aggiungere "/" .. gm.player_id qui!
 	local url = BASE_URL .. "/databases/" .. DATABASE_ID .. "/collections/" .. COLLECTION_ID .. "/documents"
-
 	local create_payload = {
-		documentId = gm.player_id, -- L'ID va solo qui dentro
+		documentId = gm.player_id,
 		data = payload.data
 	}
 
 	http.request(url, "POST", function(self, id, response)
 		if response.status == 201 then
-			print("API: Profilo database creato con successo!")
+			print("API: Profilo database creato!")
 		else
-			-- Se vedi 401 qui, controlla i permessi su Appwrite (Settings -> Permissions)
-			print("API: Errore creazione profilo: " .. response.status .. " - " .. response.response)
+			print("API: Errore creazione: " .. response.status)
 		end
 		if callback then callback() end
 	end, headers, json.encode(create_payload))
 end
 
--- Funzione per caricare i dati (GET)
 function M.load(self, callback)
-	if not gm.player_id then 
-		print("API LOAD: Nessun Player ID, impossibile caricare.")
-		if callback then callback(false) end
-		return 
-	end
+	if not gm.player_id then return end
 
 	local url = BASE_URL .. "/databases/" .. DATABASE_ID .. "/collections/" .. COLLECTION_ID .. "/documents/" .. gm.player_id
-	local headers = {
-		["Content-Type"] = "application/json",
-		["X-Appwrite-Project"] = PROJECT_ID
-	}
+	local headers = { ["X-Appwrite-Project"] = PROJECT_ID }
 
 	http.request(url, "GET", function(self, id, response)
 		if response.status == 200 then
-			local data = json.decode(response.response)
+			local response_data = json.decode(response.response)
+			local data = response_data -- Appwrite restituisce i campi direttamente nel corpo della risposta
 
-			-- AGGIORNA IL GAMEMANAGER CON I DATI DAL DB
-			-- Usiamo 'or' per evitare nil se il campo è vuoto
-			gm.knowledge_amount = data.knowledgePoints or 0
-			gm.coins = data.coins or 0
-			gm.hunger = data.hunger or 50
+			-- SINCRONIZZAZIONE CON GAMEMANAGER
+			-- Usiamo i nomi esatti delle tue colonne DB (knowledgePoints)
+			gm.knowledge_amount = tonumber(data.knowledgePoints) or 0
+			gm.coins = tonumber(data.coins) or 0
+			gm.hunger = tonumber(data.hunger) or 50
+			gm.inventory = json.decode(data.inventory or "[]")
 
-			print("API LOAD: Dati caricati con successo!")
+			print("API LOAD OK - Punti: " .. gm.knowledge_amount .. " Monete: " .. gm.coins)
 			if callback then callback(true) end
 		else
-			print("API LOAD: Nessun dato trovato o errore " .. response.status)
+			print("API LOAD FALLITO: " .. response.status)
 			if callback then callback(false) end
 		end
 	end, headers)
 end
 
--- Funzione pubblica per salvare i dati
 function M.save(self, callback)
 	if not gm.player_id then 
-		print("API SAVE: Nessun Player ID, salto salvataggio.")
+		print("API SAVE: Errore, player_id mancante!")
 		if callback then callback() end 
 		return 
 	end
 
 	local url = BASE_URL .. "/databases/" .. DATABASE_ID .. "/collections/" .. COLLECTION_ID .. "/documents/" .. gm.player_id
 
+	-- I nomi a sinistra (es: knowledgePoints) DEVONO essere identici a quelli su Appwrite
 	local payload = {
 		data = {
-			knowledgePoints = tonumber(gm.knowledge_amount) or 0,
-			coins = tonumber(gm.coins) or 0,
-			hunger = tonumber(gm.hunger) or 50
+			knowledgePoints = math.floor(tonumber(gm.knowledge_amount) or 0),
+			coins = math.floor(tonumber(gm.coins) or 0),
+			hunger = math.floor(tonumber(gm.hunger) or 50),
+			inventory = json.encode(gm.inventory or {})
 		}
 	}
 
@@ -89,16 +77,13 @@ function M.save(self, callback)
 
 	http.request(url, "PATCH", function(self, id, response)
 		if response.status == 200 then
-			print("API SAVE: Dati aggiornati correttamente!")
-			-- Successo: eseguiamo la callback e usciamo
+			print("API SAVE: Dati salvati con successo!")
 			if callback then callback() end
 		elseif response.status == 404 then
 			print("API SAVE: Documento non trovato, provo a crearlo...")
-			-- Passiamo la callback alla funzione di creazione
 			create_user_document(self, payload, headers, callback)
 		else
-			print("API SAVE: Errore " .. response.status)
-			-- Anche in caso di errore generico, eseguiamo la callback per non bloccare il gioco
+			print("API SAVE ERRORE: " .. response.status .. " - " .. response.response)
 			if callback then callback() end
 		end
 	end, headers, json.encode(payload))

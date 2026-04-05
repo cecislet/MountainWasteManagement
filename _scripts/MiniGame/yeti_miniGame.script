@@ -80,6 +80,9 @@ function on_message(self, message_id, message, sender)
 				data.reason = "HAI VINTO!!"
 			else
 				GameManager.hunger = (GameManager.hunger or 100) - 10
+			GameManager.coins = GameManager.coins + gainedCoins
+			if group == hash("Tree") or group == hash("Rock") then
+				GameManager.hunger = GameManager.hunger - 10
 				data.reason = "GAME OVER!!!!!"
 			end
 
