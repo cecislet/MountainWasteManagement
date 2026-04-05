@@ -42,8 +42,19 @@ nodes {
   inherit_alpha: true
 }
 nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "loginForm"
+  parent: "Background"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
   position {
-    y: -295.0
+    y: -266.0
   }
   size {
     x: 400.0
@@ -51,8 +62,8 @@ nodes {
   }
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
-  id: "ExitButton"
-  parent: "Background"
+  id: "SendButton"
+  parent: "loginForm"
   inherit_alpha: true
   slice9 {
     x: 20.0
@@ -66,15 +77,225 @@ nodes {
     x: 200.0
     y: 100.0
   }
+  type: TYPE_TEXT
+  text: "SUBMIT"
+  font: "pixelFont_Title"
+  id: "sendTxt"
+  parent: "SendButton"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -82.0
+  }
+  size {
+    x: 500.0
+    y: 200.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "Password"
+  parent: "loginForm"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    y: 51.0
+  }
+  size {
+    x: 250.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Password:"
+  font: "pixelFont_Title"
+  id: "password"
+  parent: "Password"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -21.0
+    y: -28.0
+  }
+  size {
+    x: 350.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  id: "passwordBg"
+  parent: "Password"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: -4.0
+  }
+  size {
+    x: 400.0
+    y: 50.0
+  }
   color {
     x: 0.0
     y: 0.0
     z: 0.0
   }
   type: TYPE_TEXT
+  text: "Insert Password"
+  font: "pixelFont"
+  id: "passwordTxt"
+  parent: "passwordBg"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 216.0
+    y: -1.0
+  }
+  size {
+    x: 70.0
+    y: 70.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "viewPassword"
+  parent: "passwordBg"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 50.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "icons/view"
+  id: "passwordVisibility"
+  parent: "viewPassword"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 151.0
+  }
+  size {
+    x: 500.0
+    y: 200.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "Username"
+  parent: "loginForm"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    y: 51.0
+  }
+  size {
+    x: 250.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Username:"
+  font: "pixelFont_Title"
+  id: "username"
+  parent: "Username"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -28.0
+  }
+  size {
+    x: 350.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  id: "usernameBg"
+  parent: "Username"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    y: -4.0
+  }
+  size {
+    x: 400.0
+    y: 50.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Insert Username"
+  font: "pixelFont"
+  id: "usernameTxt"
+  parent: "usernameBg"
+  inherit_alpha: true
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "Menu"
+  parent: "Background"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  enabled: false
+}
+nodes {
+  position {
+    y: -295.0
+  }
+  size {
+    x: 400.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "ExitButton"
+  parent: "Menu"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
   text: "EXIT"
   font: "pixelFont_Title"
-  id: "text"
+  id: "exitTxt"
   parent: "ExitButton"
   inherit_alpha: true
 }
@@ -89,7 +310,7 @@ nodes {
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
   id: "PlayButton"
-  parent: "Background"
+  parent: "Menu"
   inherit_alpha: true
   slice9 {
     x: 20.0
@@ -102,11 +323,6 @@ nodes {
   size {
     x: 200.0
     y: 100.0
-  }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
   }
   type: TYPE_TEXT
   text: "PLAY"
@@ -129,7 +345,7 @@ nodes {
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
   id: "Logo"
-  parent: "Background"
+  parent: "Menu"
   inherit_alpha: true
   slice9 {
     x: 20.0
@@ -162,7 +378,7 @@ nodes {
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
   id: "Credits"
-  parent: "Background"
+  parent: "Menu"
   inherit_alpha: true
   slice9 {
     x: 20.0
@@ -176,17 +392,44 @@ nodes {
     x: 200.0
     y: 100.0
   }
-  color {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
   type: TYPE_TEXT
   text: "CREDITS"
   font: "pixelFont_Title"
   id: "creditsTxt"
   parent: "Credits"
   inherit_alpha: true
+}
+nodes {
+  position {
+    x: 314.0
+    y: 318.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "Login"
+  parent: "Menu"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 80.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  id: "pfp"
+  parent: "Login"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

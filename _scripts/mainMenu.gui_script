@@ -1,30 +1,123 @@
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	-- Ensure the menu is visible when initialized
-	gui.set_enabled(gui.get_node("Background"), true)
-end
 
-function on_message(self, message_id, message, sender)
-	if message_id == hash("show_end_menu") then
-		handle_game_over(self, message)
-	end
+	-- Stato iniziale
+	gui.set_enabled(gui.get_node("Menu"), true)
+	gui.set_enabled(gui.get_node("loginForm"), false)
+
+	self.is_logged_in = false   -- NUOVO: Controlla se l'utente ha fatto il login
+	self.show_password = false 
+	self.active_field = nil 
+	self.username_text = "" 
+	self.password_text = "" 
 end
 
 function on_input(self, action_id, action)
+	-- 1. GESTIONE TOCCO (MOUSE/TOUCH)
 	if action_id == hash("touch") and action.pressed then
-		-- 1. Reference your button nodes from the Outline
+
 		local play_button = gui.get_node("PlayButton")
 		local exit_button = gui.get_node("ExitButton")
+		local login_icon = gui.get_node("Login")
+		local is_login_open = gui.is_enabled(gui.get_node("loginForm"))
 
-		-- 2. Handle Play Button logic
-		if gui.pick_node(play_button, action.x, action.y) then
-			-- Send message to change level to StartPage
-			msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage"})
+		-- --- LOGICA MENU PRINCIPALE ---
+		if not is_login_open then
+			if gui.pick_node(play_button, action.x, action.y) then
+				-- MODIFICATO: Il tasto Play funziona solo se is_logged_in è true
+				if self.is_logged_in then
+					msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage"})
+				else
+					print("ACCESSO NEGATO: Devi prima fare il login!")
+					-- Opzionale: fai vibrare l'icona login o cambia colore al tasto Play
+				end
+				return 
+			elseif gui.pick_node(exit_button, action.x, action.y) then
+				sys.exit(0)
+				return
+			elseif gui.pick_node(login_icon, action.x, action.y) then
+				gui.set_enabled(gui.get_node("Menu"), false)
+				gui.set_enabled(gui.get_node("loginForm"), true)
+				return
+			end
+		end
 
-			-- 3. Handle Exit Button logic
-		elseif gui.pick_node(exit_button, action.x, action.y) then
-			-- This built-in message tells the engine to shut down
-			sys.exit(0) 
+		-- --- LOGICA LOGIN FORM ---
+		if is_login_open then
+			local user_bg = gui.get_node("usernameBg")
+			local pass_bg = gui.get_node("passwordBg")
+			local send_btn = gui.get_node("SendButton")
+			local view_btn = gui.get_node("viewPassword")
+			local pass_node = gui.get_node("passwordTxt")
+			local vis_btn = gui.get_node("passwordVisibility")
+			
+			if gui.pick_node(user_bg, action.x, action.y) then
+				self.active_field = "username"
+				gui.set_color(user_bg, vmath.vector4(1, 1, 1, 1))
+				gui.set_color(pass_bg, vmath.vector4(0.3, 0.3, 0.3, 1))
+
+			elseif gui.pick_node(pass_bg, action.x, action.y) then
+				self.active_field = "password"
+				gui.set_color(pass_bg, vmath.vector4(1, 1, 1, 1))
+				gui.set_color(user_bg, vmath.vector4(0.3, 0.3, 0.3, 1))
+
+			elseif gui.pick_node(view_btn, action.x, action.y) then
+				self.show_password = not self.show_password
+				local pass_node = gui.get_node("passwordTxt")
+				if self.show_password then
+					gui.set_text(pass_node, self.password_text)
+					gui.play_flipbook(vis_btn, hash("hide"))
+				else
+					gui.set_text(pass_node, string.rep("*", #self.password_text))
+					gui.play_flipbook(vis_btn, hash("view"))
+				end
+
+			elseif gui.pick_node(send_btn, action.x, action.y) then
+				if #self.username_text > 0 and #self.password_text > 0 then
+					print("Login effettuato con successo!")
+
+					self.is_logged_in = true -- NUOVO: Ora l'utente può premere Play
+
+					-- Reset e chiusura
+					self.active_field = nil
+					gui.set_enabled(gui.get_node("loginForm"), false)
+					gui.set_enabled(gui.get_node("Menu"), true)
+
+					-- Opzionale: Cambia colore al tasto Play per far capire che è attivo
+					gui.set_color(play_button, vmath.vector4(1, 1, 1, 1))
+				else
+					print("Errore: Campi vuoti!")
+				end
+			end
+		end
+	end
+
+	-- 2. GESTIONE TASTIERA (Limite 20 caratteri)
+	if self.active_field and gui.is_enabled(gui.get_node("loginForm")) then
+		local pass_node = gui.get_node("passwordTxt")
+		local user_node = gui.get_node("usernameTxt")
+
+		if action_id == hash("text") then
+			if self.active_field == "username" and #self.username_text < 20 then
+				self.username_text = self.username_text .. action.text
+				gui.set_text(user_node, self.username_text)
+			elseif self.active_field == "password" and #self.password_text < 20 then
+				self.password_text = self.password_text .. action.text
+				if self.show_password then
+					gui.set_text(pass_node, self.password_text)
+				else
+					gui.set_text(pass_node, string.rep("*", #self.password_text))
+				end
+			end
+		elseif action_id == hash("backspace") and action.pressed then
+			if self.active_field == "username" then
+				self.username_text = string.sub(self.username_text, 1, -2)
+				gui.set_text(user_node, self.username_text)
+			else
+				self.password_text = string.sub(self.password_text, 1, -2)
+				local stars = string.rep("*", #self.password_text)
+				gui.set_text(pass_node, self.show_password and self.password_text or stars)
+			end
 		end
 	end
 end
