@@ -61,9 +61,9 @@ function on_message(self, message_id, message, sender)
 			local data = {coins = gainedCoins, reason = ""}
 			msg.post("spawner#ObstacleSpawner", "stop_spawning")
 			state.active = false
-			GameManager.money_amount = GameManager.money_amount + gainedCoins
+			GameManager.coins = GameManager.coins + gainedCoins
 			if group == hash("Tree") or group == hash("Rock") then
-				GameManager.hunger_amount = GameManager.hunger_amount - 10
+				GameManager.hunger = GameManager.hunger - 10
 				data.reason = "GAME OVER!!!!!"
 			elseif group == hash("FinishLine") then
 				data.reason = "YOU FINISHED!!"
