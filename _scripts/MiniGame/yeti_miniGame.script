@@ -55,7 +55,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") and message.enter then
-		if self.is_ending then return end -- Ignora altre collisioni se stiamo chiudendo
+		if self.is_ending then return end 
 
 		local group = message.other_group
 
@@ -63,42 +63,39 @@ function on_message(self, message_id, message, sender)
 			gainedCoins = gainedCoins + 1
 			msg.post("hud_gui#hud", "update_coins", {coins = gainedCoins})
 			print("YEAH: hai preso una moneta!")
-			-- Ricordati di rimuovere o disabilitare la moneta qui se non lo fa già lei stessa
+			-- Se la moneta non si distrugge da sola, aggiungi qui: go.delete(message.other_id)
 
 		elseif group == hash("Tree") or group == hash("Rock") or group == hash("FinishLine") then
-			-- Blocchiamo subito la logica per evitare trigger doppi
+			-- Blocchiamo subito la logica
 			self.is_ending = true
 			state.active = false
 			msg.post("spawner#ObstacleSpawner", "stop_spawning")
 
 			local data = {coins = gainedCoins, reason = ""}
 
-			-- 1. Aggiorna i dati nel GameManager locale
+			-- 1. Aggiorna i dati nel GameManager locale (UNA SOLA VOLTA)
 			GameManager.coins = (GameManager.coins or 0) + gainedCoins
 
 			if group == hash("FinishLine") then
 				data.reason = "HAI VINTO!!"
 			else
+				-- Se è un albero o una roccia
 				GameManager.hunger = (GameManager.hunger or 100) - 10
-			GameManager.coins = GameManager.coins + gainedCoins
-			if group == hash("Tree") or group == hash("Rock") then
-				GameManager.hunger = GameManager.hunger - 10
 				data.reason = "GAME OVER!!!!!"
-			end
+			end -- <--- QUESTO END MANCAVA!
 
 			-- 2. Salvataggio su Database (Appwrite)
-			-- Usiamo il feedback visivo immediato
 			print("Salvataggio dati su DB in corso...")
 
-			-- Chiamata asincrona corretta
-			api.save(self, function()
+			-- Usiamo api.save(api, ...) perché il tuo api.lua usa M.save(self, callback)
+			api.save(api, function()
 				print("API: Salvataggio completato con successo.")
 
-				-- 3. Mostra menu e disabilita lo script SOLO dopo il successo del DB
+				-- 3. Mostra menu e disabilita lo script
 				msg.post("main:/SceneParent#Main", "show_end_menu", data)
 				msg.post("#", "disable")
 			end)
-		end
+		end -- Fine blocco ostacoli
 
 	elseif message_id == hash("move_left") then
 		update_direction(self, "x", -1, message.pressed)

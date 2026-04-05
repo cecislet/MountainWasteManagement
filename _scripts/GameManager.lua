@@ -7,6 +7,8 @@ M.knowledge_amount = 0  -- Coerente con api.lua
 M.hunger = 50           -- Coerente con api.lua
 M.inventory = {}        -- LA NUOVA TABELLA PER GLI OGGETTI
 
+M.hunger_rate = 0.00115 -- Velocità globale (es. 100 punti in 24h)
+
 -- LIVELLO ATTUALE
 M.current_level = ""
 
