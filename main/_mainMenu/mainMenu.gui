@@ -54,10 +54,11 @@ nodes {
 }
 nodes {
   position {
+    x: -127.0
     y: -266.0
   }
   size {
-    x: 400.0
+    x: 245.0
     y: 100.0
   }
   type: TYPE_BOX
@@ -78,7 +79,7 @@ nodes {
     y: 100.0
   }
   type: TYPE_TEXT
-  text: "SUBMIT"
+  text: "LOGIN"
   font: "pixelFont_Title"
   id: "sendTxt"
   parent: "SendButton"
@@ -256,6 +257,39 @@ nodes {
   inherit_alpha: true
 }
 nodes {
+  position {
+    x: 129.0
+    y: -266.0
+  }
+  size {
+    x: 245.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "RegisterButton"
+  parent: "loginForm"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "REGISTER"
+  font: "pixelFont_Title"
+  id: "sendTxt1"
+  parent: "RegisterButton"
+  inherit_alpha: true
+}
+nodes {
   size {
     x: 200.0
     y: 100.0
@@ -430,6 +464,79 @@ nodes {
   parent: "Login"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 5.0
+    y: 7.0
+  }
+  size {
+    x: 650.0
+    y: 400.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "errBox"
+  parent: "Background"
+  layer: "err"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    y: 31.0
+  }
+  size {
+    x: 600.0
+    y: 300.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "errText"
+  line_break: true
+  parent: "errBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -158.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceWrongButton"
+  id: "closeErr"
+  parent: "errBox"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "EXIT"
+  font: "pixelFont"
+  id: "exitErrText"
+  parent: "closeErr"
+  inherit_alpha: true
+}
+layers {
+  name: "err"
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

@@ -1,56 +1,125 @@
+local gm = require "_scripts.GameManager"
+
+-- CONFIGURAZIONE APPWRITE
+local PROJECT_ID = "69d189c1001e4c58e744"
+local BASE_URL = "https://cloud.appwrite.io/v1"
+local SUFFIX = "@game.io" 
+
+-- --- FUNZIONI UTILITY ---
+
+-- Funzione per validare l'username (solo lettere e numeri)
+local function is_valid_username(str)
+	return str:match("^[a-zA-Z0-9]+$") ~= nil
+end
+
+local function show_popup(self, message)
+	gui.set_text(gui.get_node("errText"), message)
+	gui.set_enabled(gui.get_node("errBox"), true)
+end
+
+-- --- FUNZIONI DI RETE ---
+
+-- 1. LOGIN
+local function appwrite_login(self, username, password, quiet)
+	local email = username .. SUFFIX
+	local url = BASE_URL .. "/account/sessions/email"
+	local payload = { email = email, password = password }
+	local headers = { ["Content-Type"] = "application/json", ["X-Appwrite-Project"] = PROJECT_ID }
+
+	http.request(url, "POST", function(self, id, response)
+		if response.status == 201 then
+			local data = json.decode(response.response)
+			gm.player_id = data.userId
+			self.is_logged_in = true
+
+			-- Se 'quiet' è true, non mostriamo il popup (utile dopo la registrazione)
+			if not quiet then
+				show_popup(self, "LOGIN SUCCESS! Benvenuto " .. username)
+			end
+
+			-- Chiudi form e attiva Play
+			gui.set_enabled(gui.get_node("loginForm"), false)
+			gui.set_enabled(gui.get_node("Menu"), true)
+			gui.set_color(gui.get_node("PlayButton"), vmath.vector4(1, 1, 1, 1))
+		else
+			show_popup(self, "LOGIN FALLITO: Credenziali errate.")
+		end
+	end, headers, json.encode(payload))
+end
+
+-- 2. REGISTRAZIONE
+local function appwrite_register(self, username, password)
+	local email = username .. SUFFIX
+	local url = BASE_URL .. "/account"
+	local payload = {
+		userId = "unique()",
+		email = email,
+		password = password,
+		name = username
+	}
+	local headers = { ["Content-Type"] = "application/json", ["X-Appwrite-Project"] = PROJECT_ID }
+
+	http.request(url, "POST", function(self, id, response)
+		if response.status == 201 then
+			-- Invece di mostrare popup qui, logghiamo silenziosamente
+			print("Registrazione OK, effettuando login...")
+			appwrite_login(self, username, password, true) 
+			show_popup(self, "ACCOUNT CREATO! Benvenuto " .. username)
+		else
+			local err = json.decode(response.response)
+			show_popup(self, "ERRORE: " .. (err.message or "Registrazione fallita"))
+		end
+	end, headers, json.encode(payload))
+end
+
+-- --- FUNZIONI DEFOLD ---
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
 
-	-- Stato iniziale
 	gui.set_enabled(gui.get_node("Menu"), true)
 	gui.set_enabled(gui.get_node("loginForm"), false)
+	gui.set_enabled(gui.get_node("errBox"), false)
 
-	self.is_logged_in = false   -- NUOVO: Controlla se l'utente ha fatto il login
-	self.show_password = false 
-	self.active_field = nil 
-	self.username_text = "" 
-	self.password_text = "" 
+	self.is_logged_in = false
+	self.show_password = false
+	self.active_field = nil
+	self.username_text = ""
+	self.password_text = ""
 end
 
 function on_input(self, action_id, action)
-	-- 1. GESTIONE TOCCO (MOUSE/TOUCH)
 	if action_id == hash("touch") and action.pressed then
 
-		local play_button = gui.get_node("PlayButton")
-		local exit_button = gui.get_node("ExitButton")
-		local login_icon = gui.get_node("Login")
-		local is_login_open = gui.is_enabled(gui.get_node("loginForm"))
+		-- Priorità Popup
+		if gui.is_enabled(gui.get_node("errBox")) then
+			if gui.pick_node(gui.get_node("closeErr"), action.x, action.y) then
+				gui.set_enabled(gui.get_node("errBox"), false)
+			end
+			return true 
+		end
 
-		-- --- LOGICA MENU PRINCIPALE ---
-		if not is_login_open then
-			if gui.pick_node(play_button, action.x, action.y) then
-				-- MODIFICATO: Il tasto Play funziona solo se is_logged_in è true
+		local menu = gui.get_node("Menu")
+		local form = gui.get_node("loginForm")
+
+		if gui.is_enabled(menu) then
+			if gui.pick_node(gui.get_node("PlayButton"), action.x, action.y) then
 				if self.is_logged_in then
 					msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage"})
 				else
-					print("ACCESSO NEGATO: Devi prima fare il login!")
-					-- Opzionale: fai vibrare l'icona login o cambia colore al tasto Play
+					show_popup(self, "DEVI FARE IL LOGIN PER GIOCARE!")
 				end
-				return 
-			elseif gui.pick_node(exit_button, action.x, action.y) then
+			elseif gui.pick_node(gui.get_node("Login"), action.x, action.y) then
+				gui.set_enabled(menu, false)
+				gui.set_enabled(form, true)
+			elseif gui.pick_node(gui.get_node("ExitButton"), action.x, action.y) then
 				sys.exit(0)
-				return
-			elseif gui.pick_node(login_icon, action.x, action.y) then
-				gui.set_enabled(gui.get_node("Menu"), false)
-				gui.set_enabled(gui.get_node("loginForm"), true)
-				return
 			end
-		end
 
-		-- --- LOGICA LOGIN FORM ---
-		if is_login_open then
+		elseif gui.is_enabled(form) then
 			local user_bg = gui.get_node("usernameBg")
 			local pass_bg = gui.get_node("passwordBg")
-			local send_btn = gui.get_node("SendButton")
-			local view_btn = gui.get_node("viewPassword")
-			local pass_node = gui.get_node("passwordTxt")
-			local vis_btn = gui.get_node("passwordVisibility")
-			
+
 			if gui.pick_node(user_bg, action.x, action.y) then
 				self.active_field = "username"
 				gui.set_color(user_bg, vmath.vector4(1, 1, 1, 1))
@@ -61,62 +130,50 @@ function on_input(self, action_id, action)
 				gui.set_color(pass_bg, vmath.vector4(1, 1, 1, 1))
 				gui.set_color(user_bg, vmath.vector4(0.3, 0.3, 0.3, 1))
 
-			elseif gui.pick_node(view_btn, action.x, action.y) then
+			elseif gui.pick_node(gui.get_node("viewPassword"), action.x, action.y) then
 				self.show_password = not self.show_password
-				local pass_node = gui.get_node("passwordTxt")
-				if self.show_password then
-					gui.set_text(pass_node, self.password_text)
-					gui.play_flipbook(vis_btn, hash("hide"))
+				local txt = self.show_password and self.password_text or string.rep("*", #self.password_text)
+				gui.set_text(gui.get_node("passwordTxt"), txt)
+
+			elseif gui.pick_node(gui.get_node("SendButton"), action.x, action.y) then
+				if #self.username_text > 0 and #self.password_text > 0 then
+					appwrite_login(self, self.username_text, self.password_text, false)
 				else
-					gui.set_text(pass_node, string.rep("*", #self.password_text))
-					gui.play_flipbook(vis_btn, hash("view"))
+					show_popup(self, "INSERISCI TUTTI I DATI!")
 				end
 
-			elseif gui.pick_node(send_btn, action.x, action.y) then
-				if #self.username_text > 0 and #self.password_text > 0 then
-					print("Login effettuato con successo!")
-
-					self.is_logged_in = true -- NUOVO: Ora l'utente può premere Play
-
-					-- Reset e chiusura
-					self.active_field = nil
-					gui.set_enabled(gui.get_node("loginForm"), false)
-					gui.set_enabled(gui.get_node("Menu"), true)
-
-					-- Opzionale: Cambia colore al tasto Play per far capire che è attivo
-					gui.set_color(play_button, vmath.vector4(1, 1, 1, 1))
+			elseif gui.pick_node(gui.get_node("RegisterButton"), action.x, action.y) then
+				-- Controllo Username Valido + Password
+				if not is_valid_username(self.username_text) then
+					show_popup(self, "USERNAME NON VALIDO (Usa solo lettere e numeri)")
+				elseif #self.password_text < 8 then
+					show_popup(self, "PASSWORD TROPPO CORTA (MIN 8 CARATTERI)")
 				else
-					print("Errore: Campi vuoti!")
+					appwrite_register(self, self.username_text, self.password_text)
 				end
 			end
 		end
 	end
 
-	-- 2. GESTIONE TASTIERA (Limite 20 caratteri)
-	if self.active_field and gui.is_enabled(gui.get_node("loginForm")) then
-		local pass_node = gui.get_node("passwordTxt")
-		local user_node = gui.get_node("usernameTxt")
-
+	-- Tastiera
+	if self.active_field and gui.is_enabled(gui.get_node("loginForm")) and not gui.is_enabled(gui.get_node("errBox")) then
 		if action_id == hash("text") then
 			if self.active_field == "username" and #self.username_text < 20 then
 				self.username_text = self.username_text .. action.text
-				gui.set_text(user_node, self.username_text)
+				gui.set_text(gui.get_node("usernameTxt"), self.username_text)
 			elseif self.active_field == "password" and #self.password_text < 20 then
 				self.password_text = self.password_text .. action.text
-				if self.show_password then
-					gui.set_text(pass_node, self.password_text)
-				else
-					gui.set_text(pass_node, string.rep("*", #self.password_text))
-				end
+				local display = self.show_password and self.password_text or string.rep("*", #self.password_text)
+				gui.set_text(gui.get_node("passwordTxt"), display)
 			end
 		elseif action_id == hash("backspace") and action.pressed then
 			if self.active_field == "username" then
 				self.username_text = string.sub(self.username_text, 1, -2)
-				gui.set_text(user_node, self.username_text)
+				gui.set_text(gui.get_node("usernameTxt"), self.username_text)
 			else
 				self.password_text = string.sub(self.password_text, 1, -2)
-				local stars = string.rep("*", #self.password_text)
-				gui.set_text(pass_node, self.show_password and self.password_text or stars)
+				local display = self.show_password and self.password_text or string.rep("*", #self.password_text)
+				gui.set_text(gui.get_node("passwordTxt"), display)
 			end
 		end
 	end
