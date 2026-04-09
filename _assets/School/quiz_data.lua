@@ -1,60 +1,59 @@
--- quiz_data.lua
 local M = {}
 
 M.questions = {
 	{
-		question = "What is the water footprint of 1 kg of beef?",
-		answers = {"150000 liters", "15000 liters", "1500 liters", "150 liters"},
+		question = "q1",
+		answers = {"q1_a1", "q1_a2", "q1_a3", "q1_a4"},
 		correct_index = 2
 	},
 	{
-		question = "Roughly what percentage of all food produced globally is lost or wasted?",
-		answers = {"5%", "15%", "33%", "60%"},
+		question = "q2",
+		answers = {"q2_a1", "q2_a2", "q2_a3", "q2_a4"},
 		correct_index = 3
 	},
 	{
-		question = "True or False: Frozen foods generally have a higher nutrient loss over time than fresh produce sitting on a shelf.",
-		answers = {"True", "False"},
+		question = "q3",
+		answers = {"q3_a1", "q3_a2"},
 		correct_index = 2 
 	},
 	{
-		question = "Which of these is the most effective way to reduce food waste at home?",
-		answers = {"Buying in bulk", "Meal planning and shopping lists", "Storing all produce in the sun", "Throwing away food on the 'sell by' date"},
+		question = "q4",
+		answers = {"q4_a1", "q4_a2", "q4_a3", "q4_a4"},
 		correct_index = 2
 	},
 	{
-		question = "What is the difference between 'Use By' and 'Best Before' dates?",
-		answers = {"They mean the same thing", "'Use By' is about safety; 'Best Before' is about quality", "'Best Before' is about safety; 'Use By' is about quality", "Both are suggestions and can be ignored"},
+		question = "q5",
+		answers = {"q5_a1", "q5_a2", "q5_a3", "q5_a4"},
 		correct_index = 2
 	},
 	{
-		question = "Which gas is produced when food rots in a landfill, contributing significantly to climate change?",
-		answers = {"Oxygen", "Nitrogen", "Methane", "Helium"},
+		question = "q6",
+		answers = {"q6_a1", "q6_a2", "q6_a3", "q6_a4"},
 		correct_index = 3
 	},
 	{
-		question = "True or False: Most food waste in high-income countries occurs at the retail and consumer level.",
-		answers = {"True", "False"},
+		question = "q7",
+		answers = {"q7_a1", "q7_a2"},
 		correct_index = 1
 	},
 	{
-		question = "What is 'Upcycling' in the context of food?",
-		answers = {"Throwing food away", "Growing your own vegetables", "Creating new products from food scraps or byproducts", "Using a bicycle to deliver groceries"},
+		question = "q8",
+		answers = {"q8_a1", "q8_a2", "q8_a3", "q8_a4"},
 		correct_index = 3
 	},
 	{
-		question = "Where is the best place to store onions to make them last longer?",
-		answers = {"In a plastic bag with potatoes", "In a cool, dry, dark place", "In the freezer while raw", "On a sunny windowsill"},
+		question = "q9",
+		answers = {"q9_a1", "q9_a2", "q9_a3", "q9_a4"},
 		correct_index = 2
 	},
 	{
-		question = "Which part of the 'Food Waste Hierarchy' is the most preferred option?",
-		answers = {"Composting", "Feeding animals", "Source reduction (preventing waste)", "Landfill disposal"},
+		question = "q10",
+		answers = {"q10_a1", "q10_a2", "q10_a3", "q10_a4"},
 		correct_index = 3
 	},
 	{
-		question = "True or False: Bruised or 'ugly' produce is usually just as nutritious as perfect-looking produce.",
-		answers = {"True", "False"},
+		question = "q11",
+		answers = {"q11_a1", "q11_a2"},
 		correct_index = 1
 	}
 }

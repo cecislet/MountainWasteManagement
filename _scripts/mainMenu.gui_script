@@ -79,9 +79,32 @@ end
 
 -- Funzione helper per aggiornare i testi nella UI
 local function update_ui_texts(self)
+	-- --- TESTI MENU PRINCIPALE ---
 	gui.set_text(gui.get_node("playTxt"), gm.get_text("play"))
 	gui.set_text(gui.get_node("creditsTxt"), gm.get_text("credits"))
 	gui.set_text(gui.get_node("exitTxt"), gm.get_text("exit"))
+
+	-- --- TESTI LOGIN FORM (image_9f7b60.png) ---
+	-- Etichette dei campi
+	gui.set_text(gui.get_node("username"), gm.get_text("label_username")) -- "Username:"
+	gui.set_text(gui.get_node("password"), gm.get_text("label_password")) -- "Password:"
+
+	-- Placeholder (mostrati solo se i campi sono vuoti, opzionale)
+	if self.username_text == "" then
+		gui.set_text(gui.get_node("usernameTxt"), gm.get_text("insert_user")) -- "Insert Username"
+	end
+	if self.password_text == "" then
+		gui.set_text(gui.get_node("passwordTxt"), gm.get_text("insert_pass")) -- "Insert Password"
+	end
+
+	-- Pulsanti del Form
+	gui.set_text(gui.get_node("sendTxt"), gm.get_text("login"))      -- Pulsante LOGIN
+	gui.set_text(gui.get_node("registerTxt"), gm.get_text("register")) -- Pulsante REGISTER
+	gui.set_text(gui.get_node("backTxt"), gm.get_text("back"))        -- Pulsante BACK
+
+	-- --- TESTI EXTRA (Debug e Errori) ---
+	gui.set_text(gui.get_node("text"), gm.get_text("debug_access")) -- Pulsante DEBUG
+	gui.set_text(gui.get_node("exitErrText"), gm.get_text("close"))     -- Pulsante CLOSE popup
 end
 
 function init(self)

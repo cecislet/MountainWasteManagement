@@ -58,7 +58,6 @@ nodes {
   parent: "Background"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
-  enabled: false
 }
 nodes {
   position {
@@ -326,7 +325,7 @@ nodes {
   type: TYPE_TEXT
   text: "BACK"
   font: "pixelFont"
-  id: "backButton"
+  id: "backTxt"
   parent: "BackButton"
   inherit_alpha: true
 }
@@ -340,6 +339,7 @@ nodes {
   parent: "Background"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+  enabled: false
 }
 nodes {
   position {

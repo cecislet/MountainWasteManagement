@@ -9,6 +9,9 @@ local is_saving = false
 local function update_ui_visibility(self)
 	gui.set_enabled(self.info_box_node, self.info_open)
 	local quiz_enabled = not self.info_open
+
+	gui.set_enabled(self.question_node, quiz_enabled)
+	
 	for _, node in ipairs(self.quiz_buttons) do
 		if self.active_buttons[node] then
 			gui.set_enabled(node, quiz_enabled)
@@ -35,7 +38,8 @@ load_question = function(self, index)
 		if is_saving then return end
 		is_saving = true
 
-		gui.set_text(self.question_text, "Quiz Finito! Salvataggio...")
+		-- Sostituisci la stringa fissa con:
+		gui.set_text(self.question_text, gm.get_text("quiz_finished"))
 
 		-- Salvataggio asincrono su Appwrite
 		api.save(self, function()
@@ -49,12 +53,17 @@ load_question = function(self, index)
 	local q = self.selected_questions[index]
 	self.correct_index = q.correct_index
 
-	gui.set_text(self.question_text, q.question)
+	local translated_question = gm.get_text(q.question)
+	gui.set_text(self.question_text, translated_question)
 
 	for i, node in ipairs(self.quiz_buttons) do
 		if q.answers[i] then
 			gui.set_enabled(node, true)
-			gui.set_text(self.button_labels[i], q.answers[i])
+
+			-- TRADUZIONE DELLA RISPOSTA
+			local translated_answer = gm.get_text(q.answers[i])
+			gui.set_text(self.button_labels[i], translated_answer)
+
 			gui.play_flipbook(node, hash("9SliceButton"))
 			self.active_buttons[node] = true 
 		else
@@ -64,6 +73,13 @@ load_question = function(self, index)
 	end
 
 	self.answered = false
+end
+
+local function update_ui_texts(self)
+	gui.set_text(self.info_text_node, gm.get_text("school_guide"))
+
+	-- Traduzione del tasto per chiudere il popup (nodo 'exitText' nell'immagine)
+	gui.set_text(gui.get_node("exitText"), gm.get_text("close"))
 end
 
 local function get_random_questions(all_questions, count)
@@ -85,6 +101,7 @@ function init(self)
 
 	is_saving = false
 	self.selected_questions = get_random_questions(data.questions, 5)
+	self.question_node = gui.get_node("question/button_root")
 	self.question_text = gui.get_node("question/label")
 
 	self.quiz_buttons = {
@@ -110,7 +127,7 @@ function init(self)
 	self.info_open = false
 	self.active_buttons = {}
 
-	gui.set_text(self.info_text_node, school_info.school_guide or "Studia per ottenere conoscenza!")
+	update_ui_texts(self)
 
 	load_question(self, 1)
 	update_ui_visibility(self)
@@ -142,7 +159,8 @@ function on_input(self, action_id, action)
 		-- Tasto Exit (con salvataggio)
 		if gui.pick_node(self.exit_button, action.x, action.y) then
 			is_saving = true
-			gui.set_text(self.question_text, "Salvataggio in corso...")
+			-- Sostituisci la stringa fissa con:
+			gui.set_text(self.question_text, gm.get_text("saving"))
 
 			api.save(self, function()
 				is_saving = false
