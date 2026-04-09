@@ -38,11 +38,11 @@ nodes {
 nodes {
   position {
     x: 83.0
-    y: 131.04327
+    y: 106.043274
   }
   size {
-    x: 100.0
-    y: 50.0
+    x: 150.0
+    y: 60.0
     z: 0.1
   }
   type: TYPE_BOX
@@ -59,13 +59,13 @@ nodes {
 }
 nodes {
   size {
-    x: 100.0
+    x: 130.0
     y: 50.0
   }
   type: TYPE_TEXT
   text: "Previous"
   font: "pixelFont"
-  id: "label"
+  id: "previousText"
   line_break: true
   parent: "previous"
   inherit_alpha: true
@@ -73,11 +73,11 @@ nodes {
 nodes {
   position {
     x: 485.0
-    y: 133.04327
+    y: 108.043274
   }
   size {
-    x: 100.0
-    y: 50.0
+    x: 150.0
+    y: 60.0
   }
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
@@ -93,13 +93,13 @@ nodes {
 }
 nodes {
   size {
-    x: 100.0
+    x: 130.0
     y: 50.0
   }
   type: TYPE_TEXT
   text: "Next"
   font: "pixelFont"
-  id: "label1"
+  id: "nextText"
   line_break: true
   parent: "next"
   inherit_alpha: true
@@ -149,7 +149,7 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  texture: "food/cake_strawberry"
+  texture: "food/fruit_apple"
   id: "food_template/item_icon"
   parent: "food_template/item_template"
   overridden_fields: 3
@@ -249,7 +249,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "buttons/9SliceWrongButton"
-  id: "box"
+  id: "exitInfo"
   parent: "infoBox"
   inherit_alpha: true
   slice9 {
@@ -268,7 +268,7 @@ nodes {
   text: "EXIT"
   font: "pixelFont"
   id: "exitText"
-  parent: "box"
+  parent: "exitInfo"
   inherit_alpha: true
 }
 nodes {

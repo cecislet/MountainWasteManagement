@@ -1,41 +1,8 @@
 images {
-  image: "/_assets/Market/foods/boba_coffee.png"
-}
-images {
-  image: "/_assets/Market/foods/boba_mango.png"
-}
-images {
-  image: "/_assets/Market/foods/boba_matcha.png"
-}
-images {
-  image: "/_assets/Market/foods/boba_milktea.png"
-}
-images {
-  image: "/_assets/Market/foods/boba_strawberry.png"
-}
-images {
-  image: "/_assets/Market/foods/boba_taro.png"
-}
-images {
-  image: "/_assets/Market/foods/boba_thai.png"
-}
-images {
   image: "/_assets/Market/foods/cake_cheese.png"
 }
 images {
   image: "/_assets/Market/foods/cake_chocolate.png"
-}
-images {
-  image: "/_assets/Market/foods/cake_matcha.png"
-}
-images {
-  image: "/_assets/Market/foods/cake_redvelvet.png"
-}
-images {
-  image: "/_assets/Market/foods/cake_strawberry.png"
-}
-images {
-  image: "/_assets/Market/foods/canned_soup.png"
 }
 images {
   image: "/_assets/Market/foods/cheese_blue.png"
@@ -84,9 +51,6 @@ images {
 }
 images {
   image: "/_assets/Market/foods/eggs_fried.png"
-}
-images {
-  image: "/_assets/Market/foods/eggs_overeasy.png"
 }
 images {
   image: "/_assets/Market/foods/eggs_scrambled.png"
@@ -155,36 +119,6 @@ images {
   image: "/_assets/Market/foods/icecream_3scoops.png"
 }
 images {
-  image: "/_assets/Market/foods/jam_blueberry.png"
-}
-images {
-  image: "/_assets/Market/foods/jam_grape.png"
-}
-images {
-  image: "/_assets/Market/foods/jam_kiwi.png"
-}
-images {
-  image: "/_assets/Market/foods/jam_peach.png"
-}
-images {
-  image: "/_assets/Market/foods/jam_strawberry.png"
-}
-images {
-  image: "/_assets/Market/foods/onigiri_1.png"
-}
-images {
-  image: "/_assets/Market/foods/onigiri_2.png"
-}
-images {
-  image: "/_assets/Market/foods/onigiri_3.png"
-}
-images {
-  image: "/_assets/Market/foods/onigiri_4.png"
-}
-images {
-  image: "/_assets/Market/foods/onigiri_5.png"
-}
-images {
   image: "/_assets/Market/foods/pastry_baguette.png"
 }
 images {
@@ -225,36 +159,6 @@ images {
 }
 images {
   image: "/_assets/Market/foods/soda_sprite.png"
-}
-images {
-  image: "/_assets/Market/foods/soymilk_almond.png"
-}
-images {
-  image: "/_assets/Market/foods/soymilk_banana.png"
-}
-images {
-  image: "/_assets/Market/foods/soymilk_choco.png"
-}
-images {
-  image: "/_assets/Market/foods/soymilk_chocomint.png"
-}
-images {
-  image: "/_assets/Market/foods/soymilk_coffee.png"
-}
-images {
-  image: "/_assets/Market/foods/soymilk_mango.png"
-}
-images {
-  image: "/_assets/Market/foods/soymilk_match.png"
-}
-images {
-  image: "/_assets/Market/foods/soymilk_peach.png"
-}
-images {
-  image: "/_assets/Market/foods/soymilk_soy.png"
-}
-images {
-  image: "/_assets/Market/foods/soymilk_strawberry.png"
 }
 images {
   image: "/_assets/Market/foods/vegetable_bellpepper_green.png"

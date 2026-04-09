@@ -11,18 +11,6 @@ M.ITEMS = {
 	-- Cakes
 	item("Cheese Cake", 15, "cake_cheese", "fridge"),
 	item("Chocolate Cake", 16, "cake_chocolate", "fridge"),
-	item("Matcha Cake", 17, "cake_matcha", "fridge"),
-	item("Red Velvet Cake", 18, "cake_redvelvet", "fridge"),
-	item("Strawberry Cake", 16, "cake_strawberry", "fridge"),
-
-	-- Boba
-	item("Boba Coffee", 11, "boba_coffee", "fridge"),
-	item("Boba Mango", 11, "boba_mango", "fridge"),
-	item("Boba Matcha", 11, "boba_matcha", "fridge"),
-	item("Boba Milk Tea", 10, "boba_milktea", "fridge"),
-	item("Boba Strawberry", 11, "boba_strawberry", "fridge"),
-	item("Boba Taro", 12, "boba_taro", "fridge"),
-	item("Boba Thai", 12, "boba_thai", "fridge"),
 
 	-- Coffee / Drinks
 	item("Espresso", 6, "coffee_espresso", "fridge"),
@@ -37,18 +25,6 @@ M.ITEMS = {
 	item("Fanta", 5, "soda_fanta", "fridge"),
 	item("Pepsi", 5, "soda_pepsi", "fridge"),
 	item("Sprite", 5, "soda_sprite", "fridge"),
-
-	-- Soymilk
-	item("Soymilk Almond", 7, "soymilk_almond", "fridge"),
-	item("Soymilk Banana", 7, "soymilk_banana", "fridge"),
-	item("Soymilk Chocolate", 7, "soymilk_choco", "fridge"),
-	item("Soymilk Choco Mint", 7, "soymilk_chocomint", "fridge"),
-	item("Soymilk Coffee", 7, "soymilk_coffee", "fridge"),
-	item("Soymilk Mango", 7, "soymilk_mango", "fridge"),
-	item("Soymilk Matcha", 7, "soymilk_match", "fridge"),
-	item("Soymilk Peach", 7, "soymilk_peach", "fridge"),
-	item("Soymilk Classic", 6, "soymilk_soy", "fridge"),
-	item("Soymilk Strawberry", 7, "soymilk_strawberry", "fridge"),
 
 	-- Ice cream & popsicles
 	item("Ice Cream (1 Scoop)", 5, "icecream_1scoop", "fridge"),
@@ -70,7 +46,6 @@ M.ITEMS = {
 	item("Fried Eggs", 6, "eggs_fried", "fridge"),
 	item("Scrambled Eggs", 6, "eggs_scrambled", "fridge"),
 	item("Soft Boiled Eggs", 5, "eggs_softboiled", "fridge"),
-	item("Overeasy Eggs", 6, "eggs_overeasy", "fridge"),
 
 	item("Gouda Cheese", 12, "cheese_gouda", "fridge"),
 	item("Mozzarella", 11, "cheese_mozzarella", "fridge"),
@@ -117,23 +92,6 @@ M.ITEMS = {
 	item("Brioche", 5, "pastry_brioche", "shelf"),
 	item("Croissant", 6, "pastry_croissant", "shelf"),
 	item("Pretzel", 5, "pastry_pretzel", "shelf"),
-
-	-- Onigiri
-	item("Onigiri 1", 7, "onigiri_1", "shelf"),
-	item("Onigiri 2", 7, "onigiri_2", "shelf"),
-	item("Onigiri 3", 8, "onigiri_3", "shelf"),
-	item("Onigiri 4", 8, "onigiri_4", "shelf"),
-	item("Onigiri 5", 9, "onigiri_5", "shelf"),
-
-	-- Jams
-	item("Jam Blueberry", 9, "jam_blueberry", "shelf"),
-	item("Jam Grape", 9, "jam_grape", "shelf"),
-	item("Jam Kiwi", 9, "jam_kiwi", "shelf"),
-	item("Jam Peach", 9, "jam_peach", "shelf"),
-	item("Jam Strawberry", 9, "jam_strawberry", "shelf"),
-
-	-- Misc
-	item("Canned Soup", 5, "canned_soup", "shelf"),
 }
 
 return M

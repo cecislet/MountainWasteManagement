@@ -59,8 +59,24 @@ M.strings = {
 	q10_a1 = "Composting", q10_a2 = "Feeding animals", q10_a3 = "Source reduction (preventing waste)", q10_a4 = "Landfill disposal",
 
 	q11 = "True or False: Bruised or 'ugly' produce is usually just as nutritious as perfect-looking produce.",
-	q11_a1 = "True", q11_a2 = "False"
-	
+	q11_a1 = "True", q11_a2 = "False",
+
+	market_guide = [[
+	WELCOME TO THE GENERAL STORE!
+
+	Welcome to the General Store! Ensure your Yeti stays healthy and happy by keeping your supplies stocked.
+
+	Fuel Your Friend: Purchase essential food and treats specifically for your Yeti here.
+	Currency: All items are priced in Knowledge Points. Use your wisdom to provide!
+	Seasonal Pricing: Keep an eye on the calendar! Prices fluctuate based on the current season.
+	Real-World Skills: Proper Storage: Learn the best ways to store food in real life to maximize freshness (Fridge vs. Shelf).
+	]],
+	inventory_full = "INVENTORY FULL! Eat something first.",
+	buy_btn = "BUY",
+	close_btn = "CLOSE",
+	no_description = "No description available.",
+	next_btn = "NEXT",
+	prev_btn = "PREVIOUS",
 }
 
 return M 

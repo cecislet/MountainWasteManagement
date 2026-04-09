@@ -1,6 +1,5 @@
 local data = require "_assets.School.quiz_data"
 local gm = require "_scripts.GameManager"
-local school_info = require "_scripts.School.SchoolInfo"
 local api = require "_scripts.api" 
 
 -- Variabile di controllo per evitare salvataggi multipli contemporanei

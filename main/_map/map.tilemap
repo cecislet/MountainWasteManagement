@@ -255,7 +255,7 @@ layers {
   cell {
     x: 2
     y: 4
-    tile: 12
+    tile: 39
   }
   cell {
     x: 3

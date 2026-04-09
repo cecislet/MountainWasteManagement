@@ -59,7 +59,24 @@ M.strings = {
 	q10_a1 = "Compostaggio", q10_a2 = "Nutrire gli animali", q10_a3 = "Riduzione alla fonte (prevenzione)", q10_a4 = "Smaltimento in discarica",
 
 	q11 = "Vero o Falso: I prodotti ammaccati o 'brutti' sono solitamente nutrienti quanto quelli esteticamente perfetti.",
-	q11_a1 = "Vero", q11_a2 = "Falso"
+	q11_a1 = "Vero", q11_a2 = "Falso",
+
+	market_guide = [[
+	BENVENUTO AL MARKET GENERALE!
+
+	Benvenuto al Market Generale! Assicurati che il tuo Yeti rimanga in salute e felice mantenendo scorte sufficienti.
+
+	Nutri il tuo Amico: Acquista qui cibo essenziale e premi speciali specifici per il tuo Yeti.
+	Valuta: Tutti gli articoli sono prezzati in Punti Conoscenza. Usa la tua saggezza per provvedere alle sue necessita'!
+	Prezzi Stagionali: Tieni d'occhio il calendario! I prezzi variano in base alla stagione corrente.
+	Competenze Reali: Conservazione Corretta: Impara i modi migliori per conservare il cibo nella realta' per massimizzarne la freschezza (Frigo vs. Scaffale).
+	]],
+	inventory_full = "INVENTARIO PIENO! Mangia qualcosa prima.",
+	buy_btn = "COMPRA",
+	close_btn = "CHIUDI",
+	no_description = "Nessuna descrizione disponibile.",
+	next_btn = "PROSSIMO",
+	prev_btn = "PRECEDENTE",
 }
 
 return M
