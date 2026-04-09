@@ -27,6 +27,10 @@ textures {
   name: "MiniGameMap"
   texture: "/main/_miniGame/MiniGameMap.atlas"
 }
+textures {
+  name: "icons1"
+  texture: "/_assets/icons/icons.atlas"
+}
 nodes {
   position {
     x: 385.0
@@ -42,6 +46,9 @@ nodes {
   inherit_alpha: true
 }
 nodes {
+  position {
+    y: 20.0
+  }
   size {
     x: 200.0
     y: 100.0
@@ -51,14 +58,15 @@ nodes {
   parent: "Background"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+  enabled: false
 }
 nodes {
   position {
-    x: -127.0
+    x: 2.0
     y: -266.0
   }
   size {
-    x: 245.0
+    x: 160.0
     y: 100.0
   }
   type: TYPE_BOX
@@ -75,12 +83,12 @@ nodes {
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 140.0
+    y: 80.0
   }
   type: TYPE_TEXT
   text: "LOGIN"
-  font: "pixelFont_Title"
+  font: "pixelFont"
   id: "sendTxt"
   parent: "SendButton"
   inherit_alpha: true
@@ -258,11 +266,11 @@ nodes {
 }
 nodes {
   position {
-    x: 129.0
+    x: 172.0
     y: -266.0
   }
   size {
-    x: 245.0
+    x: 160.0
     y: 100.0
   }
   type: TYPE_BOX
@@ -279,14 +287,47 @@ nodes {
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 140.0
+    y: 80.0
   }
   type: TYPE_TEXT
   text: "REGISTER"
-  font: "pixelFont_Title"
-  id: "sendTxt1"
+  font: "pixelFont"
+  id: "registerTxt"
   parent: "RegisterButton"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -169.0
+    y: -266.0
+  }
+  size {
+    x: 160.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "BackButton"
+  parent: "loginForm"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 140.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  text: "BACK"
+  font: "pixelFont"
+  id: "backButton"
+  parent: "BackButton"
   inherit_alpha: true
 }
 nodes {
@@ -299,7 +340,6 @@ nodes {
   parent: "Background"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
-  enabled: false
 }
 nodes {
   position {
@@ -455,13 +495,39 @@ nodes {
   }
 }
 nodes {
-  size {
-    x: 80.0
-    y: 80.0
-  }
   type: TYPE_BOX
+  texture: "icons1/pfpIcon"
   id: "pfp"
   parent: "Login"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 314.0
+    y: 209.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "Language"
+  parent: "Menu"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  type: TYPE_BOX
+  texture: "icons/SwissItaly"
+  id: "flag"
+  parent: "Language"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
@@ -486,6 +552,7 @@ nodes {
     z: 20.0
     w: 20.0
   }
+  enabled: false
 }
 nodes {
   position {
@@ -558,6 +625,7 @@ nodes {
   parent: "Background"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+  enabled: false
 }
 nodes {
   scale {

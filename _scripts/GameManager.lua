@@ -1,4 +1,9 @@
 local M = {}
+local lang_en = require "_scripts.loc.en"
+local lang_it = require "_scripts.loc.it"
+
+M.current_language = "en"
+M.lang_data = lang_en.strings
 
 -- DATI DEL GIOCATORE (Valori iniziali)
 M.player_id = nil        -- Verrà impostato al login
@@ -84,6 +89,27 @@ end
 
 function M.get_current_level()
 	return M.current_level
+end
+
+-- --- LOCALIZZAZIONE ---
+
+-- Funzione per caricare il file della lingua
+function M.load_language(lang_id)
+	M.current_language = lang_id
+	if lang_id == "it" then
+		M.lang_data = lang_it.strings
+	elseif lang_id == "en" then
+		M.lang_data = lang_en.strings
+	end
+	print("Lingua switchata a: " .. lang_id)
+end
+
+-- Funzione globale per ottenere una stringa tradotta
+function M.get_text(key)
+	if M.lang_data and M.lang_data[key] then
+		return M.lang_data[key]
+	end
+	return key
 end
 
 return M
