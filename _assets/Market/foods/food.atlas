@@ -11,7 +11,7 @@ images {
   image: "/_assets/Market/foods/cheese_camembert.png"
 }
 images {
-  image: "/_assets/Market/foods/cheese_gouda.png"
+  image: "/_assets/Market/foods/cheese_emmental.png"
 }
 images {
   image: "/_assets/Market/foods/cheese_mozzarella.png"
@@ -110,15 +110,6 @@ images {
   image: "/_assets/Market/foods/fruit_watermelon_slice.png"
 }
 images {
-  image: "/_assets/Market/foods/icecream_1scoop.png"
-}
-images {
-  image: "/_assets/Market/foods/icecream_2scoops.png"
-}
-images {
-  image: "/_assets/Market/foods/icecream_3scoops.png"
-}
-images {
   image: "/_assets/Market/foods/pastry_baguette.png"
 }
 images {
@@ -201,5 +192,26 @@ images {
 }
 images {
   image: "/_assets/Market/foods/vegetable_tomato.png"
+}
+images {
+  image: "/_assets/Market/foods/polenta.png"
+}
+images {
+  image: "/_assets/Market/foods/glazed_donut.png"
+}
+images {
+  image: "/_assets/Market/foods/maple_syrup.png"
+}
+images {
+  image: "/_assets/Market/foods/pancakes.png"
+}
+images {
+  image: "/_assets/Market/foods/peanut_butter.png"
+}
+images {
+  image: "/_assets/Market/foods/chestnuts.png"
+}
+images {
+  image: "/_assets/Market/foods/rosti.png"
 }
 extrude_borders: 2

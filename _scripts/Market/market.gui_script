@@ -30,16 +30,10 @@ local function update_ui_visibility(self)
 end
 
 local function update_ui_texts(self)
-	-- Testo della guida (InfoBox)
 	gui.set_text(gui.get_node("infoText"), GameManager.get_text("market_guide"))
-
-	-- Testo dei pulsanti nel FoodBox (se hanno nodi testo)
 	gui.set_text(gui.get_node("buyText"), GameManager.get_text("buy_btn"))
 	gui.set_text(gui.get_node("closeText"), GameManager.get_text("close_btn"))
-
-	-- Testo del tasto chiudi info
 	gui.set_text(gui.get_node("exitText"), GameManager.get_text("close_btn"))
-
 	gui.set_text(gui.get_node("nextText"), GameManager.get_text("next_btn"))
 	gui.set_text(gui.get_node("previousText"), GameManager.get_text("prev_btn"))
 end
@@ -49,9 +43,11 @@ local function generate_inventory(self, page_type)
 	local parent_id = (page_type == PAGE_FRIDGE) and "fridge" or "shelf"
 	local parent_node = gui.get_node(parent_id)
 
+	-- Pulizia nodi esistenti
 	for _, item in ipairs(items_table or {}) do
 		gui.delete_node(item.root)
 	end
+
 	if page_type == PAGE_FRIDGE then self.fridge_items = {} else self.shelf_items = {} end
 	items_table = (page_type == PAGE_FRIDGE) and self.fridge_items or self.shelf_items
 
@@ -64,6 +60,7 @@ local function generate_inventory(self, page_type)
 		end
 	end
 
+	-- Shuffle per varietà nel market
 	for i = #filtered_items, 2, -1 do
 		local j = math.random(i)
 		filtered_items[i], filtered_items[j] = filtered_items[j], filtered_items[i]
@@ -111,9 +108,7 @@ function init(self)
 	self.selected_item = nil
 	self.is_saving = false 
 
-	-- TRADUZIONE INIZIALE
 	update_ui_texts(self)
-
 	generate_inventory(self, PAGE_FRIDGE)
 	generate_inventory(self, PAGE_SHELF)
 	update_ui_visibility(self)
@@ -129,20 +124,19 @@ function on_input(self, action_id, action)
 				self.food_box_open = false
 				update_ui_visibility(self)
 			elseif gui.pick_node(gui.get_node("buy"), action.x, action.y) then
-				-- CONTROLLO SPAZIO INVENTARIO (Max 5)
 				if #GameManager.inventory >= 5 then
 					gui.set_text(gui.get_node("foodText"), GameManager.get_text("inventory_full"))
 					return true
 				end
 
-				-- CONTROLLO FONDI
 				if GameManager.knowledge_amount >= self.selected_item.price then
 					self.is_saving = true
 					GameManager.knowledge_amount = GameManager.knowledge_amount - self.selected_item.price
 
+					-- Aggiunta all'inventario globale
 					local duration = self.selected_item.duration or 3600
 					local inventory_item = {
-						id = self.selected_item.id,
+						id = self.selected_item.id or self.selected_item.name,
 						name = self.selected_item.name,
 						icon = self.selected_item.icon,
 						expires_at = os.time() + duration
@@ -163,7 +157,7 @@ function on_input(self, action_id, action)
 						update_ui_visibility(self)
 					end)
 				else
-					print("Fondi insufficienti!")
+					-- Feedback visivo opzionale qui per fondi insufficienti
 				end
 			end
 			return true
@@ -184,12 +178,9 @@ function on_input(self, action_id, action)
 			update_ui_visibility(self)
 			return true
 		elseif gui.pick_node(gui.get_node("exit"), action.x, action.y) then
-			-- Blocchiamo l'input per evitare clic multipli durante il salvataggio
 			self.is_saving = true
-
-			print("Salvataggio in corso prima di uscire...")
 			api.save(self, function()
-				self.is_saving = false -- Reset di sicurezza (anche se cambiamo scena)
+				self.is_saving = false 
 				msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage" })
 			end)
 			return true
@@ -210,12 +201,17 @@ function on_input(self, action_id, action)
 				self.selected_item = item.data
 				gui.play_flipbook(gui.get_node("icon"), hash(item.data.icon))
 
-				local localized_name = GameManager.get_text(item.data.name)
-				local localized_desc = GameManager.get_text(item.data.name .. "_desc")
-				
+				local key = item.data.icon
+				local localized_name = GameManager.get_text(key)
+				local localized_desc = GameManager.get_text(key .. "_desc")
+
+				if key:find("popsicle") then
+					localized_desc = GameManager.get_text("popsicle_desc")
+				end
+
 				gui.set_text(gui.get_node("foodName"), localized_name)
 				gui.set_text(gui.get_node("foodText"), localized_desc)
-				
+
 				self.food_box_open = true
 				update_ui_visibility(self)
 				return true

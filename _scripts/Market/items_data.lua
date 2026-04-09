@@ -1,7 +1,7 @@
 local M = {}
 
 local function item(name, price, icon, category)
-	return { name = name, price = price, icon = icon, category = category }
+	return {name = name, price = price, icon = icon, category = category }
 end
 
 M.ITEMS = {
@@ -25,12 +25,7 @@ M.ITEMS = {
 	item("Fanta", 5, "soda_fanta", "fridge"),
 	item("Pepsi", 5, "soda_pepsi", "fridge"),
 	item("Sprite", 5, "soda_sprite", "fridge"),
-
-	-- Ice cream & popsicles
-	item("Ice Cream (1 Scoop)", 5, "icecream_1scoop", "fridge"),
-	item("Ice Cream (2 Scoops)", 7, "icecream_2scoops", "fridge"),
-	item("Ice Cream (3 Scoops)", 9, "icecream_3scoops", "fridge"),
-
+	
 	item("Popsicle Blue", 4, "popsicle_blue", "fridge"),
 	item("Popsicle Green", 4, "popsicle_green", "fridge"),
 	item("Popsicle Pink", 4, "popsicle_pink", "fridge"),
@@ -41,19 +36,27 @@ M.ITEMS = {
 	item("Apple Slice", 4, "fruit_apple_slice", "fridge"),
 	item("Orange Slice", 4, "fruit_orange_slice", "fridge"),
 	item("Watermelon Slice", 5, "fruit_watermelon_slice", "fridge"),
+	item("Rosti", 5, "rosti", "fridge"),
 
 	-- Eggs / dairy
 	item("Fried Eggs", 6, "eggs_fried", "fridge"),
 	item("Scrambled Eggs", 6, "eggs_scrambled", "fridge"),
 	item("Soft Boiled Eggs", 5, "eggs_softboiled", "fridge"),
 
-	item("Gouda Cheese", 12, "cheese_gouda", "fridge"),
+	item("Emmental Cheese", 12, "cheese_emmental", "fridge"),
 	item("Mozzarella", 11, "cheese_mozzarella", "fridge"),
 	item("Blue Cheese", 13, "cheese_blue", "fridge"),
 	item("Camembert", 14, "cheese_camembert", "fridge"),
 
 	-- ================= SHELF =================
 
+	item("Roasted Chestnuts", 5, "chestnuts", "shelf"),
+	item("Glazed Donut", 5, "glazed_donut", "shelf"),
+	item("Maple Syrup", 5, "maple_syrup", "shelf"),
+	item("Pancakes", 5, "pancakes", "shelf"),
+	item("Polenta", 5, "polenta", "shelf"),
+	item("Peanut Butter", 5, "peanut_butter", "shelf"),
+	
 	-- Fruits
 	item("Apple", 3, "fruit_apple", "shelf"),
 	item("Banana", 3, "fruit_banana", "shelf"),
