@@ -604,8 +604,8 @@ nodes {
 }
 nodes {
   position {
-    x: -222.0
-    y: 308.0
+    x: -439.0
+    y: 408.0
   }
   scale {
     x: 0.684932
@@ -626,6 +626,7 @@ nodes {
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
   enabled: false
+  visible: false
 }
 nodes {
   scale {

@@ -88,6 +88,20 @@ function on_input(self, action_id, action)
 		return true
 	end
 
+	if action.pressed and gui.pick_node(gui.get_node("save"), action.x, action.y) then
+		-- Feedback visivo opzionale: potresti far pulsare il tasto o cambiare testo
+		print("Salvataggio manuale in corso...")
+
+		api.save(self, function(success) 
+			if success then
+				print("Dati salvati con successo!")
+			else
+				print("Errore nel salvataggio manuale.")
+			end
+		end)
+		return true
+	end
+	
 	-- 2. LOGICA FOOD BOX (Popup aperto)
 	-- Nota: Spostiamo la logica degli slot PRIMA del blocco totale del popup 
 	-- se vogliamo che ricliccare lo slot funzioni come interruttore.
