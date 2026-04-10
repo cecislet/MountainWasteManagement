@@ -7,6 +7,10 @@ textures {
   name: "buttons"
   texture: "/_assets/School/buttons.atlas"
 }
+textures {
+  name: "icons"
+  texture: "/_assets/icons/icons.atlas"
+}
 nodes {
   position {
     x: 41.867867
@@ -21,143 +25,6 @@ nodes {
   id: "exit"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
-    x: 148.6354
-    y: 292.43573
-  }
-  type: TYPE_TEMPLATE
-  id: "button1"
-  inherit_alpha: true
-  template: "/_assets/School/button_template.gui"
-}
-nodes {
-  position {
-    y: 29.043274
-  }
-  type: TYPE_BOX
-  id: "button1/button_root"
-  parent: "button1"
-  overridden_fields: 1
-  template_node_child: true
-}
-nodes {
-  size {
-    x: 230.0
-    y: 130.0
-  }
-  type: TYPE_TEXT
-  id: "button1/label"
-  parent: "button1/button_root"
-  overridden_fields: 4
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 275.32465
-    y: 428.63867
-  }
-  type: TYPE_TEMPLATE
-  id: "question"
-  inherit_alpha: true
-  template: "/_assets/School/button_template.gui"
-}
-nodes {
-  position {
-    y: 84.12534
-  }
-  size {
-    x: 400.0
-    y: 200.0
-  }
-  type: TYPE_BOX
-  id: "question/button_root"
-  parent: "question"
-  overridden_fields: 1
-  overridden_fields: 4
-  template_node_child: true
-}
-nodes {
-  size {
-    x: 380.0
-    y: 180.0
-  }
-  type: TYPE_TEXT
-  id: "question/label"
-  parent: "question/button_root"
-  overridden_fields: 4
-  template_node_child: true
-}
-nodes {
-  position {
-    x: -9.97553
-  }
-  type: TYPE_TEMPLATE
-  id: "button2"
-  inherit_alpha: true
-  template: "/_assets/School/button_template.gui"
-}
-nodes {
-  position {
-    x: 424.95758
-    y: 322.4805
-  }
-  type: TYPE_BOX
-  id: "button2/button_root"
-  parent: "button2"
-  overridden_fields: 1
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "button2/label"
-  parent: "button2/button_root"
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 148.6354
-    y: 154.2298
-  }
-  type: TYPE_TEMPLATE
-  id: "button3"
-  inherit_alpha: true
-  template: "/_assets/School/button_template.gui"
-}
-nodes {
-  type: TYPE_BOX
-  id: "button3/button_root"
-  parent: "button3"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "button3/label"
-  parent: "button3/button_root"
-  template_node_child: true
-}
-nodes {
-  position {
-    x: 416.97717
-    y: 152.22682
-  }
-  type: TYPE_TEMPLATE
-  id: "button4"
-  inherit_alpha: true
-  template: "/_assets/School/button_template.gui"
-}
-nodes {
-  type: TYPE_BOX
-  id: "button4/button_root"
-  parent: "button4"
-  template_node_child: true
-}
-nodes {
-  type: TYPE_TEXT
-  id: "button4/label"
-  parent: "button4/button_root"
-  template_node_child: true
 }
 nodes {
   position {
@@ -186,6 +53,7 @@ nodes {
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
   id: "infoBox"
+  layer: "infobox"
   inherit_alpha: true
   slice9 {
     x: 20.0
@@ -241,6 +109,240 @@ nodes {
   id: "exitText"
   parent: "box"
   inherit_alpha: true
+}
+nodes {
+  position {
+    x: -249.38824
+    y: 457.68195
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "triviaUi"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 345.15335
+    y: -177.26411
+  }
+  type: TYPE_TEMPLATE
+  id: "button1"
+  parent: "triviaUi"
+  inherit_alpha: true
+  template: "/_assets/School/button_template.gui"
+}
+nodes {
+  position {
+    x: 21.946167
+    y: 29.043274
+  }
+  size {
+    x: 200.0
+    y: 150.0
+  }
+  type: TYPE_BOX
+  id: "button1/button_root"
+  parent: "button1"
+  overridden_fields: 1
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 180.0
+    y: 130.0
+  }
+  type: TYPE_TEXT
+  id: "button1/label"
+  parent: "button1/button_root"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 471.8426
+    y: -41.06118
+  }
+  type: TYPE_TEMPLATE
+  id: "question"
+  parent: "triviaUi"
+  inherit_alpha: true
+  template: "/_assets/School/button_template.gui"
+}
+nodes {
+  position {
+    y: 84.12534
+  }
+  size {
+    x: 400.0
+    y: 200.0
+  }
+  type: TYPE_BOX
+  id: "question/button_root"
+  parent: "question"
+  overridden_fields: 1
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 380.0
+    y: 180.0
+  }
+  type: TYPE_TEXT
+  id: "question/label"
+  parent: "question/button_root"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 186.54242
+    y: -469.69986
+  }
+  type: TYPE_TEMPLATE
+  id: "button2"
+  parent: "triviaUi"
+  inherit_alpha: true
+  template: "/_assets/School/button_template.gui"
+}
+nodes {
+  position {
+    x: 388.04813
+    y: 322.4805
+  }
+  size {
+    x: 200.0
+    y: 150.0
+  }
+  type: TYPE_BOX
+  id: "button2/button_root"
+  parent: "button2"
+  overridden_fields: 1
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 180.0
+    y: 130.0
+  }
+  type: TYPE_TEXT
+  id: "button2/label"
+  parent: "button2/button_root"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 345.15335
+    y: -315.47006
+  }
+  type: TYPE_TEMPLATE
+  id: "button3"
+  parent: "triviaUi"
+  inherit_alpha: true
+  template: "/_assets/School/button_template.gui"
+}
+nodes {
+  position {
+    x: 21.946165
+  }
+  size {
+    x: 200.0
+    y: 150.0
+  }
+  type: TYPE_BOX
+  id: "button3/button_root"
+  parent: "button3"
+  overridden_fields: 1
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 180.0
+    y: 130.0
+  }
+  type: TYPE_TEXT
+  id: "button3/label"
+  parent: "button3/button_root"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 613.4951
+    y: -317.47302
+  }
+  type: TYPE_TEMPLATE
+  id: "button4"
+  parent: "triviaUi"
+  inherit_alpha: true
+  template: "/_assets/School/button_template.gui"
+}
+nodes {
+  position {
+    x: -36.909462
+  }
+  size {
+    x: 200.0
+    y: 150.0
+  }
+  type: TYPE_BOX
+  id: "button4/button_root"
+  parent: "button4"
+  overridden_fields: 1
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  size {
+    x: 180.0
+    y: 130.0
+  }
+  type: TYPE_TEXT
+  id: "button4/label"
+  parent: "button4/button_root"
+  overridden_fields: 4
+  template_node_child: true
+}
+nodes {
+  position {
+    x: 572.59546
+    y: 333.4969
+  }
+  scale {
+    x: 1.089743
+    y: 1.102176
+  }
+  type: TYPE_BOX
+  texture: "icons/teacher"
+  id: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    y: 4.172295
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "npc"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
+}
+layers {
+  name: "infobox"
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

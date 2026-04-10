@@ -19,6 +19,10 @@ textures {
   name: "food"
   texture: "/_assets/Market/foods/food.atlas"
 }
+textures {
+  name: "icons"
+  texture: "/_assets/icons/icons.atlas"
+}
 nodes {
   position {
     x: 41.867867
@@ -37,8 +41,8 @@ nodes {
 }
 nodes {
   position {
-    x: 83.0
-    y: 106.043274
+    x: 108.0
+    y: 103.043274
   }
   size {
     x: 150.0
@@ -72,8 +76,8 @@ nodes {
 }
 nodes {
   position {
-    x: 485.0
-    y: 108.043274
+    x: 352.0
+    y: 105.043274
   }
   size {
     x: 150.0
@@ -170,8 +174,8 @@ nodes {
 }
 nodes {
   position {
-    x: 281.0
-    y: 315.0
+    x: 233.0
+    y: 381.0
   }
   scale {
     x: 4.459911
@@ -187,8 +191,8 @@ nodes {
 }
 nodes {
   position {
-    x: 281.0
-    y: 315.0
+    x: 233.0
+    y: 381.0
   }
   scale {
     x: 4.459911
@@ -294,14 +298,15 @@ nodes {
 }
 nodes {
   position {
-    x: 141.0
+    x: 129.0
+    y: 73.0
   }
   size {
     x: 300.0
-    y: 200.0
+    y: 60.0
   }
   type: TYPE_TEXT
-  text: "<text>"
+  text: "desc"
   font: "pixelFont"
   id: "foodText"
   line_break: true
@@ -398,11 +403,105 @@ nodes {
     y: 80.0
   }
   type: TYPE_TEXT
-  text: "<text>"
+  text: "Lemon"
   font: "pixelFont_Title"
   id: "foodName"
   parent: "foodBox"
   inherit_alpha: true
+}
+nodes {
+  position {
+    x: 215.0
+    y: 152.0
+  }
+  size {
+    x: 50.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "icons/food"
+  id: "foodIcon"
+  parent: "foodBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 48.0
+  }
+  size {
+    x: 50.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: ":50"
+  font: "pixelFont_Title"
+  id: "energy"
+  parent: "foodIcon"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 130.0
+    y: 11.0
+  }
+  size {
+    x: 300.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Qualita\' ottima fino a:"
+  font: "pixelFont"
+  id: "labelBestBefore"
+  line_break: true
+  parent: "foodBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 130.0
+    y: -39.0
+  }
+  size {
+    x: 300.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "Scadenza tassativa:"
+  font: "pixelFont"
+  id: "labelExpiry"
+  line_break: true
+  parent: "foodBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 572.59546
+    y: 333.4969
+  }
+  scale {
+    x: 1.089743
+    y: 1.102176
+  }
+  type: TYPE_BOX
+  texture: "icons/cashier"
+  id: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  scale {
+    y: 4.172295
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "npc"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+  visible: false
 }
 layers {
   name: "bgProps"

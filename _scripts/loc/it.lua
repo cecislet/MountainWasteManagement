@@ -13,6 +13,13 @@ M.strings = {
 	back = "INDIETRO",
 	debug_access = "ACCESSO DEBUG",
 	close = "CHIUDI",
+	label_best_before = "Consumare preferibilmente entro:",
+	label_expiry = "Scadenza tassativa:",
+	label_energy = ":",
+	storage_fridge = "Conserva in: FRIGO",
+	storage_shelf = "Conserva in: SCAFFALE",
+	days_left = "giorni rimasti",
+	expired = "SCADUTO!",
 	school_guide = [[
 	BENVENUTO A SCUOLA!
 
@@ -60,6 +67,33 @@ M.strings = {
 
 	q11 = "Vero o Falso: I prodotti ammaccati o 'brutti' sono solitamente nutrienti quanto quelli esteticamente perfetti.",
 	q11_a1 = "Vero", q11_a2 = "Falso",
+
+	q12 = "Quale di questi cibi ha l'impatto ambientale piu' basso?",
+	q12_a1 = "Manzo", q12_a2 = "Legumi", q12_a3 = "Formaggio", q12_a4 = "Pollo",
+	
+	q13 = "Vero o Falso: Il 10% delle emissioni globali di gas serra deriva dal cibo sprecato.",
+	q13_a1 = "Vero", q13_a2 = "Falso",
+	
+	q14 = "Cosa significa 'Km 0'?",
+	q14_a1 = "Cibo senza calorie", q14_a2 = "Prodotti venduti vicino al luogo di produzione", q14_a3 = "Cibo che non scade mai", q14_a4 = "Prodotti importati via aerea",
+
+	q15 = "Qual e' il principale vantaggio del compostaggio?",
+	q15_a1 = "Crea plastica", q15_a2 = "Trasforma scarti organici in fertilizzante", q15_a3 = "Elimina il bisogno di acqua", q15_a4 = "Serve a pulire i pavimenti",
+
+	q16 = "Vero o Falso: Mangiare prodotti locali (Km 0) aiuta a ridurre le emissioni causate dai trasporti.",
+	q16_a1 = "Vero", q16_a2 = "Falso",
+	
+	q17 = "Quale di questi metodi di cottura consuma meno energia?",
+	q17_a1 = "Forno elettrico", q17_a2 = "Microonde", q17_a3 = "Bollitura in pentola aperta", q17_a4 = "Frittura",
+
+	q18 = "Cosa indica il simbolo del 'punto verde' (due frecce che si intrecciano) sugli imballaggi?",
+	q18_a1 = "Il prodotto e' biologico", q18_a2 = "L'azienda finanzia sistemi di riciclo degli imballaggi", q18_a3 = "Il cibo all'interno e' verde", q18_a4 = "Si puo' mangiare la confezione",
+
+	q19 = "Vero o Falso: La plastica biodegradabile puo' essere gettata ovunque in natura.",
+	q19_a1 = "Vero", q19_a2 = "Falso",
+
+	q20 = "Quanti litri d'acqua servono circa per produrre una singola tazza di caffe'?",
+	q20_a1 = "1 litro", q20_a2 = "140 litri", q20_a3 = "50 litri", q20_a4 = "500 litri",
 
 	market_guide = [[
 	BENVENUTI ALL'EMPORIO GENERALE!
@@ -227,6 +261,55 @@ M.strings = {
 	pastry_croissant_desc = "Sfoglia burrosa e fragrante per una colazione perfetta.",
 	pastry_pretzel = "Pretzel",
 	pastry_pretzel_desc = "Pane tipico annodato, ricoperto di granelli di sale.",
+
+	-- CONSIGLI DELLA MUCCA (NPC TIPS)
+	tip_1 = "Muuu! 'Da consumare preferibilmente entro' (TMC) indica la qualita', non la sicurezza. Se l'aspetto e' buono, non buttarlo!",
+	tip_2 = "La data di scadenza 'Scade il' e' per i cibi freschi. Oltre quella data, il rischio di intossicazione e' reale. Muuu!",
+	tip_3 = "Fidati dei tuoi sensi! Se un cibo 'Best Before' ha un cattivo odore o muffa, buttalo via anche se la data non e' passata.",
+	tip_4 = "Muuu! Congelare i cibi vicino alla scadenza blocca il tempo! Puoi conservarli per mesi in freezer.",
+	tip_5 = "Sapevi che il miele non scade mai? E' stato trovato miele commestibile persino nelle tombe egizie! Muuu!",
+	tip_6 = "Il ripiano piu' basso del frigo e' il piu' freddo (circa 2 gradi). E' il posto perfetto per carne e pesce crudo!",
+	tip_7 = "Muuu! I cassetti in basso servono a mantenere l'umidita' per frutta e verdura. Non metterci i formaggi!",
+	tip_8 = "Il latte e le uova non dovrebbero stare nello sportello del frigo: e' la zona soggetta a piu' sbalzi di temperatura.",
+	tip_9 = "Non riempire troppo il frigo! L'aria fredda deve poter circolare per mantenere tutto alla giusta temperatura.",
+	tip_10 = "Muuu! Aspetta sempre che i cibi caldi si raffreddino prima di metterli in frigo, o scalderai tutto il resto!",
+	tip_11 = "Conserva patate e cipolle al buio e al fresco, ma mai insieme! Le cipolle fanno germogliare le patate prima.",
+	tip_12 = "Il pane si conserva meglio in un sacchetto di carta o di stoffa. Nel vapore della plastica ammuffisce subito!",
+	tip_13 = "Muuu! Olio e vino temono la luce. Tienili in armadietti chiusi per evitare che irrancidiscano.",
+	tip_14 = "I legumi secchi durano anni! Sono una fonte di proteine incredibile e molto economica. Muuu!",
+	tip_15 = "Se il pacco di biscotti e' aperto, chiudilo bene o usa un barattolo di vetro: l'umidita' dell'aria li rendera' molli.",
+	tip_16 = "Muuu! Lavare la carne cruda nel lavandino e' pericoloso: gli schizzi d'acqua diffondono batteri ovunque!",
+	tip_17 = "Usa taglieri diversi per carne e verdura. Eviterai la 'contaminazione crociata' dei batteri. Molto importante!",
+	tip_18 = "Muuu! Le banane emettono etilene. Se vuoi far maturare in fretta un avocado, mettilo in un sacchetto con una banana!",
+	tip_19 = "Le uova si conservano meglio con la punta rivolta verso il basso per mantenere il tuorlo centrato e protetto.",
+	tip_20 = "Muuu! Se un cibo ha la muffa, non basta togliere la parte brutta. Le radici della muffa spesso sono gia' ovunque!",
+	tip_21 = "Fai la lista della spesa prima di venire da me! Comprare solo cio' che serve e' il primo passo contro lo spreco.",
+	tip_22 = "Muuu! Mangia i prodotti di stagione. Sono piu' buoni, costano meno e non devono viaggiare per migliaia di chilometri!",
+	tip_23 = "Gli scarti della verdura possono diventare un ottimo brodo! Non buttare via le bucce pulite. Muuu!",
+	tip_24 = "Muuu! Ricorda la regola FIFO: First-In, First-Out. Metti davanti i cibi comprati prima per usarli per primi!",
+	tip_25 = "Sapevi che un terzo del cibo prodotto nel mondo viene buttato? Ogni piccolo gesto conta per salvare il pianeta!",
+
+	-- CONSIGLI DEL GUFO (OWL TIPS)
+	owl_1 = "Uh-uh! Sapevi che produrre un solo hamburger richiede circa 2400 litri d'acqua? Usa i tuoi punti con saggezza!",
+	owl_2 = "La sostenibilita' inizia dal carrello: compra solo cio' di cui hai bisogno per evitare che il cibo finisca in discarica.",
+	owl_3 = "Uh-uh! Le emissioni di metano del cibo in decomposizione sono 25 volte piu' potenti dell'anidride carbonica.",
+	owl_4 = "Preferisci prodotti con meno imballaggi. La plastica impiega secoli a degradarsi nel nostro ecosistema.",
+	owl_5 = "Il 'Batch Cooking' o cucinare in serie aiuta a risparmiare energia e a ridurre gli sprechi settimanali. Uh-uh!",
+	owl_6 = "Coltivare un piccolo orto, anche sul balcone, ci aiuta a capire il valore e il tempo necessario per produrre cibo.",
+	owl_7 = "Uh-uh! Mangiare meno carne rossa anche solo una volta a settimana riduce drasticamente la tua impronta ecologica.",
+	owl_8 = "Lo spreco alimentare non e' solo cibo perso, ma anche spreco di terra, energia e lavoro umano.",
+	owl_9 = "Uh-uh! Molti 'scarti' come i baccelli dei piselli o le foglie dei ravanelli sono commestibili e molto nutrienti!",
+	owl_10 = "Il vetro e' riciclabile all'infinito. Quando compri, preferisci contenitori in vetro rispetto a quelli in plastica.",
+	owl_11 = "Uh-uh! Mettere il coperchio sulla pentola quando bolle l'acqua fa risparmiare fino al 30% di energia!",
+	owl_12 = "Sapevi che la buccia delle patate contiene piu' vitamine della polpa? Lavale bene e mangia tutto!",
+	owl_13 = "Uh-uh! Il 'dumpster diving' e' un movimento che recupera cibo perfettamente buono buttato dai supermercati.",
+	owl_14 = "Evita di comprare frutta gia' tagliata e confezionata nella plastica: costa di piu' e inquina il triplo!",
+	owl_15 = "Uh-uh! La data 'Best Before' sul latte spesso e' molto prudente. Se non odora di acido, e' ancora ottimo!",
+	owl_16 = "Usa borse di tela riutilizzabili per la spesa. Una borsa di plastica viene usata per 12 minuti ma dura 400 anni!",
+	owl_17 = "Uh-uh! La carne di pollo ha un impatto ambientale molto minore rispetto a quella di manzo o agnello.",
+	owl_18 = "Se hai del pane raffermo, bagnale con un po' d'acqua e mettilo in forno: tornera' croccante come appena fatto!",
+	owl_19 = "Uh-uh! Molti detersivi per piatti inquinano l'acqua. Cerca quelli con etichetta 'Ecolabel'.",
+	owl_20 = "Il modo piu' sostenibile di mangiare e' seguire la dieta mediterranea: tanti legumi, cereali e verdura di stagione!",
 }
 
 return M

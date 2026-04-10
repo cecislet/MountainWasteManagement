@@ -13,6 +13,13 @@ M.strings = {
 	back = "BACK",
 	debug_access = "DEBUG ACCESS",
 	close = "CLOSE",
+	label_best_before = "Best before:",
+	label_expiry = "Use by:",
+	label_energy = ":",
+	storage_fridge = "Store in: FRIDGE",
+	storage_shelf = "Store in: SHELF",
+	days_left = "days left",
+	expired = "EXPIRED!",
 	school_guide = [[
 	WELCOME TO THE SCHOOL!
 
@@ -60,6 +67,34 @@ M.strings = {
 
 	q11 = "True or False: Bruised or 'ugly' produce is usually just as nutritious as perfect-looking produce.",
 	q11_a1 = "True", q11_a2 = "False",
+
+	q12 = "Which of these foods has the lowest environmental impact?",
+	q12_a1 = "Beef", q12_a2 = "Legumes", q12_a3 = "Cheese", q12_a4 = "Chicken",
+	
+	q13 = "True or False: 10% of global greenhouse gas emissions come from wasted food.",
+	q13_a1 = "True", q13_a2 = "False",
+	
+	q14 = "What does 'Zero km' (local food) mean?",
+	q14_a1 = "Zero-calorie food", q14_a2 = "Products sold near where they are produced", q14_a3 = "Food that never expires", q14_a4 = "Products imported by air",
+	
+	q15 = "What is the main benefit of composting?",
+	q15_a1 = "It creates plastic", q15_a2 = "It turns organic waste into fertilizer", q15_a3 = "It eliminates the need for water", q15_a4 = "It is used for cleaning floors",
+
+	q16 = "True or False: Eating local products (Zero km) helps reduce emissions caused by transport.",
+	q16_a1 = "True", q16_a2 = "False",
+
+	q17 = "Which of these cooking methods uses the least energy?",
+	q17_a1 = "Electric oven", q17_a2 = "Microwave", q17_a3 = "Boiling in an open pot", q17_a4 = "Frying",
+
+	q18 = "What does the 'Green Dot' symbol (two interlocking arrows) on packaging mean?",
+	q18_a1 = "The product is organic", q18_a2 = "The company funds packaging recycling systems", q18_a3 = "The food inside is green", q18_a4 = "You can eat the package",
+
+	q19 = "True or False: Biodegradable plastic can be thrown anywhere in nature.",
+	q19_a1 = "True", q19_a2 = "False",
+
+	q20 = "Approximately how many liters of water are needed to produce a single cup of coffee?",
+	q20_a1 = "1 liter", q20_a2 = "140 liters", q20_a3 = "50 liters", q20_a4 = "500 liters",
+	
 	market_guide = [[
 	WELCOME TO THE GENERAL STORE!
 
@@ -227,6 +262,55 @@ M.strings = {
 	pastry_croissant_desc = "Buttery and flaky pastry for a perfect breakfast.",
 	pastry_pretzel = "Pretzel",
 	pastry_pretzel_desc = "Traditional knotted bread topped with salt crystals.",
+
+	-- COW NPC TIPS
+	tip_1 = "Mooo! 'Best before' refers to quality, not safety. If it looks and smells fine, don't waste it!",
+	tip_2 = "The 'Use by' date is for fresh foods. After that date, there is a real risk of food poisoning. Mooo!",
+	tip_3 = "Trust your senses! If a 'Best Before' food smells bad or has mold, toss it even if the date hasn't passed.",
+	tip_4 = "Mooo! Freezing food near its expiration date freezes time! You can keep it for months in the freezer.",
+	tip_5 = "Did you know honey never expires? Edible honey was even found in ancient Egyptian tombs! Mooo!",
+	tip_6 = "The bottom shelf of the fridge is the coldest (about 2 degrees). It's the perfect spot for raw meat and fish!",
+	tip_7 = "Mooo! The bottom drawers are designed to keep humidity in for fruits and veggies. Don't put cheese there!",
+	tip_8 = "Milk and eggs shouldn't be kept in the fridge door: it's the area with the most temperature fluctuations.",
+	tip_9 = "Don't overfill the fridge! Cold air needs to circulate to keep everything at the right temperature.",
+	tip_10 = "Mooo! Always wait for hot food to cool down before putting it in the fridge, or you'll warm up everything else!",
+	tip_11 = "Store potatoes and onions in a dark, cool place, but never together! Onions make potatoes sprout faster.",
+	tip_12 = "Bread stays fresh longer in a paper or cloth bag. Plastic traps steam and makes it moldy quickly!",
+	tip_13 = "Mooo! Oil and wine hate light. Keep them in closed cabinets to prevent them from going rancid.",
+	tip_14 = "Dried legumes last for years! They are an incredible and very cheap source of protein. Mooo!",
+	tip_15 = "If a biscuit pack is open, seal it well or use a glass jar: air humidity will make them soggy.",
+	tip_16 = "Mooo! Washing raw meat in the sink is dangerous: water splashes spread bacteria everywhere!",
+	tip_17 = "Use different cutting boards for meat and vegetables to avoid 'cross-contamination'. Very important!",
+	tip_18 = "Mooo! Bananas release ethylene. To ripen an avocado fast, put it in a bag with a banana!",
+	tip_19 = "Eggs are best stored with the pointy end down to keep the yolk centered and protected.",
+	tip_20 = "Mooo! If food has mold, cutting off the bad part isn't enough. Mold roots often spread through the whole item!",
+	tip_21 = "Make a shopping list before coming to see me! Buying only what you need is the first step against waste.",
+	tip_22 = "Mooo! Eat seasonal products. They taste better, cost less, and don't have to travel thousands of miles!",
+	tip_23 = "Vegetable scraps can make a great broth! Don't throw away clean peels. Mooo!",
+	tip_24 = "Mooo! Remember the FIFO rule: First-In, First-Out. Put older food in front so you use it first!",
+	tip_25 = "Did you know that one-third of all food produced globally is wasted? Every small action counts to save the planet!",
+
+	-- OWL NPC TIPS
+	owl_1 = "Hoot-hoot! Did you know that producing a single hamburger requires about 2400 liters of water? Use your points wisely!",
+	owl_2 = "Sustainability starts in the shopping cart: buy only what you need to keep food out of landfills.",
+	owl_3 = "Hoot-hoot! Methane emissions from rotting food are 25 times more potent than carbon dioxide.",
+	owl_4 = "Choose products with less packaging. Plastic takes centuries to degrade in our ecosystem.",
+	owl_5 = "Batch cooking or meal prepping helps save energy and reduces weekly food waste. Hoot-hoot!",
+	owl_6 = "Growing a small garden, even on a balcony, helps us understand the value and time needed to produce food.",
+	owl_7 = "Hoot-hoot! Eating less red meat even just once a week drastically reduces your ecological footprint.",
+	owl_8 = "Food waste isn't just lost food; it's also a waste of land, energy, and human labor.",
+	owl_9 = "Hoot-hoot! Many 'scraps' like pea pods or radish tops are edible and very nutritious!",
+	owl_10 = "Glass is infinitely recyclable. When buying, choose glass containers over plastic ones.",
+	owl_11 = "Hoot-hoot! Putting a lid on the pot when boiling water saves up to 30% energy!",
+	owl_12 = "Did you know potato skins contain more vitamins than the flesh? Wash them well and eat it all!",
+	owl_13 = "Hoot-hoot! 'Dumpster diving' is a movement that recovers perfectly good food thrown away by supermarkets.",
+	owl_14 = "Avoid buying pre-cut fruit in plastic containers: it costs more and pollutes three times as much!",
+	owl_15 = "Hoot-hoot! The 'Best Before' date on milk is often very conservative. If it doesn't smell sour, it's still good!",
+	owl_16 = "Use reusable cloth bags for shopping. A plastic bag is used for 12 minutes but lasts 400 years!",
+	owl_17 = "Hoot-hoot! Chicken meat has a much lower environmental impact compared to beef or lamb.",
+	owl_18 = "If you have stale bread, sprinkle it with water and put it in the oven: it will be crunchy again!",
+	owl_19 = "Hoot-hoot! Many dish soaps pollute water. Look for those with the 'Ecolabel' tag.",
+	owl_20 = "The most sustainable way to eat is the Mediterranean diet: lots of legumes, grains, and seasonal veggies!",
 }
 
 return M

@@ -28,4 +28,10 @@ images {
 images {
   image: "/_assets/icons/USA.png"
 }
+images {
+  image: "/_assets/icons/teacher.png"
+}
+images {
+  image: "/_assets/icons/cashier.png"
+}
 extrude_borders: 2
