@@ -1,39 +1,34 @@
 local M = {}
+
+-- CARICAMENTO MODULI ESTERNI
 local lang_en = require "_scripts.loc.en"
 local lang_it = require "_scripts.loc.it"
+M.items_data = require "_scripts.Market.items_data" -- Assicurati che il percorso sia corretto
 
 M.current_language = "en"
 M.lang_data = lang_en.strings
 
--- DATI DEL GIOCATORE (Valori iniziali)
-M.player_id = nil        -- Verrà impostato al login
-M.coins = 0             -- Coerente con api.lua
-M.knowledge_amount = 0  -- Coerente con api.lua
-M.hunger = 50           -- Coerente con api.lua
-M.inventory = {}        -- LA NUOVA TABELLA PER GLI OGGETTI
+-- DATI DEL GIOCATORE
+M.player_id = nil
+M.coins = 0
+M.knowledge_amount = 0
+M.hunger = 50
+M.inventory = {} 
+M.mood = 100 
 
--- Velocità quando il gioco è CHIUSO (100 punti in 24 ore)
+-- COSTANTI FAME
 M.hunger_rate_offline = 0.00115 
-
--- Velocità quando il gioco è APERTO (es. 3 volte più veloce, 100 punti in 8 ore)
 M.hunger_rate_online = 0.00345
 
--- LIVELLO ATTUALE
 M.current_level = ""
 
--- In GameManager.lua
-M.mood = 100 -- Valore attuale da 0 a 100
+-- --- LOGICA MOOD ---
 
--- Funzione per applicare bonus/malus
 function M.add_mood(amount)
-	M.mood = M.mood + amount
-	-- Limitiamo tra 0 e 100
-	if M.mood > 100 then M.mood = 100 end
-	if M.mood < 0 then M.mood = 0 end
+	M.mood = math.max(0, math.min(100, M.mood + amount))
 	print("Nuovo valore Mood: " .. M.mood)
 end
 
--- Funzione per ottenere il moltiplicatore in base al punteggio
 function M.get_mood_multiplier()
 	if M.mood >= 80 then return 1.0     -- FELICE
 	elseif M.mood >= 60 then return 1.2 -- NEUTRALE
@@ -43,37 +38,6 @@ function M.get_mood_multiplier()
 	end
 end
 
-function M.eat_food(index)
-	local item = M.inventory[index]
-	local now = os.time(os.date("!*t"))
-
-	if item then
-		-- Controllo se il cibo è scaduto
-		local is_expired = now > item.expires_at
-
-		if is_expired then
-			-- CASO CIBO SCADUTO:
-			-- Aumenta la fame (perché fa male/non nutre)
-			M.hunger = math.min(100, M.hunger + 10) 
-			-- Diminuisce il mood (il Yeti è triste/arrabbiato)
-			M.add_mood(-15)
-			print("Schifo! Cibo scaduto. Fame: " .. M.hunger .. " Mood: " .. M.mood)
-		else
-			-- CASO CIBO BUONO:
-			-- Diminuisce la fame (valore più basso = meno fame)
-			local nutrizione = item.nutrition or 20
-			M.hunger = math.max(0, M.hunger - nutrizione)
-			-- Aumenta il mood
-			M.add_mood(10)
-			print("Gnam! Cibo buono. Fame: " .. M.hunger .. " Mood: " .. M.mood)
-		end
-
-		-- Rimuovi l'oggetto mangiato in ogni caso
-		table.remove(M.inventory, index)
-	end
-end
-
--- Funzione per ottenere il nome dell'animazione per l'HUD
 function M.get_mood_state_name()
 	if M.mood >= 80 then return "happy"
 	elseif M.mood >= 60 then return "neutral"
@@ -83,6 +47,89 @@ function M.get_mood_state_name()
 	end
 end
 
+-- --- LOGICA CIBO E STAGIONALITÀ ---
+
+-- Funzione di supporto per trovare i dati base di un item tramite ID
+function M.get_item_data_by_id(item_id)
+	for _, item in ipairs(M.items_data.ITEMS) do
+		if item.icon == item_id or item.id == item_id then
+			return item
+		end
+	end
+	return nil
+end
+
+function M.get_current_season()
+	local month = os.date("*t").month
+
+	-- Definiamo i mesi per ogni stagione
+	local seasons_months = {
+		WINTER = {12, 1, 2},
+		SPRING = {3, 4, 5},
+		SUMMER = {6, 7, 8},
+		AUTUMN = {9, 10, 11}
+	}
+
+	for season_name, months in pairs(seasons_months) do
+		for _, m in ipairs(months) do
+			if m == month then 
+				return season_name 
+			end
+		end
+	end
+
+	return "UNKNOWN"
+end
+
+function M.eat_food(index)
+	local item = M.inventory[index]
+	if not item then return end
+
+	local now = os.time()
+	local original_data = M.get_item_data_by_id(item.id)
+
+	if not original_data then 
+		table.remove(M.inventory, index)
+		return 
+	end
+
+	local energy_gain = original_data.energy or 10
+	local current_season = M.get_current_season()
+	local time_passed = now - (item.purchased_at or now)
+
+	-- 1. Bonus Stagionalità (sottrae più fame)
+	if original_data.season and original_data.season == current_season then
+		energy_gain = energy_gain * 1.2
+	end
+
+	-- 2. Logica a 3 Fasi con impatto sul MOOD
+	if time_passed <= original_data.fresh_duration then
+		-- FASE 1: FRESCO
+		M.hunger = M.hunger - energy_gain 
+		M.add_mood(5) -- Mangiare cibo fresco rende felici (+5)
+		print("Ottimo! Il Mood sale.")
+
+	elseif time_passed <= original_data.max_duration then
+		-- FASE 2: BEST BEFORE
+		M.hunger = M.hunger - math.floor(energy_gain * 0.5)
+		M.add_mood(-2) -- Non è il massimo, il mood scende un pochino (-2)
+		print("Accettabile, ma lo Yeti non è entusiasta.")
+
+	else
+		-- FASE 3: SCADUTO
+		M.hunger = M.hunger + 15 -- La fame sale (sta male)
+		M.add_mood(-20) -- SCHIFO! Il mood crolla drasticamente (-20)
+		print("Che schifo! Lo Yeti è furioso per il cibo avariato!")
+	end
+
+	-- Limiti di sicurezza
+	M.hunger = math.max(0, math.min(100, M.hunger))
+
+	table.remove(M.inventory, index)
+end
+
+-- --- LIVELLI E LOCALIZZAZIONE ---
+
 function M.set_current_level(new_level)
 	M.current_level = new_level
 end
@@ -91,9 +138,6 @@ function M.get_current_level()
 	return M.current_level
 end
 
--- --- LOCALIZZAZIONE ---
-
--- Funzione per caricare il file della lingua
 function M.load_language(lang_id)
 	M.current_language = lang_id
 	if lang_id == "it" then
@@ -101,10 +145,8 @@ function M.load_language(lang_id)
 	elseif lang_id == "en" then
 		M.lang_data = lang_en.strings
 	end
-	print("Lingua switchata a: " .. lang_id)
 end
 
--- Funzione globale per ottenere una stringa tradotta
 function M.get_text(key)
 	if M.lang_data and M.lang_data[key] then
 		return M.lang_data[key]

@@ -62,14 +62,20 @@ M.strings = {
 	q11_a1 = "Vero", q11_a2 = "Falso",
 
 	market_guide = [[
-	BENVENUTO AL MARKET GENERALE!
+	BENVENUTI ALL'EMPORIO GENERALE!
 
-	Benvenuto al Market Generale! Assicurati che il tuo Yeti rimanga in salute e felice mantenendo scorte sufficienti.
+	Assicurati che il tuo Yeti rimanga in salute e felice mantenendo le scorte piene.
 
-	Nutri il tuo Amico: Acquista qui cibo essenziale e premi speciali specifici per il tuo Yeti.
-	Valuta: Tutti gli articoli sono prezzati in Punti Conoscenza. Usa la tua saggezza per provvedere alle sue necessita'!
-	Prezzi Stagionali: Tieni d'occhio il calendario! I prezzi variano in base alla stagione corrente.
-	Competenze Reali: Conservazione Corretta: Impara i modi migliori per conservare il cibo nella realta' per massimizzarne la freschezza (Frigo vs. Scaffale).
+	1. NUTRI IL TUO AMICO: Acquista cibo e prelibatezze. Ricorda che la fame sale verso il 100% (pericolo) e scende verso lo 0% (sazio).
+	2. VALUTA: Tutti gli articoli sono prezzati in Punti Conoscenza. Usa la tua saggezza per provvedere allo Yeti!
+	3. PREZZI STAGIONALI: I prezzi fluttuano in base alla stagione corrente. Comprare prodotti di stagione conviene e nutre di più!
+	4. CONSERVAZIONE REALE: Impara dove conservare i cibi (Frigo vs Scaffale) per farli durare più a lungo.
+
+	--- LA GESTIONE DELLA SCADENZA ---
+	Ogni cibo nell'inventario mostra il suo stato tramite il colore del bottone:
+	- VERDE (Fresco): Massima efficacia! Riduce molta fame e aumenta il Mood.
+	- ARANCIONE (Da consumare): Qualità ridotta. Sazia la metà e peggiora leggermente il Mood.
+	- ROSSO (Avariato): ATTENZIONE! Se lo mangia, la fame AUMENTA (+15) e il Mood crolla. Lo Yeti starà male!
 	]],
 	inventory_full = "INVENTARIO PIENO! Mangia qualcosa prima.",
 	buy_btn = "COMPRA",

@@ -14,26 +14,40 @@ end
 
 local function refresh_inventory_slots(self)
 	local inv = data.inventory or {}
-	local now = os.time(os.date("!*t")) 
+	local now = os.time() -- Usiamo il tempo locale per coerenza con purchased_at
 
 	for i = 1, 5 do
 		local slot_node = gui.get_node("item" .. i)
 		local icon_node = gui.get_node("itemIcon" .. i)
 
+		gui.set_enabled(slot_node, true)
+
 		if inv[i] then
-			gui.set_enabled(slot_node, true)
+			-- Mostra l'icona
+			gui.set_enabled(icon_node, true)
 			gui.play_flipbook(icon_node, hash(inv[i].icon))
 
-			-- Controllo scadenza
-			if now > inv[i].expires_at then
-				gui.play_flipbook(slot_node, hash("9SliceWrongButton")) 
-				gui.set_color(icon_node, vmath.vector4(0.5, 0.5, 0.5, 0.8))
-			else
-				gui.play_flipbook(slot_node, hash("9SliceRightButton"))
-				gui.set_color(icon_node, vmath.vector4(1, 1, 1, 1))
+			-- Recuperiamo i dati originali dal GameManager per le soglie di tempo
+			local original_data = data.get_item_data_by_id(inv[i].id)
+			local time_passed = now - (inv[i].purchased_at or now)
+
+			if original_data then
+				if time_passed <= original_data.fresh_duration then
+					-- FASE 1: BUONO (Right)
+					gui.play_flipbook(slot_node, hash("9SliceRightButton"))
+				elseif time_passed <= original_data.max_duration then
+					-- FASE 2: NEL MEZZO (Orange)
+					gui.play_flipbook(slot_node, hash("9SliceOrangeButton")) -- Assicurati che questo nome esista nell'atlas
+				else
+					-- FASE 3: SCADUTO (Wrong)
+					gui.play_flipbook(slot_node, hash("9SliceWrongButton"))
+				end
 			end
+			gui.set_color(icon_node, vmath.vector4(1, 1, 1, 1))
 		else
-			gui.set_enabled(slot_node, false)
+			-- SLOT VUOTO
+			gui.set_enabled(icon_node, false)
+			gui.play_flipbook(slot_node, hash("9SliceButton"))
 		end
 	end
 end
@@ -71,25 +85,37 @@ function on_input(self, action_id, action)
 	if action.pressed and self.inventory_open then
 		for i = 1, 5 do
 			local node = gui.get_node("item" .. i)
-			if gui.is_enabled(node) and gui.pick_node(node, action.x, action.y) then
+			-- Controlliamo se esiste un oggetto nell'inventario a quell'indice
+			local item = data.inventory[i]
+
+			if gui.pick_node(node, action.x, action.y) and item then
 				-- SE RICLICCATO LO STESSO SLOT: CHIUDI
 				if self.food_box_open and self.selected_item_index == i then
 					self.food_box_open = false
 					self.selected_item_index = nil
 					gui.set_enabled(gui.get_node("foodBox"), false)
 				else
-					-- ALTRIMENTI: APRI O CAMBIA CONTENUTO
-					local item = data.inventory[i]
-					if item then
-						self.selected_item_index = i
-						self.food_box_open = true
+					-- ALTRIMENTI: APRI IL POPUP
+					self.selected_item_index = i
+					self.food_box_open = true
 
-						-- Aggiorna UI FoodBox
-						gui.play_flipbook(gui.get_node("icon"), hash(item.icon))
-						gui.set_text(gui.get_node("foodName"), item.name or "Cibo")
-						gui.set_enabled(gui.get_node("foodBox"), true)
+					gui.play_flipbook(gui.get_node("icon"), hash(item.icon))
+					local key = item.icon
+					local localized_name = data.get_text(key)
+					local localized_desc = data.get_text(key .. "_desc")
+
+					if key:find("popsicle") then
+						localized_desc = data.get_text("popsicle_desc")
 					end
+
+					gui.set_text(gui.get_node("foodName"), localized_name or item.name)
+					gui.set_text(gui.get_node("foodText"), localized_desc or data.get_text("no_description"))
+
+					gui.set_enabled(gui.get_node("foodBox"), true)
 				end
+				return true
+			elseif gui.pick_node(node, action.x, action.y) and not item then
+				-- Se clicco uno slot vuoto, non fare nulla (ma blocca il click)
 				return true
 			end
 		end

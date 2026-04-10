@@ -5,6 +5,8 @@ local api = require "_scripts.api"
 local PAGE_SHELF = hash("shelf")
 local PAGE_FRIDGE = hash("fridge")
 
+-- --- FUNZIONI DI SERVIZIO ---
+
 local function update_ui_visibility(self)
 	local is_fridge = (self.current_page == PAGE_FRIDGE)
 	local is_shelf = (self.current_page == PAGE_SHELF)
@@ -27,6 +29,16 @@ local function update_ui_visibility(self)
 	for _, item in ipairs(self.shelf_items or {}) do
 		gui.set_enabled(item.root, is_shelf and not ui_blocked)
 	end
+end
+
+local function get_dynamic_price(item_data)
+	local current_season = GameManager.get_current_season()
+	local price = item_data.price or 0
+
+	if item_data.season and item_data.season == current_season then
+		price = math.floor(price * 0.7) -- Sconto del 30%
+	end
+	return price
 end
 
 local function update_ui_texts(self)
@@ -83,7 +95,8 @@ local function generate_inventory(self, page_type)
 			gui.set_parent(root, parent_node, true)
 			gui.set_enabled(root, true)
 			gui.play_flipbook(icon, hash(data.icon))
-			gui.set_text(price_tag, tostring(data.price or "0"))
+			local final_price = get_dynamic_price(data)
+			gui.set_text(price_tag, tostring(final_price))
 
 			local col = (display_index - 1) % items_per_row
 			local row = math.floor((display_index - 1) / items_per_row)
@@ -96,6 +109,8 @@ local function generate_inventory(self, page_type)
 		end
 	end
 end
+
+-- --- CICLO DI VITA DEFOLD ---
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
@@ -129,17 +144,18 @@ function on_input(self, action_id, action)
 					return true
 				end
 
-				if GameManager.knowledge_amount >= self.selected_item.price then
-					self.is_saving = true
-					GameManager.knowledge_amount = GameManager.knowledge_amount - self.selected_item.price
+				local final_price = get_dynamic_price(self.selected_item)
 
-					-- Aggiunta all'inventario globale
-					local duration = self.selected_item.duration or 3600
+				if GameManager.knowledge_amount >= final_price then
+					self.is_saving = true
+					GameManager.knowledge_amount = GameManager.knowledge_amount - final_price
+
+					-- Salvataggio nell'inventario globale per logica 3 fasi
 					local inventory_item = {
-						id = self.selected_item.id or self.selected_item.name,
+						id = self.selected_item.icon,
 						name = self.selected_item.name,
 						icon = self.selected_item.icon,
-						expires_at = os.time() + duration
+						purchased_at = os.time()
 					}
 					table.insert(GameManager.inventory, inventory_item)
 
@@ -157,7 +173,7 @@ function on_input(self, action_id, action)
 						update_ui_visibility(self)
 					end)
 				else
-					-- Feedback visivo opzionale qui per fondi insufficienti
+					gui.set_text(gui.get_node("foodText"), "Punti Conoscenza insufficienti!")
 				end
 			end
 			return true
@@ -194,7 +210,7 @@ function on_input(self, action_id, action)
 			return true
 		end
 
-		-- 5. SELEZIONE CIBI
+		-- 5. SELEZIONE CIBI DAL MERCATO
 		local active_list = (self.current_page == PAGE_FRIDGE) and self.fridge_items or self.shelf_items
 		for _, item in ipairs(active_list) do
 			if gui.pick_node(item.root, action.x, action.y) then
@@ -204,6 +220,12 @@ function on_input(self, action_id, action)
 				local key = item.data.icon
 				local localized_name = GameManager.get_text(key)
 				local localized_desc = GameManager.get_text(key .. "_desc")
+
+				-- Feedback stagionale
+				local current_season = GameManager.get_current_season()
+				if item.data.season == current_season then
+					localized_desc = localized_desc .. "\n\n(IN STAGIONE: Sconto 30% e +20% Energia!)"
+				end
 
 				if key:find("popsicle") then
 					localized_desc = GameManager.get_text("popsicle_desc")
@@ -218,4 +240,5 @@ function on_input(self, action_id, action)
 			end
 		end
 	end
+	return false
 end

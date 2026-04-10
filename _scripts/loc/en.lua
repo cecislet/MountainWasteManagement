@@ -60,17 +60,23 @@ M.strings = {
 
 	q11 = "True or False: Bruised or 'ugly' produce is usually just as nutritious as perfect-looking produce.",
 	q11_a1 = "True", q11_a2 = "False",
-
 	market_guide = [[
 	WELCOME TO THE GENERAL STORE!
 
-	Welcome to the General Store! Ensure your Yeti stays healthy and happy by keeping your supplies stocked.
+	Ensure your Yeti stays healthy and happy by keeping your supplies stocked.
 
-	Fuel Your Friend: Purchase essential food and treats specifically for your Yeti here.
-	Currency: All items are priced in Knowledge Points. Use your wisdom to provide!
-	Seasonal Pricing: Keep an eye on the calendar! Prices fluctuate based on the current season.
-	Real-World Skills: Proper Storage: Learn the best ways to store food in real life to maximize freshness (Fridge vs. Shelf).
+	1. FUEL YOUR FRIEND: Purchase food and treats. Remember: Hunger rises towards 100% (Danger) and drops towards 0% (Full).
+	2. CURRENCY: All items are priced in Knowledge Points. Use your wisdom to provide for your Yeti!
+	3. SEASONAL PRICING: Keep an eye on the calendar! Prices fluctuate based on the season. In-season food is cheaper and more nutritious!
+	4. REAL-WORLD STORAGE: Learn the best ways to store food (Fridge vs. Shelf) to maximize freshness, just like in real life.
+
+	--- UNDERSTANDING EXPIRATION ---
+	Items in your inventory change status based on time. Check the button colors:
+	- GREEN (Fresh): Maximum efficiency! Greatly reduces Hunger and boosts Mood.
+	- ORANGE (Best Before): Reduced quality. Satisfies only half the hunger and slightly lowers Mood.
+	- RED (Spoiled): WARNING! If eaten, Hunger INCREASES (+15) and Mood drops sharply. Your Yeti will feel sick!
 	]],
+	
 	inventory_full = "INVENTORY FULL! Eat something first.",
 	buy_btn = "BUY",
 	close_btn = "CLOSE",

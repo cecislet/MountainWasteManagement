@@ -13,4 +13,7 @@ images {
 images {
   image: "/_assets/School/buttons/info.png"
 }
+images {
+  image: "/_assets/School/buttons/9SliceOrangeButton.png"
+}
 extrude_borders: 2
