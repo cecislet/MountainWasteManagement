@@ -1,4 +1,5 @@
 local GameManager = require("_scripts.GameManager")
+local api = require("_scripts.api") 
 
 -- Rate di aumento: 100 punti / 86400 secondi (24h) = ~0.00115
 local HUNGER_RATE = 0.00115 
@@ -50,5 +51,11 @@ function on_message(self, message_id, message, sender)
 			reason = message.reason
 		}
 		switch_to_level(self, "MiniGame", "MiniGameMenu")
+	end
+
+	if message_id == hash("trigger_remote_save") then
+		api.save(api, function(success)
+			print("API: Salvataggio persistente completato: " .. tostring(success))
+		end)
 	end
 end -- <--- Questo chiude on_message

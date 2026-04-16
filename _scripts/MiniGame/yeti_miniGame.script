@@ -1,6 +1,6 @@
 local WINDOW_WIDTH = tonumber(sys.get_config("display.width"))
 local GameManager = require("_scripts.GameManager")
-local api = require("_scripts.api") 
+--local api = require("_scripts.api") 
 local state = require "_scripts/MiniGame.Game_State"
 
 local speed = 500
@@ -89,14 +89,15 @@ function on_message(self, message_id, message, sender)
 			-- 2. Salvataggio su Database (Appwrite)
 			print("Salvataggio dati su DB in corso...")
 
-			-- Usiamo api.save(api, ...) perché il tuo api.lua usa M.save(self, callback)
-			api.save(api, function()
-				print("API: Salvataggio completato con successo.")
+			-- 1. Mostra il menu IMMEDIATAMENTE
+			msg.post("main:/SceneParent#Main", "show_end_menu", data)
 
-				-- 3. Mostra menu e disabilita lo script
-				msg.post("main:/SceneParent#Main", "show_end_menu", data)
-				msg.post("#", "disable")
-			end)
+			-- 2. Chiedi alla Scena Madre (o un oggetto persistente) di salvare
+			-- Invece di api.save qui, inviamo un messaggio a un oggetto che NON viene disabilitato
+			msg.post("main:/SceneParent#Main", "trigger_remote_save")
+
+			-- 3. Ora puoi disabilitare il giocatore in sicurezza
+			msg.post("#", "disable")
 		end -- Fine blocco ostacoli
 
 	elseif message_id == hash("move_left") then
