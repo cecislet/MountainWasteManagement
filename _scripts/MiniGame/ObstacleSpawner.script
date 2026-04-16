@@ -6,10 +6,10 @@ for i=1,25 do
 end
 
 local TYPES = {
-	{ id = "#tree_Factory", weight = 30 },
-	{ id = "#rock_Factory", weight = 30 },
-	{ id = "#coin_Factory", weight = 30 },
-	{ id = "#finish_Factory", weight = 10 }
+	{ id = "#tree_Factory", weight = 38 },
+	{ id = "#rock_Factory", weight = 38 },
+	{ id = "#coin_Factory", weight = 20 },
+	{ id = "#finish_Factory", weight = 4 }
 }
 
 local function get_weighted_type()
