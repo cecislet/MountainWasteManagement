@@ -144,8 +144,23 @@ function on_input(self, action_id, action)
 
 					-- 2. CALCOLO DATE (in giorni)
 					local function format_days(seconds)
-						local d = math.ceil(seconds / 86400)
-						return d > 0 and (d .. " " .. data.get_text("days_left")) or data.get_text("expired")
+						if seconds <= 0 then 
+							return data.get_text("expired") 
+						end
+
+						if seconds < 3600 then
+							-- Meno di un'ora: mostra i minuti
+							local m = math.ceil(seconds / 60)
+							return m .. " m" -- o data.get_text("minutes_left")
+						elseif seconds < 86400 then
+							-- Meno di un giorno: mostra le ore
+							local h = math.ceil(seconds / 3600)
+							return h .. " h" -- o data.get_text("hours_left")
+						else
+							-- Più di un giorno: mostra i giorni
+							local d = math.ceil(seconds / 86400)
+							return d .. " " .. data.get_text("days_left")
+						end
 					end
 
 					-- Best Before: entro quanto diventa arancione
