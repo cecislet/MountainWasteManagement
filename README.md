@@ -1,31 +1,48 @@
-🏔️ Yeti Sustainability Project:
+# 🏔️ Yeti Sustainability Project: Official Overview
 
-Play the Demo here: https://cecislet.github.io/MountainWasteManagement/
+**Play the Demo here:** [cecislet.github.io/MountainWasteManagement/](https://cecislet.github.io/MountainWasteManagement/)
 
-Welcome to the first demo of our interactive educational game! This project combines fast-paced gameplay with essential lessons on Food Waste Management. By blending action-based mechanics with educational rewards, we aim to make learning about sustainability both engaging and necessary for player progress.
+Welcome to the first demo of our interactive educational game! This project merges fast-paced action with essential lessons on **Food Waste Management**. By linking gameplay performance directly to sustainability knowledge, we make learning a vital part of the player's survival and progress.
 
-🎮 The Gameplay Loop:
+---
 
-Our project is built around a "hook and reward" cycle designed to keep players learning:
+### 🎮 The Gameplay Loop: Hunger & Mood
 
-The Hook (The Ski Lift): A high-energy minigame where players control a Yeti, dodging obstacles and collecting coins for future customization.
+The core of the game revolves around managing the Yeti's physical and emotional well-being:
 
-The Maintenance: Crashing during the minigame reduces health. To keep the Yeti alive and continue playing, players must provide food.
+* **The Hook (The Ski Lift):** A high-energy minigame where you dodge obstacles and collect coins. **Warning:** Crashing doesn't just increase hunger—it also upsets the Yeti!
+* **The Mood System:** The Yeti’s emotional state (ranging from **Furious → Angry → Sad → Neutral → Happy**) dictates how fast he gets hungry.
+    * **Boost Mood:** Answer quiz questions correctly or feed him fresh, high-quality food.
+    * **Drain Mood:** Crashing in the minigame, answering quizzes incorrectly, or feeding him rotten/expired food will lower his spirits.
+* **The Consequence:** The lower the Yeti's mood, the **faster his hunger bar grows**, creating a challenging cycle for players who neglect sustainability.
+* **The Penalty (Furious Yeti):** If the Yeti becomes **Furious** or the hunger bar maxes out, he will refuse to play. You are **locked out** of the Ski Lift minigame until you improve his condition.
 
-The Learning (The School): Food can only be obtained using Knowledge Points, which are earned by completing quizzes on food waste, sustainability, and proper storage.
+---
 
-🚀 What’s in this Demo?:
+### 🗺️ Interactive NPCs & Education
 
-Main Hub: The central snowy environment for world navigation.
+The mountain is home to mentors who guide your sustainability journey:
 
-Ski Lift Minigame: A stress test for our movement engine and responsive controls.
+* **The School (Professor Owl):** Click on **Professor Owl** for "Fun Facts" about food waste and the global impact of our consumption habits.
+* **The Market (Cashier Cow):** Click on the **Cashier Cow** for expert advice on reading labels and essential tips for storing items correctly at home to maximize their shelf life.
 
-The School: An interactive quiz module focused on environmental education.
+---
 
-🗺️ Future Outlook:
+### 🛒 The Market & Storage Mechanics
 
-We are currently expanding the world to include:
+The Market is where players apply their knowledge to manage resources effectively:
 
-The Shop: A dedicated space to spend coins on Yeti customization and skins.
+* **Smart Shopping:** Buy food from the **Fridge** or **Normal Shelves**. Prices and nutritional values vary, and you can find **seasonal discounts** or **boosted values** depending on the time of year.
+* **The Dual-Expiry System:**
+    1.  **Best Before:** After this date, food is less effective at satisfying hunger and provides a smaller mood boost.
+    2.  **Expiration Date:** Once expired, food becomes "waste." Eating it **increases hunger** and significantly **lowers the Yeti's mood**, potentially making him Furious instantly. Be careful not to over-buy, or your supplies might spoil before you can use them!
 
-The Market: A shopping simulation where players learn to read expiration dates, understand labels, and practice smart food storage to minimize waste.
+---
+
+### 🚀 What’s in this Demo?
+
+* **Main Hub:** The central snowy environment for world navigation.
+* **Ski Lift Minigame:** A stress test for movement and responsive controls.
+* **The School:** An interactive quiz module focused on environmental education.
+* **The Market:** A shopping simulation where you can spend your **Knowledge Points** to feed your Yeti and manage your inventory.
+* **The Shop (Coming Soon):** A space to spend your collected coins on Yeti skins and cosmetic customizations once the Yeti is fed and happy!
