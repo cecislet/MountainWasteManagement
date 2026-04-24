@@ -44,7 +44,8 @@ function M.load(self, callback)
 			gm.mood = tonumber(data.mood) or 100
 			gm.knowledge_amount = tonumber(data.knowledgePoints) or 0
 			gm.coins = tonumber(data.coins) or 0
-			local hunger_from_db = tonumber(data.hunger) or 0
+			-- Se il DB è vuoto, facciamo partire lo Yeti a 100 (Sazio)
+			local hunger_from_db = tonumber(data.hunger) or 100 
 			gm.inventory = (type(data.inventory) == "string" and data.inventory ~= "") and json.decode(data.inventory) or {}
 
 			-- 2. Calcolo Fame Offline (Metodo dei Secondi Puri)
@@ -54,11 +55,11 @@ function M.load(self, callback)
 				local current_time = get_now_utc()
 				local seconds_passed = current_time - last_save
 
-				-- Protezione contro furbi che spostano l'ora indietro
 				if seconds_passed > 0 then
-					local rate = gm.hunger_rate_offline or 0.00115 -- USA QUELLO LENTO
-					gm.hunger = math.min(100, hunger_from_db + (seconds_passed * rate))
-					print("API: Passati " .. math.floor(seconds_passed / 60) .. " minuti reali (UTC).")
+					local rate = gm.hunger_rate_offline or 0.00115
+					-- SOTTRAGGO la fame (si svuota la pancia) invece di aggiungere
+					gm.hunger = math.max(0, hunger_from_db - (seconds_passed * rate))
+					print("API: Passati " .. math.floor(seconds_passed / 60) .. " minuti. Fame diminuita.")
 				else
 					gm.hunger = hunger_from_db
 				end
@@ -66,7 +67,7 @@ function M.load(self, callback)
 				gm.hunger = hunger_from_db
 			end
 
-			print("API LOAD OK - Fame finale: " .. math.floor(gm.hunger))
+			print("API LOAD OK - Sazietà finale: " .. math.floor(gm.hunger) .. "/100")
 			if callback then callback(true) end
 		else
 			print("API LOAD FALLITO: " .. response.status)

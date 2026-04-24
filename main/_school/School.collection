@@ -9,7 +9,7 @@ embedded_instances {
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "textures {\\n"
   "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/main/school/SchoolBg.atlas\\\"\\n"
+  "  texture: \\\"/main/_school/SchoolBg.atlas\\\"\\n"
   "}\\n"
   "\"\n"
   "}\n"
@@ -28,7 +28,7 @@ embedded_instances {
   id: "buttonsGui"
   data: "components {\n"
   "  id: \"buttons\"\n"
-  "  component: \"/main/school/buttons.gui\"\n"
+  "  component: \"/main/_school/buttons.gui\"\n"
   "}\n"
   ""
   scale3 {

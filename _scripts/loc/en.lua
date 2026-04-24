@@ -18,6 +18,7 @@ M.strings = {
 	label_energy = ":",
 	storage_fridge = "Store in: FRIDGE",
 	storage_shelf = "Store in: SHELF",
+	error_knowledge = "Not enough Knowledge Points",
 	days_left = "days left",
 	expired = "EXPIRED!",
 	school_guide = [[

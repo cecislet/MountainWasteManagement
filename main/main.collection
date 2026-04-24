@@ -27,7 +27,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"School\"\n"
   "  type: \"collectionproxy\"\n"
-  "  data: \"collection: \\\"/main/school/School.collection\\\"\\n"
+  "  data: \"collection: \\\"/main/_school/School.collection\\\"\\n"
   "\"\n"
   "}\n"
   "embedded_components {\n"

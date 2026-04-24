@@ -68,6 +68,7 @@ local function update_ui_texts(self)
 	gui.set_text(gui.get_node("exitText"), GameManager.get_text("close_btn"))
 	gui.set_text(gui.get_node("nextText"), GameManager.get_text("next_btn"))
 	gui.set_text(gui.get_node("previousText"), GameManager.get_text("prev_btn"))
+	gui.set_color(gui.get_node("foodText"), vmath.vector4(1, 1, 1, 1))
 end
 
 local function generate_inventory(self, page_type)
@@ -193,7 +194,31 @@ function on_input(self, action_id, action)
 						update_ui_visibility(self)
 					end)
 				else
-					gui.set_text(gui.get_node("foodText"), "Punti Conoscenza insufficienti!")
+					-- --- ERROR FEEDBACK START ---
+					local food_text_node = gui.get_node("foodText")
+
+					-- 1. Set text to error and color to Red
+					gui.set_text(food_text_node, GameManager.get_text("error_knowledge"))
+					gui.set_color(food_text_node, vmath.vector4(1, 0, 0, 1)) -- Red (R, G, B, A)
+
+					-- 2. Timer to revert back after 3 seconds
+					timer.delay(3, false, function()
+						-- Ensure the item is still selected and box is open before reverting
+						if self.selected_item and self.food_box_open then
+							local original_key = self.selected_item.icon .. "_desc"
+
+							-- Check for special popsicle case as per your existing logic
+							if self.selected_item.icon:find("popsicle") then
+								original_key = "popsicle_desc"
+							end
+
+							gui.set_text(food_text_node, GameManager.get_text(original_key))
+
+							-- Animate color back to White (1, 1, 1, 1) over 0.5 seconds for a smooth transition
+							gui.animate(food_text_node, "color", vmath.vector4(1, 1, 1, 1), gui.EASING_OUTSINE, 0.5)
+						end
+					end)
+					-- --- ERROR FEEDBACK END ---
 				end
 			end
 			return true

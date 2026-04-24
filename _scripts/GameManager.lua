@@ -97,32 +97,32 @@ function M.eat_food(index)
 	local current_season = M.get_current_season()
 	local time_passed = now - (item.purchased_at or now)
 
-	-- 1. Bonus Stagionalità (sottrae più fame)
+	-- 1. Bonus Stagionalità (riempie di più se in stagione)
 	if original_data.season and original_data.season == current_season then
 		energy_gain = energy_gain * 1.2
 	end
 
 	-- 2. Logica a 3 Fasi con impatto sul MOOD
 	if time_passed <= original_data.fresh_duration then
-		-- FASE 1: FRESCO
-		M.hunger = M.hunger - energy_gain 
-		M.add_mood(5) -- Mangiare cibo fresco rende felici (+5)
-		print("Ottimo! Il Mood sale.")
+		-- FASE 1: FRESCO (Aumenta il valore Sazietà)
+		M.hunger = M.hunger + energy_gain 
+		M.add_mood(5) 
+		print("Ottimo! Sazio e felice.")
 
 	elseif time_passed <= original_data.max_duration then
-		-- FASE 2: BEST BEFORE
-		M.hunger = M.hunger - math.floor(energy_gain * 0.5)
-		M.add_mood(-2) -- Non è il massimo, il mood scende un pochino (-2)
-		print("Accettabile, ma lo Yeti non è entusiasta.")
+		-- FASE 2: BEST BEFORE (Meno efficace, aumenta di meno)
+		M.hunger = M.hunger + math.floor(energy_gain * 0.5)
+		M.add_mood(-2) 
+		print("Accettabile, ma poco nutriente.")
 
 	else
-		-- FASE 3: SCADUTO
-		M.hunger = M.hunger + 15 -- La fame sale (sta male)
-		M.add_mood(-20) -- SCHIFO! Il mood crolla drasticamente (-20)
-		print("Che schifo! Lo Yeti è furioso per il cibo avariato!")
+		-- FASE 3: SCADUTO (Fa male! Toglie sazietà perché lo Yeti sta male)
+		M.hunger = M.hunger - 15 
+		M.add_mood(-20) 
+		print("Il cibo avariato ha fatto star male lo Yeti! Fame aumentata.")
 	end
 
-	-- Limiti di sicurezza
+	-- Limiti di sicurezza: 0 (Hungry) to 100 (Full)
 	M.hunger = math.max(0, math.min(100, M.hunger))
 
 	table.remove(M.inventory, index)

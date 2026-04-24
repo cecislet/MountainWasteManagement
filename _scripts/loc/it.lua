@@ -18,6 +18,7 @@ M.strings = {
 	label_energy = ":",
 	storage_fridge = "Conserva in: FRIGO",
 	storage_shelf = "Conserva in: SCAFFALE",
+	error_knowledge = "Non hai abbastanza punti Conoscenza",
 	days_left = "giorni rimasti",
 	expired = "SCADUTO!",
 	school_guide = [[
