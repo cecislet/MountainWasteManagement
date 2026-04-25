@@ -1,5 +1,5 @@
-go.property("speed", 300)
 local state = require "_scripts/MiniGame.Game_State"
+go.property("speed", 300)
 local TARGET_GROUPS = {
 	[hash("Tree")] = true,
 	[hash("Rock")] = true,
@@ -17,6 +17,11 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
+	if message_id == hash("set_speed") then
+		self.speed = message.speed
+	elseif message_id == hash("force_despawn") then
+		go.delete()
+	end
 	if message_id == hash("trigger_response") and message.enter then
 		local other_group = message.other_group
 
@@ -29,4 +34,9 @@ function on_message(self, message_id, message, sender)
 			end
 		end
 	end
+end
+
+function final(self)
+	-- Quando l'oggetto viene rimosso per qualsiasi motivo (colpito o uscito dallo schermo)
+	msg.post("/spawner#ObstacleSpawner", "remove_from_list", { id = go.get_id() })
 end
