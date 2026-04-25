@@ -30,6 +30,7 @@ embedded_components {
   "mask: \"Tree\"\n"
   "mask: \"Rock\"\n"
   "mask: \"Coin\"\n"
+  "mask: \"KnowledgeItem\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"

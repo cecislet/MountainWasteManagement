@@ -13,8 +13,8 @@ embedded_components {
   "}\n"
   ""
   scale {
-    x: 1.508475
-    y: 1.462963
+    x: 0.5
+    y: 0.5
   }
 }
 embedded_components {
@@ -27,10 +27,11 @@ embedded_components {
   "group: \"Coin\"\n"
   "mask: \"Player\"\n"
   "mask: \"Map\"\n"
-  "mask: \"Rock\"\n"
   "mask: \"Tree\"\n"
-  "mask: \"FinishLine\"\n"
+  "mask: \"Rock\"\n"
   "mask: \"Coin\"\n"
+  "mask: \"KnowledgeItem\"\n"
+  "mask: \"FInishLine\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
