@@ -1,7 +1,13 @@
 function on_message(self, message_id, message, sender)
 	if message_id == hash("update_coins") then
-		local label = gui.get_node("score_label")
+		local label = gui.get_node("coin_label")
 		gui.set_text(label, "Coins: " .. message.coins)
+	elseif message_id == hash("update_score") then
+		local score_node = gui.get_node("score_label")
+		gui.set_text(score_node, string.format("%d m", message.score))
+	elseif message_id == hash("update_knowledge") then
+		local score_node = gui.get_node("knowledge_label")
+		gui.set_text(score_node, string.format("Knowledge: " .. message.knowledge))
 	end
 end
 

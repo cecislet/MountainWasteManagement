@@ -117,7 +117,7 @@ nodes {
 }
 nodes {
   position {
-    x: 110.0
+    x: 150.0
     y: 1.0
   }
   size {
@@ -132,7 +132,7 @@ nodes {
 }
 nodes {
   position {
-    y: 138.0
+    y: 238.0
   }
   size {
     x: 400.0
@@ -167,6 +167,62 @@ nodes {
   id: "finishLabel"
   line_break: true
   parent: "box"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 68.0
+  }
+  size {
+    x: 400.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "Knowledge_Label"
+  parent: "Background"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    x: -50.0
+  }
+  size {
+    x: 300.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "KNOWLEDGE GAINED: "
+  font: "pixelFont"
+  id: "knowledgeLabel"
+  line_break: true
+  parent: "Knowledge_Label"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 150.0
+    y: 1.0
+  }
+  size {
+    x: 64.0
+    y: 64.0
+  }
+  type: TYPE_BOX
+  texture: "icons/knowledge"
+  id: "coinIcon1"
+  parent: "Knowledge_Label"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"

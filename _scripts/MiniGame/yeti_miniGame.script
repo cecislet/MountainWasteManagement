@@ -5,6 +5,8 @@ local state = require "_scripts/MiniGame.Game_State"
 
 local speed = 500
 local gainedCoins = 0
+local gainedKnowledgeItems = 0
+local coinPowerUp = false
 
 -- Funzione di supporto per gestire l'input unificato
 local function update_direction(self, axis, value, is_pressed)
@@ -59,8 +61,27 @@ function on_message(self, message_id, message, sender)
 
 		local group = message.other_group
 
-		if group == hash("Coin") then
-			gainedCoins = gainedCoins + 1
+		if group == hash("CoinPowerUp")	then
+			coinPowerUp = true -- aggiungere powerup (2x coins, knowledge bonuses)
+			msg.post("spawner#ObstacleSpawner", "coinPowerUpHit")
+
+		elseif group == hash("KnowledgePowerUp") then
+			msg.post("spawner#ObstacleSpawner", "knowledgePowerUpHit")
+
+		elseif group == hash("KnowledgeItem") then
+			if coinPowerUp then
+				gainedKnowledgeItems = gainedKnowledgeItems + 2
+			else
+				gainedKnowledgeItems = gainedKnowledgeItems + 1
+			end
+			msg.post("hud_gui#hud", "update_knowledge", {knowledge = gainedKnowledgeItems})
+
+		elseif group == hash("Coin") then
+			if coinPowerUp then
+				gainedCoins = gainedCoins + 2
+			else
+				gainedCoins = gainedCoins + 1
+			end
 			msg.post("hud_gui#hud", "update_coins", {coins = gainedCoins})
 			print("YEAH: hai preso una moneta!")
 			-- Se la moneta non si distrugge da sola, aggiungi qui: go.delete(message.other_id)
@@ -71,10 +92,11 @@ function on_message(self, message_id, message, sender)
 			state.active = false
 			msg.post("spawner#ObstacleSpawner", "stop_spawning")
 
-			local data = {coins = gainedCoins, reason = ""}
+			local data = {coins = gainedCoins, knowledge = gainedKnowledgeItems, reason = ""}
 
 			-- 1. Aggiorna i dati nel GameManager locale (UNA SOLA VOLTA)
 			GameManager.coins = (GameManager.coins or 0) + gainedCoins
+			GameManager.knowledge_amount = (GameManager.knowledge_amount or 0) + gainedKnowledgeItems
 
 			if group == hash("FinishLine") then
 				data.reason = "HAI VINTO!!"
@@ -104,6 +126,8 @@ function on_message(self, message_id, message, sender)
 		update_direction(self, "x", -1, message.pressed)
 	elseif message_id == hash("move_right") then
 		update_direction(self, "x", 1, message.pressed)
+	elseif message_id == hash("StopCoinPowerUp") then
+		coinPowerUp = false
 	end
 end
 
