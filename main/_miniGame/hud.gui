@@ -24,7 +24,7 @@ nodes {
   type: TYPE_TEXT
   text: "Coins: 0"
   font: "pixelFont"
-  id: "score_label"
+  id: "coin_label"
   inherit_alpha: true
 }
 nodes {
@@ -67,6 +67,47 @@ nodes {
   id: "rightButton"
   parent: "mobileControls"
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 370.0
+    y: 734.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "Meters: 0"
+  font: "pixelFont"
+  id: "score_label"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 670.0
+    y: 734.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "knowledge: 0\n"
+  ""
+  font: "pixelFont"
+  id: "knowledge_label"
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
