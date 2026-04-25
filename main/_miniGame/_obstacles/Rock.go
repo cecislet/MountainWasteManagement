@@ -32,6 +32,8 @@ embedded_components {
   "mask: \"Coin\"\n"
   "mask: \"KnowledgeItem\"\n"
   "mask: \"FinishLine\"\n"
+  "mask: \"KnowledgePowerUp\"\n"
+  "mask: \"CoinPowerUp\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
