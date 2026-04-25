@@ -4,8 +4,10 @@ local function handle_game_over(self, message)
 	local finish_label = gui.get_node("finishLabel")
 	local exit_node = gui.get_node("ExitButton")
 	local background = gui.get_node("Background")
+	local knowledge_label = gui.get_node("knowledgeLabel")
 
 	-- Imposto i testi
+	gui.set_text(knowledge_label, "KNOWLEDGE GAINED: " .. tostring(message.knowledge or 0))
 	gui.set_text(coin_label, "COINS GAINED: " .. tostring(message.coins or 0))
 	gui.set_text(finish_label, message.reason or "")		
 
