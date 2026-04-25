@@ -39,6 +39,49 @@ The Market is where players apply their knowledge to manage resources effectivel
 
 ---
 
+### 🎿 Ski Lift Minigame — Deep Dive
+
+The Ski Lift is an **endless runner** where the Yeti skis down the mountain. The goal is to travel as far as possible while collecting as many coins and Knowledge Points as you can — and making it to the Finish Line alive!
+
+#### 🏔️ Elements on the Slope
+
+| Element | Description |
+|---|---|
+| 🌲 **Trees** | Obstacles — dodge them or it's Game Over! |
+| 🪨 **Rocks** | Obstacles — same as trees, watch out! |
+| 🏁 **Finish Line** | Reach it to win the run and give the Yeti a mood boost (+20) |
+| 🪙 **Coins** | Collectibles that add to your coin total |
+| 📚 **Knowledge Points** | Special collectibles that count as Knowledge for the Market |
+| ⚡ **Power-ups** | Game-changers — see below! |
+
+#### ⚡ Power-ups
+
+Two power-ups can appear on the slope. They can be active at the same time!
+
+**🪙 2× Coins** *(lasts 10 seconds)*
+Doubles the value of every collectible you pick up:
+- Each **Coin** counts as **2 Coins**
+- Each **Knowledge Point** counts as **2 Knowledge Points**
+
+**📚 Knowledge Mode** *(lasts 15 seconds)*
+Replaces all incoming coins with Knowledge Points:
+- For the full duration, **only Knowledge Points** spawn on the slope (no regular coins)
+- Stacks with **2× Coins** — if both are active, each Knowledge Point counts as **2**
+
+#### 📈 Difficulty & Progression
+
+The run is split into escalating levels. As you go further, obstacles spawn faster and move at higher speed. Your score increases continuously based on distance traveled and current level, shown live on the HUD.
+
+#### 🏆 End of Run
+
+The run ends in one of two ways:
+- **Crash** (Tree or Rock) → Game Over: the Yeti loses mood (−10) and gets hungrier (+10 hunger)
+- **Finish Line** → Victory: the Yeti gains mood (+20)
+
+All coins and Knowledge Points collected are added to your totals and saved after each run.
+
+---
+
 ### 🚀 What’s in this Demo?
 
 * **Main Hub:** The central snowy environment for world navigation.
