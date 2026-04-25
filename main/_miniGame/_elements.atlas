@@ -8,7 +8,28 @@ animations {
 animations {
   id: "coin"
   images {
-    image: "/_assets/MiniGame/moneta.png"
+    image: "/_assets/icons/money.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "coinsPowerUp"
+  images {
+    image: "/_assets/MiniGame/powerups/powerup_2x_coins.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "knowledgePowerUp"
+  images {
+    image: "/_assets/MiniGame/powerups/powerup_knowledge.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "knowledgeItem"
+  images {
+    image: "/_assets/icons/knowledge.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }
