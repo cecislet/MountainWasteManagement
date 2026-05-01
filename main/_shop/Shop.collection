@@ -40,3 +40,15 @@ embedded_instances {
     z: 1.2
   }
 }
+embedded_instances {
+  id: "shopGui"
+  data: "components {\n"
+  "  id: \"hud\"\n"
+  "  component: \"/main/_shop/shop.gui\"\n"
+  "}\n"
+  ""
+  position {
+    x: 1.000013
+    y: 1.041459
+  }
+}

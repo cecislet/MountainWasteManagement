@@ -2,9 +2,12 @@ name: "StartPage"
 instances {
   id: "yeti"
   prototype: "/main/_player/yeti.go"
+  children: "head"
+  children: "pants"
+  children: "shirt"
   position {
-    x: 356.0
-    y: 147.0
+    x: 350.0
+    y: 150.0
     z: 0.1
   }
   scale3 {
@@ -400,4 +403,88 @@ embedded_instances {
   "  component: \"/main/movingButtons.gui\"\n"
   "}\n"
   ""
+}
+embedded_instances {
+  id: "shirt"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"shirt-left\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 144.0\\n"
+  "  y: 144.0\\n"
+  "}\\n"
+  "size_mode: SIZE_MODE_MANUAL\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/_assets/yeti/clothes.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: -156.66666\n"
+  "    y: 3.333332\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 156.66666
+    y: -3.333334
+  }
+}
+embedded_instances {
+  id: "pants"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"pantsLeft\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 144.0\\n"
+  "  y: 144.0\\n"
+  "}\\n"
+  "size_mode: SIZE_MODE_MANUAL\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/_assets/yeti/clothes.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: -156.66666\n"
+  "    y: 0.999998\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 156.66666
+    y: -3.333334
+  }
+}
+embedded_instances {
+  id: "head"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"hat-left\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 144.0\\n"
+  "  y: 144.0\\n"
+  "}\\n"
+  "size_mode: SIZE_MODE_MANUAL\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/_assets/yeti/clothes.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: -156.66666\n"
+  "    y: -7.666668\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 156.66666
+    y: 6.666666
+  }
 }

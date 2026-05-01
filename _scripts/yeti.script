@@ -30,13 +30,19 @@ function update(self, dt)
 	new_p.y = math.max(self.margin_y, math.min(new_p.y, WINDOW_HEIGHT - self.margin_y))
 
 	go.set_position(new_p)
+	
+	local is_moving = vmath.length_sqr(move_dir) > 0.1
+	local anim = self.current_anim
 
-	local anim = self.current_anim or hash("front")
-	if move_dir.x > 0 then anim = hash("right")
-	elseif move_dir.x < 0 then anim = hash("left")
-	elseif move_dir.y > 0 then anim = hash("back")
-	elseif move_dir.y < 0 then anim = hash("front")
-	end
+	if is_moving then
+		if move_dir.x > 0 then anim = hash("right")
+		elseif move_dir.x < 0 then anim = hash("left")
+		elseif move_dir.y > 0 then anim = hash("back")
+		elseif move_dir.y < 0 then anim = hash("front")
+		end
+	else
+		anim = hash("idle_front")
+	end	
 
 	if anim ~= self.current_anim then
 		sprite.play_flipbook("#sprite", anim)
