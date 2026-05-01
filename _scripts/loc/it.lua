@@ -3,7 +3,7 @@ local M = {}
 M.strings = {
 	play = "GIOCA",
 	credits = "CREDITI",
-	exit = "ESCI",
+	story = "STORIA",
 	label_username = "Utente:",
 	label_password = "Password:",
 	insert_user = "Inserisci Utente",
@@ -29,6 +29,7 @@ M.strings = {
 	msg_gameover = "HAI PERSO!",
 	button_trash = "BUTTA",
 	button_eat = "MANGIA",
+	story_text = "YETI SUSTAINABILITY PROJECT\nIl cibo sprecato sottrae energia alla montagna e danneggia l'equilibrio del villaggio.\n\nMECCANICHE DI GIOCO:\n1. SKI LIFT: Raccogli monete e Punti Conoscenza schivando gli ostacoli.\n2. MOOD SYSTEM: Lo stato emotivo del Yeti influenza la sua fame. Se è furioso, il gioco si blocca.\n3. MARKET: Acquista cibo dai mentor, ma attenzione alla data di scadenza per evitare sprechi.\n4. SCHOOL: Consulta Professor Owl per ottenere Fun Facts e aumentare il tuo livello.\n\nCollabora con i mentor della montagna per salvare il villaggio e nutrire il Yeti in modo sostenibile!",
 	school_guide = [[
 	BENVENUTO A SCUOLA!
 
