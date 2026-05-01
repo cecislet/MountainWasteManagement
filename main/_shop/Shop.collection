@@ -1,0 +1,42 @@
+name: "Shop"
+scale_along_z: 0
+embedded_instances {
+  id: "ui_handler"
+  data: "components {\n"
+  "  id: \"hud\"\n"
+  "  component: \"/_assets/hud.gui\"\n"
+  "}\n"
+  ""
+  position {
+    x: 1.000013
+    y: 1.041459
+  }
+}
+embedded_instances {
+  id: "shopBg"
+  data: "embedded_components {\n"
+  "  id: \"shopBg\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"Bg\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 640.0\\n"
+  "  y: 576.0\\n"
+  "}\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/main/school/SchoolBg.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 384.0
+    y: 384.0
+  }
+  scale3 {
+    x: 1.2
+    y: 1.339355
+    z: 1.2
+  }
+}
