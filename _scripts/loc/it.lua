@@ -27,6 +27,8 @@ M.strings = {
 	button_exit = "ESCI",
 	msg_victory = "HAI VINTO!",
 	msg_gameover = "HAI PERSO!",
+	button_trash = "BUTTA",
+	button_eat = "MANGIA",
 	school_guide = [[
 	BENVENUTO A SCUOLA!
 

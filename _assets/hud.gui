@@ -387,7 +387,7 @@ nodes {
 }
 nodes {
   position {
-    x: -8.0
+    x: -61.0
     y: -214.0
   }
   size {
@@ -506,6 +506,40 @@ nodes {
   id: "labelExpiry"
   line_break: true
   parent: "foodBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 55.0
+    y: -214.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceWrongButton"
+  id: "trash"
+  parent: "foodBox"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "TRASH\n"
+  ""
+  font: "pixelFont"
+  id: "trashText"
+  parent: "trash"
   inherit_alpha: true
 }
 nodes {

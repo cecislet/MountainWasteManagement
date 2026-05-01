@@ -81,6 +81,15 @@ function M.get_current_season()
 	return "UNKNOWN"
 end
 
+function M.discard_food(index)
+	if M.inventory[index] then
+		table.remove(M.inventory, index)
+		M.add_mood(-50) 
+		return true
+	end
+	return false
+end
+
 function M.eat_food(index)
 	local item = M.inventory[index]
 	if not item then return end

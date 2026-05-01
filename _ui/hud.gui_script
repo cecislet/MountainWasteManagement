@@ -106,6 +106,9 @@ function on_input(self, action_id, action)
 	-- Nota: Spostiamo la logica degli slot PRIMA del blocco totale del popup 
 	-- se vogliamo che ricliccare lo slot funzioni come interruttore.
 
+	local label_trash = data.get_text("button_trash") or "TRASH"
+	local label_eat = data.get_text("button_eat") or "EAT"
+	
 	if action.pressed and self.inventory_open then
 		for i = 1, 5 do
 			local node = gui.get_node("item" .. i)
@@ -179,7 +182,8 @@ function on_input(self, action_id, action)
 					if key:find("popsicle") then
 						localized_desc = data.get_text("popsicle_desc")
 					end
-
+					gui.set_text(gui.get_node("trashText"), label_trash)
+					gui.set_text(gui.get_node("eatText"), label_eat)
 					gui.set_text(gui.get_node("foodName"), localized_name or item.name)
 					gui.set_text(gui.get_node("foodText"), localized_desc or data.get_text("no_description"))
 
@@ -200,6 +204,15 @@ function on_input(self, action_id, action)
 				local item = data.inventory[self.selected_item_index]
 				if item then
 					data.eat_food(self.selected_item_index)
+				end
+				close_inventory(self)
+				return true
+			elseif gui.pick_node(gui.get_node("trash"), action.x, action.y) then
+				local item = data.inventory[self.selected_item_index]
+				if item then
+					-- Call the new discard function
+					data.discard_food(self.selected_item_index)
+					print("Food discarded!")
 				end
 				close_inventory(self)
 				return true
