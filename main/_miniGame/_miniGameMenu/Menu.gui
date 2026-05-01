@@ -70,7 +70,7 @@ nodes {
   type: TYPE_TEXT
   text: "EXIT"
   font: "pixelFont"
-  id: "text"
+  id: "exitLabel"
   parent: "ExitButton"
   inherit_alpha: true
 }

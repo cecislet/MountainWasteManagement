@@ -1,13 +1,23 @@
+local GameManager = require "_scripts.GameManager"
+
 function on_message(self, message_id, message, sender)
 	if message_id == hash("update_coins") then
 		local label = gui.get_node("coin_label")
-		gui.set_text(label, "Coins: " .. message.coins)
+		-- Usa la stringa "label_coins" (Monete:) dal tuo file M.strings
+		local prefix = GameManager.get_text("label_coins") or "Coins:"
+		print("DEBUG: prefix for coins is:", prefix);
+		gui.set_text(label, prefix .. " " .. math.floor(message.coins or 0))
+
 	elseif message_id == hash("update_score") then
 		local score_node = gui.get_node("score_label")
-		gui.set_text(score_node, string.format("%d m", message.score))
+		-- "m" per metri solitamente rimane invariato, ma formattiamo il numero
+		gui.set_text(score_node, string.format("%d m", math.floor(message.score or 0)))
+
 	elseif message_id == hash("update_knowledge") then
 		local score_node = gui.get_node("knowledge_label")
-		gui.set_text(score_node, string.format("Knowledge: " .. message.knowledge))
+		-- Usa la stringa "label_knowledge" (Conoscenza:) dal tuo file M.strings
+		local prefix = GameManager.get_text("label_knowledge") or "Knowledge:"
+		gui.set_text(score_node, prefix .. " " .. math.floor(message.knowledge or 0))
 	end
 end
 
@@ -46,4 +56,7 @@ function init(self)
 	else
 		gui.set_enabled(mobile_root, false)
 	end
+
+	msg.post("#", "update_coins", {coins = 0})
+	msg.post("#", "update_knowledge", {knowledge = 0})
 end

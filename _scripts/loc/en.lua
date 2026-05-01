@@ -11,6 +11,8 @@ M.strings = {
 	login = "LOGIN",
 	register = "REGISTER",
 	back = "BACK",
+	label_coins = "Coins:",
+	label_knowledge = "Knowledge:",
 	debug_access = "DEBUG ACCESS",
 	close = "CLOSE",
 	label_best_before = "Best before:",
@@ -20,6 +22,11 @@ M.strings = {
 	storage_shelf = "Store in: SHELF",
 	days_left = "days left",
 	expired = "EXPIRED!",
+	label_coins_gained = "COINS GAINED:",
+	label_knowledge_gained = "KNOWLEDGE GAINED:",
+	button_exit = "EXIT",
+	msg_victory = "VICTORY!",
+	msg_gameover = "GAME OVER!",
 	school_guide = [[
 	WELCOME TO THE SCHOOL!
 
