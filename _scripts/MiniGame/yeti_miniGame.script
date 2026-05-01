@@ -99,14 +99,13 @@ function on_message(self, message_id, message, sender)
 			GameManager.knowledge_amount = (GameManager.knowledge_amount or 0) + gainedKnowledgeItems
 
 			if group == hash("FinishLine") then
-				data.reason = "HAI VINTO!!"
+				data.reason = "msg_victory"  -- Usa la chiave, non il testo
 				GameManager.add_mood(20)
 			else
-				-- Se è un albero o una roccia
+				data.reason = "msg_gameover" -- Usa la chiave, non il testo
 				GameManager.hunger = (GameManager.hunger or 100) + 10
 				GameManager.add_mood(-10)
-				data.reason = "GAME OVER!!!!!"
-			end -- <--- QUESTO END MANCAVA!
+			end
 
 			-- 2. Salvataggio su Database (Appwrite)
 			print("Salvataggio dati su DB in corso...")

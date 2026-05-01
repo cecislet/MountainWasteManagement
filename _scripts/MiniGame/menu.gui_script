@@ -1,30 +1,49 @@
+local GameManager = require "_scripts.GameManager"
+
 local function handle_game_over(self, message)
 	-- Recupero i nodi
 	local coin_label = gui.get_node("coinLabel")
 	local finish_label = gui.get_node("finishLabel")
 	local exit_node = gui.get_node("ExitButton")
+	local exit_text_node = gui.get_node("exitLabel")
 	local background = gui.get_node("Background")
 	local knowledge_label = gui.get_node("knowledgeLabel")
 
-	-- Imposto i testi
-	gui.set_text(knowledge_label, "KNOWLEDGE GAINED: " .. tostring(message.knowledge or 0))
-	gui.set_text(coin_label, "COINS GAINED: " .. tostring(message.coins or 0))
-	gui.set_text(finish_label, message.reason or "")		
+	-- 1. Recupero i prefissi tradotti
+	local label_coins = GameManager.get_text("label_coins_gained") or "COINS GAINED:"
+	local label_knowledge = GameManager.get_text("label_knowledge_gained") or "KNOWLEDGE GAINED:"
+	local label_exit = GameManager.get_text("button_exit") or "EXIT"
+
+	-- 2. Gestione dinamica della "Reason" (Vittoria/Sconfitta)
+	-- Se message.reason è una chiave (es. "msg_win"), la traduciamo
+	local reason_text = GameManager.get_text(message.reason) or message.reason
+
+	-- 3. Imposto i testi finali
+	gui.set_text(knowledge_label, label_knowledge .. " " .. tostring(message.knowledge or 0))
+	gui.set_text(coin_label, label_coins .. " " .. tostring(message.coins or 0))
+	gui.set_text(finish_label, reason_text)
+
+	-- Se hai un testo sul bottone di uscita, localizziamo anche quello
+	if exit_text_node then
+		gui.set_text(exit_text_node, label_exit)
+	end
 
 	-- Rendo tutto visibile
 	gui.set_enabled(background, true)
 	gui.set_enabled(finish_label, true)
 	gui.set_enabled(coin_label, true)
-	gui.set_enabled(exit_node, true) -- Fondamentale per ricevere il touch
+	gui.set_enabled(knowledge_label, true)
+	gui.set_enabled(exit_node, true) 
 end
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
 
-	-- Nascondo tutto il menu all'inizio (se non l'hai già fatto dall'editor)
+	-- Nascondo tutto il menu all'inizio
 	gui.set_enabled(gui.get_node("Background"), false)
 	gui.set_enabled(gui.get_node("coinLabel"), false)
 	gui.set_enabled(gui.get_node("finishLabel"), false)
+	gui.set_enabled(gui.get_node("knowledgeLabel"), false)
 	gui.set_enabled(gui.get_node("ExitButton"), false)
 end
 
@@ -38,7 +57,6 @@ function on_input(self, action_id, action)
 	if action_id == hash("touch") and action.pressed then
 		local exit_button = gui.get_node("ExitButton")
 
-		-- Il pick_node funziona solo se il nodo è "Enabled"
 		if gui.is_enabled(exit_button) and gui.pick_node(exit_button, action.x, action.y) then
 			msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage"})
 		end

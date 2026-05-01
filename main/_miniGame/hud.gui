@@ -103,7 +103,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "knowledge: 0\n"
+  text: "Knowledge: 0\n"
   ""
   font: "pixelFont"
   id: "knowledge_label"

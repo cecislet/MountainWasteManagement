@@ -11,6 +11,8 @@ M.strings = {
 	login = "ACCEDI",
 	register = "REGISTRATI",
 	back = "INDIETRO",
+	label_coins = "Monete:",
+	label_knowledge = "Conoscenza:",
 	debug_access = "ACCESSO DEBUG",
 	close = "CHIUDI",
 	label_best_before = "Consumare preferibilmente entro:",
@@ -20,6 +22,11 @@ M.strings = {
 	storage_shelf = "Conserva in: SCAFFALE",
 	days_left = "giorni rimasti",
 	expired = "SCADUTO!",
+	label_coins_gained = "MONETE:",
+	label_knowledge_gained = "CONOSCENZA:",
+	button_exit = "ESCI",
+	msg_victory = "HAI VINTO!",
+	msg_gameover = "HAI PERSO!",
 	school_guide = [[
 	BENVENUTO A SCUOLA!
 
