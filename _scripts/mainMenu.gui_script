@@ -38,12 +38,17 @@ local function appwrite_login(self, username, password, quiet)
 			api.load(self, function(success)
 				if success then
 					print("Dati sincronizzati: " .. (gm.coins or 0) .. " monete.")
+					-- RIMOSSO IL msg.post QUI, perché lo yeti non esiste ancora!
 				else
 					print("Nuovo profilo: inizio da zero.")
 				end
 
 				if not quiet then
+					-- Carichiamo la pagina dello Yeti
 					msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage"})
+
+					-- Trucco: Inviamo il messaggio con un leggerissimo ritardo 
+					-- o meglio, lo facciamo gestire direttamente alla StartPage quando "nasce"
 				end
 			end)
 		else

@@ -409,7 +409,7 @@ embedded_instances {
   data: "embedded_components {\n"
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"shirt-left\\\"\\n"
+  "  data: \"default_animation: \\\"shirt-Left\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "size {\\n"
   "  x: 144.0\\n"
@@ -424,6 +424,7 @@ embedded_instances {
   "  position {\n"
   "    x: -156.66666\n"
   "    y: 3.333332\n"
+  "    z: 0.1\n"
   "  }\n"
   "}\n"
   ""
@@ -437,7 +438,7 @@ embedded_instances {
   data: "embedded_components {\n"
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"pantsLeft\\\"\\n"
+  "  data: \"default_animation: \\\"pants-Left\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "size {\\n"
   "  x: 144.0\\n"
@@ -452,12 +453,14 @@ embedded_instances {
   "  position {\n"
   "    x: -156.66666\n"
   "    y: 0.999998\n"
+  "    z: 0.1\n"
   "  }\n"
   "}\n"
   ""
   position {
     x: 156.66666
     y: -3.333334
+    z: 0.3
   }
 }
 embedded_instances {
@@ -465,7 +468,7 @@ embedded_instances {
   data: "embedded_components {\n"
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"hat-left\\\"\\n"
+  "  data: \"default_animation: \\\"hat\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
   "size {\\n"
   "  x: 144.0\\n"
@@ -480,6 +483,7 @@ embedded_instances {
   "  position {\n"
   "    x: -156.66666\n"
   "    y: -7.666668\n"
+  "    z: 0.1\n"
   "  }\n"
   "}\n"
   ""

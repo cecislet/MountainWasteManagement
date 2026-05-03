@@ -19,6 +19,10 @@ textures {
   name: "yeti"
   texture: "/main/yeti.atlas"
 }
+textures {
+  name: "clothes"
+  texture: "/_assets/yeti/clothes.atlas"
+}
 nodes {
   position {
     x: 41.867867
@@ -135,47 +139,339 @@ nodes {
 }
 nodes {
   position {
-    x: 578.59546
-    y: 333.4969
+    x: 298.59546
+    y: 332.4969
   }
   scale {
-    x: 1.089743
-    y: 1.102176
+    x: 4.0
+    y: 4.0
   }
   type: TYPE_BOX
-  texture: "icons/cashier"
+  texture: "yeti/idle_front"
   id: "npcImage"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
-  scale {
-    y: 4.172295
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
   type: TYPE_BOX
-  id: "npc"
+  texture: "clothes/shirt"
+  id: "hat"
   parent: "npcImage"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
-  visible: false
+}
+nodes {
+  type: TYPE_BOX
+  texture: "clothes/shirt"
+  id: "shirt"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  type: TYPE_BOX
+  texture: "clothes/pants"
+  id: "pants"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: 244.0
-    y: 345.0
+    x: 59.5
+    y: 36.25
   }
+  scale {
+    x: 0.191519
+    y: 0.176328
+    z: 0.1856
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "nextHat"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 59.5
+    y: -5.25
+  }
+  scale {
+    x: 0.191519
+    y: 0.176328
+    z: 0.1856
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "nextShirt"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 59.5
+    y: -31.75
+  }
+  scale {
+    x: 0.191519
+    y: 0.176328
+    z: 0.1856
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "nextPants"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -58.25
+    y: 36.25
+  }
+  scale {
+    x: 0.191519
+    y: 0.176328
+    z: 0.1856
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "prevHat"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -58.25
+    y: -5.25
+  }
+  scale {
+    x: 0.191519
+    y: 0.176328
+    z: 0.1856
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "prevShirt"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -58.25
+    y: -31.75
+  }
+  scale {
+    x: 0.191519
+    y: 0.176328
+    z: 0.1856
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "prevPants"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 656.0
+    y: 481.0
+  }
+  size {
+    x: 100.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "buyHat"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
   size {
     x: 200.0
     y: 100.0
   }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont_Title"
+  id: "buyHatText"
+  parent: "buyHat"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 2.0
+    y: -84.0
+  }
+  size {
+    x: 80.0
+    y: 80.0
+  }
   type: TYPE_BOX
-  id: "box"
+  id: "priceHat"
+  parent: "buyHat"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "pricetextHat"
+  parent: "priceHat"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 656.0
+    y: 309.0
+  }
+  size {
+    x: 100.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "buyShirt"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont_Title"
+  id: "buyShirtText"
+  parent: "buyShirt"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 2.0
+    y: -84.0
+  }
+  size {
+    x: 80.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  id: "priceShirt"
+  parent: "buyShirt"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "pricetextShirt"
+  parent: "priceShirt"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 656.0
+    y: 143.0
+  }
+  size {
+    x: 100.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "buyPants"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont_Title"
+  id: "buyPantsText"
+  parent: "buyPants"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 2.0
+    y: -84.0
+  }
+  size {
+    x: 80.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  id: "pricePants"
+  parent: "buyPants"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "pricetextPants"
+  parent: "pricePants"
+  inherit_alpha: true
 }
 layers {
   name: "bgProps"

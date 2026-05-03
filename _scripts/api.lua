@@ -40,25 +40,28 @@ function M.load(self, callback)
 		if response.status == 200 then
 			local data = json.decode(response.response)
 
-			-- 1. Caricamento Dati
+			-- 1. Caricamento Dati (Nomi corretti come da DB Appwrite)
 			gm.mood = tonumber(data.mood) or 100
 			gm.knowledge_amount = tonumber(data.knowledgePoints) or 0
 			gm.coins = tonumber(data.coins) or 0
 			local hunger_from_db = tonumber(data.hunger) or 0
-			gm.inventory = (type(data.inventory) == "string" and data.inventory ~= "") and json.decode(data.inventory) or {}
 
-			-- 2. Calcolo Fame Offline (Metodo dei Secondi Puri)
+			-- Stringhe JSON -> Tabelle Lua
+			gm.inventory = (data.inventory and data.inventory ~= "") and json.decode(data.inventory) or {}
+
+			-- CORRETTO: unlocked_items (con underscore come da tuo screen)
+			gm.unlocked_items = (data.unlocked_items and data.unlocked_items ~= "") and json.decode(data.unlocked_items) or { "none" }
+
+			-- AGGIUNTO: Caricamento vestiti equipaggiati (devi creare la colonna 'equipped' su Appwrite come stringa)
+			gm.equipped = (data.equipped and data.equipped ~= "") and json.decode(data.equipped) or { hat = "none", shirt = "none", pants = "none" }
+
+			-- 2. Calcolo Fame Offline
 			local last_save = tonumber(data.lastSave) or 0
-
 			if last_save > 0 then
-				local current_time = get_now_utc()
-				local seconds_passed = current_time - last_save
-
-				-- Protezione contro furbi che spostano l'ora indietro
+				local seconds_passed = get_now_utc() - last_save
 				if seconds_passed > 0 then
-					local rate = gm.hunger_rate_offline or 0.00115 -- USA QUELLO LENTO
+					local rate = gm.hunger_rate_offline or 0.00115
 					gm.hunger = math.min(100, hunger_from_db + (seconds_passed * rate))
-					print("API: Passati " .. math.floor(seconds_passed / 60) .. " minuti reali (UTC).")
 				else
 					gm.hunger = hunger_from_db
 				end
@@ -66,7 +69,7 @@ function M.load(self, callback)
 				gm.hunger = hunger_from_db
 			end
 
-			print("API LOAD OK - Fame finale: " .. math.floor(gm.hunger))
+			print("API LOAD OK")
 			if callback then callback(true) end
 		else
 			print("API LOAD FALLITO: " .. response.status)
@@ -80,7 +83,7 @@ function M.save(self, callback)
 
 	local url = BASE_URL .. "/databases/" .. DATABASE_ID .. "/collections/" .. COLLECTION_ID .. "/documents/" .. gm.player_id
 
-	-- Salviamo i dati + il timestamp UTC attuale
+	-- I nomi qui sotto devono essere IDENTICI a quelli che vedi su Appwrite Dashboard
 	local payload = {
 		data = {
 			mood = math.floor(gm.mood or 0),
@@ -88,7 +91,9 @@ function M.save(self, callback)
 			coins = math.floor(gm.coins or 0),
 			hunger = math.floor(gm.hunger or 0),
 			inventory = json.encode(gm.inventory or {}),
-			lastSave = get_now_utc() -- SALVIAMO IL MOMENTO ESATTO IN SECONDI
+			unlocked_items = json.encode(gm.unlocked_items or { "none" }), -- NOME CORRETTO
+			equipped = json.encode(gm.equipped or { hat = "none", shirt = "none", pants = "none" }), -- AGGIUNTO
+			lastSave = get_now_utc()
 		}
 	}
 
@@ -104,7 +109,7 @@ function M.save(self, callback)
 		elseif response.status == 404 then
 			create_user_document(self, payload, headers, callback)
 		else
-			print("API SAVE ERRORE: " .. response.status)
+			print("API SAVE ERRORE 400: Controlla che tutti i nomi delle colonne nel database siano corretti!")
 			if callback then callback(false) end
 		end
 	end, headers, json.encode(payload))

@@ -1,239 +1,159 @@
 local GameManager = require "_scripts.GameManager"
-local api = require "_scripts.api" 
+local api = require "_scripts.api"
 
-
-local function update_ui_visibility(self)
-	gui.set_enabled(gui.get_node("infoBox"), self.info_open)
-	gui.set_enabled(gui.get_node("info"), not ui_blocked)
-	gui.set_enabled(gui.get_node("exit"), not ui_blocked)
-
-	for _, item in ipairs(self.fridge_items or {}) do
-		gui.set_enabled(item.root, is_fridge and not ui_blocked)
+local function is_unlocked(item_id)
+	for _, id in ipairs(GameManager.unlocked_items or {}) do
+		if id == item_id then return true end
 	end
-	for _, item in ipairs(self.shelf_items or {}) do
-		gui.set_enabled(item.root, is_shelf and not ui_blocked)
+	return false
+end
+
+-- Funzione di utilità per trovare la tabella corretta (hats vs pants)
+local function get_items_table(category)
+	-- Se esiste la versione con la 's' (hats), usa quella. 
+	-- Se è già plurale (pants), usa quella originale.
+	local plurale = category .. "s"
+	if GameManager.cosmetics[plurale] then
+		return GameManager.cosmetics[plurale], plurale
+	else
+		return GameManager.cosmetics[category], category
+	end
+end
+
+local function update_item_preview(self, category)
+	local items, cat_key = get_items_table(category)
+	if not items then 
+		print("ERRORE: Categoria non trovata nel GameManager: " .. category)
+		return 
+	end
+
+	local index = self.indices[category]
+	local item = items[index]
+	if not item then return end
+
+	-- 1. Aggiornamento Visivo Yeti 
+	local visual_node = gui.get_node(category)
+	if item.id == "none" then
+		gui.set_enabled(visual_node, false)
+	else
+		gui.set_enabled(visual_node, true)
+		local shop_anim = hash(item.id .. "-front") 
+		pcall(function() gui.play_flipbook(visual_node, shop_anim) end)
+	end
+
+	-- 2. Gestione Nodi Prezzo e Testo
+	local capitalized = category:gsub("^%l", string.upper)
+	local btn_text_node = gui.get_node("buy" .. capitalized .. "Text")
+	local price_container = gui.get_node("price" .. capitalized)
+	local price_text_node = gui.get_node("pricetext" .. capitalized)
+
+	local currently_equipped = GameManager.equipped[category] == item.id
+
+	if is_unlocked(item.id) then
+		gui.set_enabled(price_container, false)
+		if currently_equipped then
+			gui.set_text(btn_text_node, "---") 
+		else
+			gui.set_text(btn_text_node, GameManager.get_text("equip_btn"))
+		end
+	else
+		gui.set_text(btn_text_node, GameManager.get_text("buy_btn"))
+		gui.set_enabled(price_container, true)
+		gui.set_text(price_text_node, tostring(item.price))
 	end
 end
 
 local function update_ui_texts(self)
-	gui.set_text(gui.get_node("infoText"), GameManager.get_text("market_guide"))
-	gui.set_text(gui.get_node("buyText"), GameManager.get_text("buy_btn"))
-	gui.set_text(gui.get_node("closeText"), GameManager.get_text("close_btn"))
+	gui.set_text(gui.get_node("infoText"), GameManager.get_text("shop_guide"))
 	gui.set_text(gui.get_node("exitText"), GameManager.get_text("close_btn"))
-	gui.set_text(gui.get_node("nextText"), GameManager.get_text("next_btn"))
-	gui.set_text(gui.get_node("previousText"), GameManager.get_text("prev_btn"))
 end
-
-local function generate_inventory(self, page_type)
-	local items_table = (page_type == PAGE_FRIDGE) and self.fridge_items or self.shelf_items
-	local parent_id = (page_type == PAGE_FRIDGE) and "fridge" or "shelf"
-	local parent_node = gui.get_node(parent_id)
-
-	-- Pulizia nodi esistenti
-	for _, item in ipairs(items_table or {}) do
-		gui.delete_node(item.root)
-	end
-
-	if page_type == PAGE_FRIDGE then self.fridge_items = {} else self.shelf_items = {} end
-	items_table = (page_type == PAGE_FRIDGE) and self.fridge_items or self.shelf_items
-
-	local filtered_items = {}
-	local target_category = (page_type == PAGE_FRIDGE) and "fridge" or "shelf"
-
-	for _, data in ipairs(items_data.ITEMS) do
-		if data.category == target_category then
-			table.insert(filtered_items, data)
-		end
-	end
-
-	-- Shuffle per varietà nel market
-	for i = #filtered_items, 2, -1 do
-		local j = math.random(i)
-		filtered_items[i], filtered_items[j] = filtered_items[j], filtered_items[i]
-	end
-
-	local items_per_row = 2
-	local spacing_y = 25
-	local x_offset = 25
-	local y_offset = 25
-	local max_to_show = 6
-
-	for display_index = 1, math.min(#filtered_items, max_to_show) do
-		local data = filtered_items[display_index]
-		local nodes = gui.clone_tree(gui.get_node("food_template/item_template"))
-		local root = nodes[hash("food_template/item_template")]
-		local icon = nodes[hash("food_template/item_icon")]
-		local price_tag = nodes[hash("food_template/item_price")]
-
-		if root and icon then
-			gui.set_parent(root, parent_node, true)
-			gui.set_enabled(root, true)
-			gui.play_flipbook(icon, hash(data.icon))
-			local final_price = get_dynamic_price(data)
-			gui.set_text(price_tag, tostring(final_price))
-
-			local col = (display_index - 1) % items_per_row
-			local row = math.floor((display_index - 1) / items_per_row)
-			local px = (col == 0) and -x_offset or x_offset
-			local py = y_offset - (row * spacing_y)
-
-			gui.set_position(root, vmath.vector3(px, py, 0.5))
-			gui.set_scale(root, vmath.vector3(1, 1, 1)) 
-			table.insert(items_table, { root = root, data = data })
-		end
-	end
-end
-
--- --- CICLO DI VITA DEFOLD ---
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	math.randomseed(os.time())
-	self.current_page = PAGE_SHELF
-	self.fridge_items = {}
-	self.shelf_items = {}
+	self.indices = { hat = 1, shirt = 1, pants = 1 }
 	self.info_open = false
-	self.food_box_open = false
-	self.selected_item = nil
-	self.is_saving = false 
+	self.is_saving = false
 
 	update_ui_texts(self)
-	generate_inventory(self, PAGE_FRIDGE)
-	generate_inventory(self, PAGE_SHELF)
-	update_ui_visibility(self)
+	update_item_preview(self, "hat")
+	update_item_preview(self, "shirt")
+	update_item_preview(self, "pants")
+
+	gui.set_enabled(gui.get_node("infoBox"), false)
 end
 
 function on_input(self, action_id, action)
 	if action_id == hash("touch") and action.pressed then
-		if self.is_saving then return true end
+		if self.is_saving then return end
 
-		-- 1. LOGICA FOOD BOX (Acquisto)
-		if self.food_box_open then
-			if gui.pick_node(gui.get_node("close"), action.x, action.y) then
-				self.food_box_open = false
-				update_ui_visibility(self)
-			elseif gui.pick_node(gui.get_node("buy"), action.x, action.y) then
-				if #GameManager.inventory >= 5 then
-					gui.set_text(gui.get_node("foodText"), GameManager.get_text("inventory_full"))
-					return true
-				end
-
-				local final_price = get_dynamic_price(self.selected_item)
-
-				if GameManager.knowledge_amount >= final_price then
-					self.is_saving = true
-					GameManager.knowledge_amount = GameManager.knowledge_amount - final_price
-
-					-- Salvataggio nell'inventario globale per logica 3 fasi
-					local inventory_item = {
-						id = self.selected_item.icon,
-						name = self.selected_item.name,
-						icon = self.selected_item.icon,
-						purchased_at = os.time()
-					}
-					table.insert(GameManager.inventory, inventory_item)
-
-					api.save(self, function()
-						self.is_saving = false
-						local active_list = (self.current_page == PAGE_FRIDGE) and self.fridge_items or self.shelf_items
-						for i, item in ipairs(active_list) do
-							if item.data == self.selected_item then
-								gui.delete_node(item.root)
-								table.remove(active_list, i)
-								break
-							end
-						end
-						self.food_box_open = false
-						update_ui_visibility(self)
-					end)
-				else
-					gui.set_text(gui.get_node("foodText"), "Punti Conoscenza insufficienti!")
-				end
-			end
-			return true
-		end
-
-		-- 2. LOGICA INFO BOX
+		-- Gestione InfoBox
 		if self.info_open then
 			if gui.pick_node(gui.get_node("exitInfo"), action.x, action.y) then
 				self.info_open = false
-				update_ui_visibility(self)
-			end
-			return true
-		end
-
-		-- 3. BOTTONI FISSI
-		if gui.pick_node(gui.get_node("info"), action.x, action.y) then
-			-- Ripristina il testo della guida generale
-			gui.set_text(gui.get_node("infoText"), GameManager.get_text("market_guide"))
-			self.info_open = true
-			update_ui_visibility(self)
-			return true
-
-		elseif gui.pick_node(gui.get_node("npc"), action.x, action.y) then
-			-- Scegli un consiglio casuale (1-25)
-			local random_id = "tip_" .. math.random(1, 25)
-			local tip_text = GameManager.get_text(random_id)
-
-			-- Mostra il consiglio della mucca
-			gui.set_text(gui.get_node("infoText"), tip_text)
-			self.info_open = true
-			update_ui_visibility(self)
-			return true
-
-		elseif gui.pick_node(gui.get_node("exit"), action.x, action.y) then
-			self.is_saving = true
-			api.save(self, function()
-				self.is_saving = false 
-				msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage" })
-			end)
-			return true
-		end
-		-- 4. CAMBIO PAGINA
-		if gui.pick_node(gui.get_node("next"), action.x, action.y) or 
-		gui.pick_node(gui.get_node("previous"), action.x, action.y) then
-			self.current_page = (self.current_page == PAGE_SHELF) and PAGE_FRIDGE or PAGE_SHELF
-			update_ui_visibility(self)
-			return true
-		end
-
-		-- 5. SELEZIONE CIBI DAL MERCATO
-		local active_list = (self.current_page == PAGE_FRIDGE) and self.fridge_items or self.shelf_items
-		for _, item in ipairs(active_list) do
-			if gui.pick_node(item.root, action.x, action.y) then
-				self.selected_item = item.data
-				gui.play_flipbook(gui.get_node("icon"), hash(item.data.icon))
-
-				local key = item.data.icon
-				local localized_name = GameManager.get_text(key)
-				local localized_desc = GameManager.get_text(key .. "_desc")
-
-				-- CALCOLO VALORI DINAMICI PER IL MARKET
-				-- 1. Energia
-				local energy_val = item.data.energy or 0
-				local final_price = get_dynamic_price(item.data)
-				local current_season = GameManager.get_current_season()
-				if item.data.season == current_season then
-					energy_val = math.floor(energy_val * 1.2) -- +20% Energia se in stagione
-				end
-				gui.set_text(gui.get_node("energy"), GameManager.get_text("label_energy") .. " " .. energy_val)
-				gui.set_text(gui.get_node("price"), GameManager.get_text("label_energy") .. " " .. final_price)
-
-				-- 2. Scadenze (Usiamo i dati statici perché l'oggetto non è ancora "invecchiato")
-				gui.set_text(gui.get_node("labelBestBefore"), GameManager.get_text("label_best_before") .. " " .. format_days_market(item.data.fresh_duration))
-				gui.set_text(gui.get_node("labelExpiry"), GameManager.get_text("label_expiry") .. " " .. format_days_market(item.data.max_duration))
-				if key:find("popsicle") then
-					localized_desc = GameManager.get_text("popsicle_desc")
-				end
-
-				gui.set_text(gui.get_node("foodName"), localized_name)
-				gui.set_text(gui.get_node("foodText"), localized_desc)
-
-				self.food_box_open = true
-				update_ui_visibility(self)
+				gui.set_enabled(gui.get_node("infoBox"), false)
 				return true
 			end
+			return true
+		end
+
+		if gui.pick_node(gui.get_node("info"), action.x, action.y) then
+			self.info_open = true
+			gui.set_enabled(gui.get_node("infoBox"), true)
+			return true
+		end
+
+		-- Logica Shop (Frecce e Acquisto)
+		local categories = {"Hat", "Shirt", "Pants"}
+		for _, cat in ipairs(categories) do
+			local low_cat = cat:lower()
+			local items, cat_key = get_items_table(low_cat)
+
+			if items then
+				-- Frecce
+				if gui.pick_node(gui.get_node("next" .. cat), action.x, action.y) then
+					self.indices[low_cat] = self.indices[low_cat] + 1
+					if self.indices[low_cat] > #items then self.indices[low_cat] = 1 end
+					update_item_preview(self, low_cat)
+					return true
+				elseif gui.pick_node(gui.get_node("prev" .. cat), action.x, action.y) then
+					self.indices[low_cat] = self.indices[low_cat] - 1
+					if self.indices[low_cat] < 1 then self.indices[low_cat] = #items end
+					update_item_preview(self, low_cat)
+					return true
+				end
+
+				-- Tasto Buy/Equip
+				if gui.pick_node(gui.get_node("buy" .. cat), action.x, action.y) then
+					local item = items[self.indices[low_cat]]
+
+					if is_unlocked(item.id) then
+						if GameManager.equipped[low_cat] ~= item.id then
+							GameManager.equipped[low_cat] = item.id
+							self.is_saving = true
+							api.save(self, function(success)
+								self.is_saving = false
+								if success then update_item_preview(self, low_cat) end
+							end)
+						end
+					elseif GameManager.coins >= item.price then
+						GameManager.coins = GameManager.coins - item.price
+						table.insert(GameManager.unlocked_items, item.id)
+						GameManager.equipped[low_cat] = item.id 
+
+						self.is_saving = true
+						api.save(self, function(success)
+							self.is_saving = false
+							if success then update_item_preview(self, low_cat) end
+						end)
+					end
+					return true
+				end
+			end
+		end
+
+		if gui.pick_node(gui.get_node("exit"), action.x, action.y) then
+			msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage" })
+			return true
 		end
 	end
-	return false
 end

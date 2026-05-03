@@ -107,6 +107,21 @@ M.strings = {
 
 	q20 = "Approximately how many liters of water are needed to produce a single cup of coffee?",
 	q20_a1 = "1 liter", q20_a2 = "140 liters", q20_a3 = "50 liters", q20_a4 = "500 liters",
+
+	equip_btn = "EQUIP",
+	
+	shop_guide = [[
+	WELCOME TO THE YETI BOUTIQUE!
+
+	Express your style and keep your Yeti looking sharp!
+
+	1. CUSTOMIZE: Use the arrows to browse through different hats, shirts, and pants.
+	2. UNLOCK: Items can be purchased using Coins earned in the Ski Lift. Once bought, they are yours forever!
+	3. EQUIP: Already owned items will show as 'EQUIP'. Click to change your Yeti's outfit instantly.
+	4. SYNCED CLOSET: Your wardrobe is saved to your account. Your style follows you wherever you go!
+
+	Look good, feel good, and show off your unique Yeti!
+	]],
 	
 	market_guide = [[
 	WELCOME TO THE GENERAL STORE!

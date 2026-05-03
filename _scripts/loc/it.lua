@@ -108,6 +108,21 @@ M.strings = {
 	q20 = "Quanti litri d'acqua servono circa per produrre una singola tazza di caffe'?",
 	q20_a1 = "1 litro", q20_a2 = "140 litri", q20_a3 = "50 litri", q20_a4 = "500 litri",
 
+	shop_guide = [[
+	BENVENUTI NELLA BOUTIQUE DELLO YETI!
+
+	Esprimi il tuo stile e rendi il tuo Yeti il più elegante della montagna!
+
+	1. PERSONALIZZA: Usa le frecce per sfogliare i diversi modelli di cappelli, magliette e pantaloni.
+	2. SBLOCCA: Gli oggetti possono essere acquistati usando le Monete guadagnate nello Ski Lift. Una volta comprati, saranno tuoi per sempre!
+	3. EQUIPAGGIA: Gli oggetti che già possiedi mostreranno la scritta 'EQUIPAGGIA'. Clicca per cambiare l'outfit del tuo Yeti istantaneamente.
+	4. ARMADIO SINCRONIZZATO: Il tuo guardaroba è salvato sul tuo account. Il tuo stile ti segue ovunque tu vada!
+
+	Vesti bene, senti bene e mostra a tutti il tuo Yeti unico!
+	]],
+
+	equip_btn = "EQUIPAGGIA",
+	
 	market_guide = [[
 	BENVENUTI ALL'EMPORIO GENERALE!
 
