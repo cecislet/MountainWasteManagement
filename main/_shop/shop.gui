@@ -41,8 +41,8 @@ nodes {
 }
 nodes {
   position {
-    x: 113.86787
-    y: 726.06696
+    x: 41.867867
+    y: 660.06696
     z: 0.1
   }
   scale {
@@ -58,11 +58,11 @@ nodes {
 nodes {
   position {
     x: 384.0
-    y: 322.0
+    y: 325.0
   }
   size {
     x: 650.0
-    y: 600.0
+    y: 430.0
   }
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
@@ -78,27 +78,23 @@ nodes {
 }
 nodes {
   position {
-    y: 28.0
+    y: 30.0
   }
   size {
     x: 630.0
-    y: 510.0
+    y: 350.0
   }
   type: TYPE_TEXT
-  text: "BENVENUTI ALL\'EMPORIO GENERALE!\n"
+  text: "WELCOME TO THE YETI BOUTIQUE!\n"
   "\n"
-  "\tAssicurati che il tuo Yeti rimanga in salute e felice mantenendo le scorte piene.\n"
+  "\tExpress your style and keep your Yeti looking sharp!\n"
   "\n"
-  "\t1. NUTRI IL TUO AMICO: Acquista cibo e prelibatezze. Ricorda che la fame sale verso il 100% (pericolo) e scende verso lo 0% (sazio).\n"
-  "\t2. VALUTA: Tutti gli articoli sono prezzati in Punti Conoscenza. Usa la tua saggezza per provvedere allo Yeti!\n"
-  "\t3. PREZZI STAGIONALI: I prezzi fluttuano in base alla stagione corrente. Comprare prodotti di stagione conviene e nutre di pi\303\271!\n"
-  "\t4. CONSERVAZIONE REALE: Impara dove conservare i cibi (Frigo vs Scaffale) per farli durare pi\303\271 a lungo.\n"
+  "\t1. CUSTOMIZE: Use the arrows to browse through different hats, shirts, and pants.\n"
+  "\t2. UNLOCK: Items can be purchased using Coins earned in the Ski Lift. Once bought, they are yours forever!\n"
+  "\t3. EQUIP: Already owned items will show as \'EQUIP\'. Click to change your Yeti\'s outfit instantly.\n"
+  "\t4. SYNCED CLOSET: Your wardrobe is saved to your account. Your style follows you wherever you go!\n"
   "\n"
-  "\t--- LA GESTIONE DELLA SCADENZA ---\n"
-  "\tOgni cibo nell\'inventario mostra il suo stato tramite il colore del bottone:\n"
-  "\t- VERDE (Fresco): Massima efficacia! Riduce molta fame e aumenta il Mood.\n"
-  "\t- ARANCIONE (Da consumare): Qualit\303\240 ridotta. Sazia la met\303\240 e peggiora leggermente il Mood.\n"
-  "\t- ROSSO (Avariato): ATTENZIONE! Se lo mangia, la fame AUMENTA (+15) e il Mood crolla. Lo Yeti star\303\240 male!"
+  "\tLook good, feel good, and show off your unique Yeti!"
   font: "pixelFont"
   id: "infoText"
   line_break: true
@@ -107,7 +103,7 @@ nodes {
 }
 nodes {
   position {
-    y: -257.0
+    y: -171.0
   }
   size {
     x: 100.0
@@ -139,7 +135,7 @@ nodes {
 }
 nodes {
   position {
-    x: 298.59546
+    x: 276.59546
     y: 332.4969
   }
   scale {
@@ -178,128 +174,136 @@ nodes {
 }
 nodes {
   position {
-    x: 59.5
+    x: 62.75
     y: 36.25
+  }
+  rotation {
+    y: 180.0
   }
   scale {
     x: 0.191519
-    y: 0.176328
     z: 0.1856
   }
   size {
-    x: 100.0
-    y: 100.0
+    x: 60.0
+    y: 40.0
   }
   type: TYPE_BOX
+  texture: "icons/arrowHud"
   id: "nextHat"
   parent: "npcImage"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: 59.5
-    y: -5.25
+    x: 62.75
+    y: -6.5
+  }
+  rotation {
+    y: 180.0
   }
   scale {
     x: 0.191519
-    y: 0.176328
     z: 0.1856
   }
   size {
-    x: 100.0
-    y: 100.0
+    x: 60.0
+    y: 40.0
   }
   type: TYPE_BOX
+  texture: "icons/arrowHud"
   id: "nextShirt"
   parent: "npcImage"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: 59.5
-    y: -31.75
+    x: 62.75
+    y: -43.75
+  }
+  rotation {
+    y: 180.0
   }
   scale {
     x: 0.191519
-    y: 0.176328
     z: 0.1856
   }
   size {
-    x: 100.0
-    y: 100.0
+    x: 60.0
+    y: 30.0
   }
   type: TYPE_BOX
+  texture: "icons/arrowHud"
   id: "nextPants"
   parent: "npcImage"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: -58.25
+    x: -61.25
     y: 36.25
   }
   scale {
     x: 0.191519
-    y: 0.176328
     z: 0.1856
   }
   size {
-    x: 100.0
-    y: 100.0
+    x: 60.0
+    y: 40.0
   }
   type: TYPE_BOX
+  texture: "icons/arrowHud"
   id: "prevHat"
   parent: "npcImage"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: -58.25
-    y: -5.25
+    x: -61.25
+    y: -6.5
   }
   scale {
     x: 0.191519
-    y: 0.176328
     z: 0.1856
   }
   size {
-    x: 100.0
-    y: 100.0
+    x: 60.0
+    y: 40.0
   }
   type: TYPE_BOX
+  texture: "icons/arrowHud"
   id: "prevShirt"
   parent: "npcImage"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: -58.25
-    y: -31.75
+    x: -61.25
+    y: -43.75
   }
   scale {
     x: 0.191519
-    y: 0.176328
     z: 0.1856
   }
   size {
-    x: 100.0
-    y: 100.0
+    x: 60.0
+    y: 30.0
   }
   type: TYPE_BOX
+  texture: "icons/arrowHud"
   id: "prevPants"
   parent: "npcImage"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    x: 656.0
-    y: 481.0
+    x: 85.0
+    y: 45.25
+  }
+  scale {
+    x: 0.240192
+    y: 0.240192
+    z: 0.240192
   }
   size {
     x: 100.0
@@ -308,6 +312,7 @@ nodes {
   type: TYPE_BOX
   texture: "buttons/9SliceRightButton"
   id: "buyHat"
+  parent: "npcImage"
   inherit_alpha: true
   slice9 {
     x: 20.0
@@ -318,8 +323,8 @@ nodes {
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 80.0
+    y: 60.0
   }
   type: TYPE_TEXT
   text: "<text>"
@@ -331,42 +336,16 @@ nodes {
 nodes {
   position {
     x: 2.0
-    y: -84.0
+    y: -76.0
   }
   size {
-    x: 80.0
-    y: 80.0
+    x: 90.0
+    y: 60.0
   }
   type: TYPE_BOX
+  texture: "buttons/9SliceButton"
   id: "priceHat"
   parent: "buyHat"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "<text>"
-  font: "pixelFont"
-  id: "pricetextHat"
-  parent: "priceHat"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 656.0
-    y: 309.0
-  }
-  size {
-    x: 100.0
-    y: 80.0
-  }
-  type: TYPE_BOX
-  texture: "buttons/9SliceRightButton"
-  id: "buyShirt"
   inherit_alpha: true
   slice9 {
     x: 20.0
@@ -377,8 +356,46 @@ nodes {
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 70.0
+    y: 40.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "pricetextHat"
+  parent: "priceHat"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 85.0
+    y: 4.0
+  }
+  scale {
+    x: 0.240192
+    y: 0.240192
+    z: 0.240192
+  }
+  size {
+    x: 100.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "buyShirt"
+  parent: "npcImage"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 80.0
+    y: 60.0
   }
   type: TYPE_TEXT
   text: "<text>"
@@ -390,42 +407,16 @@ nodes {
 nodes {
   position {
     x: 2.0
-    y: -84.0
+    y: -76.0
   }
   size {
-    x: 80.0
-    y: 80.0
+    x: 90.0
+    y: 60.0
   }
   type: TYPE_BOX
+  texture: "buttons/9SliceButton"
   id: "priceShirt"
   parent: "buyShirt"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "<text>"
-  font: "pixelFont"
-  id: "pricetextShirt"
-  parent: "priceShirt"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 656.0
-    y: 143.0
-  }
-  size {
-    x: 100.0
-    y: 80.0
-  }
-  type: TYPE_BOX
-  texture: "buttons/9SliceRightButton"
-  id: "buyPants"
   inherit_alpha: true
   slice9 {
     x: 20.0
@@ -436,8 +427,46 @@ nodes {
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 70.0
+    y: 40.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "pricetextShirt"
+  parent: "priceShirt"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 85.0
+    y: -36.0
+  }
+  scale {
+    x: 0.240192
+    y: 0.240192
+    z: 0.240192
+  }
+  size {
+    x: 100.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "buyPants"
+  parent: "npcImage"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 80.0
+    y: 60.0
   }
   type: TYPE_TEXT
   text: "<text>"
@@ -449,28 +478,108 @@ nodes {
 nodes {
   position {
     x: 2.0
-    y: -84.0
+    y: -76.0
   }
   size {
-    x: 80.0
-    y: 80.0
+    x: 90.0
+    y: 60.0
   }
   type: TYPE_BOX
+  texture: "buttons/9SliceButton"
   id: "pricePants"
   parent: "buyPants"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
 }
 nodes {
   size {
-    x: 200.0
-    y: 100.0
+    x: 70.0
+    y: 40.0
   }
   type: TYPE_TEXT
   text: "<text>"
   font: "pixelFont"
   id: "pricetextPants"
   parent: "pricePants"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -0.5
+    y: 8.25
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  size {
+    x: 400.0
+    y: 300.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "errBox"
+  parent: "npcImage"
+  layer: "ui"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    y: 28.0
+  }
+  size {
+    x: 380.0
+    y: 220.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "errText"
+  line_break: true
+  parent: "errBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -115.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceWrongButton"
+  id: "exitErr"
+  parent: "errBox"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "EXIT"
+  font: "pixelFont"
+  id: "exitErrText"
+  parent: "exitErr"
   inherit_alpha: true
 }
 layers {

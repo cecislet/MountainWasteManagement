@@ -25,6 +25,7 @@ M.strings = {
 	label_coins_gained = "MONETE:",
 	label_knowledge_gained = "CONOSCENZA:",
 	button_exit = "ESCI",
+	error_coins = "Non hai abbastanza monete!",
 	msg_victory = "HAI VINTO!",
 	msg_gameover = "HAI PERSO!",
 	button_trash = "BUTTA",

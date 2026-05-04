@@ -25,23 +25,24 @@ textures {
 }
 nodes {
   position {
-    x: 509.0
-    y: 711.0
+    x: 503.0
+    y: 707.0
   }
   size {
-    x: 510.0
-    y: 100.0
-  }
-  color {
-    x: 0.3019608
-    y: 0.4
-    z: 0.8
+    x: 520.0
+    y: 110.0
   }
   type: TYPE_BOX
+  texture: "buttons/9SliceButton"
   id: "hud_bg"
   layer: "ui"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
 }
 nodes {
   position {
@@ -187,17 +188,31 @@ nodes {
 }
 nodes {
   position {
-    x: -307.0
+    x: -322.0
   }
   size {
-    x: 100.0
-    y: 100.0
+    x: 110.0
+    y: 110.0
   }
   type: TYPE_BOX
-  texture: "buttons/save"
+  texture: "buttons/9SliceButton"
   id: "options"
   parent: "hud_bg"
   inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  type: TYPE_BOX
+  texture: "icons/settings"
+  id: "Settingsicon"
+  parent: "options"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
