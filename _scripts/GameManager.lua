@@ -23,7 +23,7 @@ M.cosmetics = {
 	},
 	shirts = {
 		{ id = "none", price = 0 },
-		{ id = "shirt", price = 100 }
+		{ id = "shirt", price = 80 }
 	},
 	pants = {
 		{ id = "none", price = 0 },

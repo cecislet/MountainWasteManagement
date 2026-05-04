@@ -88,7 +88,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "money"
-  font: "pixelFont"
+  font: "pixelFont_Title"
   id: "money_text"
   parent: "money_icon"
   inherit_alpha: true
@@ -126,7 +126,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "hunger"
-  font: "pixelFont"
+  font: "pixelFont_Title"
   id: "hunger_text"
   parent: "hunger_icon"
   inherit_alpha: true
@@ -164,7 +164,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "know"
-  font: "pixelFont"
+  font: "pixelFont_Title"
   id: "knowledge_text"
   parent: "know_icon"
   inherit_alpha: true
@@ -334,22 +334,23 @@ nodes {
     y: 291.0
   }
   size {
-    x: 120.0
+    x: 130.0
     y: 560.0
   }
-  color {
-    x: 0.3019608
-    y: 0.4
-    z: 0.8
-  }
   type: TYPE_BOX
+  texture: "buttons/9SliceButton"
   id: "inventory_bg"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
 }
 nodes {
   position {
-    y: 221.0
+    y: 219.0
   }
   size {
     x: 100.0
@@ -381,7 +382,7 @@ nodes {
 }
 nodes {
   position {
-    y: 109.0
+    y: 107.0
   }
   size {
     x: 100.0
@@ -412,6 +413,9 @@ nodes {
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
+  position {
+    y: -2.0
+  }
   size {
     x: 100.0
     y: 100.0
@@ -442,7 +446,7 @@ nodes {
 }
 nodes {
   position {
-    y: -109.0
+    y: -111.0
   }
   size {
     x: 100.0
@@ -474,7 +478,7 @@ nodes {
 }
 nodes {
   position {
-    y: -218.0
+    y: -220.0
   }
   size {
     x: 100.0
@@ -702,7 +706,7 @@ nodes {
 }
 nodes {
   position {
-    x: -88.0
+    x: -96.0
     y: 3.0
   }
   rotation {
