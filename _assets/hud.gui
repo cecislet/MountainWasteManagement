@@ -87,7 +87,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "money"
+  text: ":100"
   font: "pixelFont_Title"
   id: "money_text"
   parent: "money_icon"
@@ -125,7 +125,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "hunger"
+  text: "85%"
   font: "pixelFont_Title"
   id: "hunger_text"
   parent: "hunger_icon"
@@ -163,7 +163,7 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "know"
+  text: ":100"
   font: "pixelFont_Title"
   id: "knowledge_text"
   parent: "know_icon"
@@ -511,7 +511,7 @@ nodes {
 nodes {
   position {
     x: -400.0
-    y: -2.0
+    y: 26.0
   }
   size {
     x: 500.0
