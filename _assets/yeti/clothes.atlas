@@ -2,10 +2,10 @@ images {
   image: "/_assets/yeti/Clothes/hat.png"
 }
 images {
-  image: "/_assets/yeti/Clothes/hat-Right.png"
+  image: "/_assets/yeti/Clothes/hat-right.png"
 }
 images {
-  image: "/_assets/yeti/Clothes/hat-Left.png"
+  image: "/_assets/yeti/Clothes/hat-left.png"
 }
 images {
   image: "/_assets/yeti/Clothes/hat-front.png"
@@ -17,7 +17,7 @@ images {
   image: "/_assets/yeti/Clothes/shirt-front.png"
 }
 animations {
-  id: "pants-Left"
+  id: "pants-left"
   images {
     image: "/_assets/yeti/Clothes/pants-left.png"
   }
@@ -34,7 +34,7 @@ animations {
   fps: 10
 }
 animations {
-  id: "pants-Right"
+  id: "pants-right"
   images {
     image: "/_assets/yeti/Clothes/pants-right.png"
   }
@@ -85,7 +85,7 @@ animations {
   fps: 10
 }
 animations {
-  id: "shirt-Left"
+  id: "shirt-left"
   images {
     image: "/_assets/yeti/Clothes/shirt-left.png"
   }
@@ -102,7 +102,7 @@ animations {
   fps: 10
 }
 animations {
-  id: "shirt-Right"
+  id: "shirt-right"
   images {
     image: "/_assets/yeti/Clothes/shirt-right.png"
   }

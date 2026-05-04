@@ -56,9 +56,9 @@ function update(self, dt)
 		-- 1. Identifichiamo la direzione per il movimento (come facevi già)
 		local dir_str = ""
 		if anim == hash("right") then 
-			dir_str = "Right"
+			dir_str = "right"
 		elseif anim == hash("left") then 
-			dir_str = "Left"
+			dir_str = "left"
 		end
 
 		local categories = { "head", "shirt", "pants" }
