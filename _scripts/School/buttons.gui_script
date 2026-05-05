@@ -94,6 +94,7 @@ local function get_random_questions(all_questions, count)
 end
 
 function init(self)
+	msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
 	-- Seed del generatore casuale più preciso
 	math.randomseed(os.time() + os.clock())
 	math.random(); math.random(); math.random()

@@ -37,6 +37,7 @@ local function handle_game_over(self, message)
 end
 
 function init(self)
+	msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
 	msg.post(".", "acquire_input_focus")
 
 	-- Nascondo tutto il menu all'inizio
