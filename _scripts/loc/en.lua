@@ -189,7 +189,7 @@ M.strings = {
 	fruit_orange_slice_desc = "A quick dose of vitamin C.",
 	fruit_watermelon_slice = "Watermelon Slice",
 	fruit_watermelon_slice_desc = "The ultimate summer refresher.",
-	rosti = "Rösti",
+	rosti = "Rosti",
 	rosti_desc = "Swiss potato specialty, golden and crispy.",
 
 	eggs_fried = "Fried Eggs",
