@@ -1,0 +1,39 @@
+image: "/_assets/yeti/yetiAnim.png"
+tile_width: 144
+tile_height: 144
+animations {
+  id: "back"
+  start_tile: 5
+  end_tile: 8
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "front"
+  start_tile: 9
+  end_tile: 12
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "idle_front"
+  start_tile: 1
+  end_tile: 4
+  playback: PLAYBACK_LOOP_PINGPONG
+  fps: 5
+}
+animations {
+  id: "left"
+  start_tile: 17
+  end_tile: 20
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "right"
+  start_tile: 13
+  end_tile: 16
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+extrude_borders: 2

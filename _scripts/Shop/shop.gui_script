@@ -30,7 +30,7 @@ local function update_item_preview(self, category)
 		gui.set_enabled(visual_node, false)
 	else
 		gui.set_enabled(visual_node, true)
-		local shop_anim = hash(item.id .. "-front") 
+		local shop_anim = hash(item.id .. "-idle") 
 		pcall(function() gui.play_flipbook(visual_node, shop_anim) end)
 	end
 

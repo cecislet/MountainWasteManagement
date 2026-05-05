@@ -19,7 +19,7 @@ M.mood = 100
 M.cosmetics = {
 	hats = {
 		{ id = "none", price = 0 },
-		{ id = "hat", price = 50 },
+		{ id = "ColorfulHat", price = 50 },
 	},
 	shirts = {
 		{ id = "none", price = 0 },

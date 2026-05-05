@@ -11,10 +11,10 @@ images {
   image: "/_assets/yeti/Clothes/hat-front.png"
 }
 images {
-  image: "/_assets/yeti/Clothes/pants-front.png"
+  image: "/_assets/yeti/Clothes/pants-idle.png"
 }
 images {
-  image: "/_assets/yeti/Clothes/shirt-front.png"
+  image: "/_assets/yeti/Clothes/shirt-idle.png"
 }
 animations {
   id: "pants-left"
@@ -51,15 +51,15 @@ animations {
   fps: 10
 }
 animations {
-  id: "pants"
+  id: "pants-front"
   images {
-    image: "/_assets/yeti/Clothes/pants-front.png"
+    image: "/_assets/yeti/Clothes/pants-idle.png"
   }
   images {
     image: "/_assets/yeti/Clothes/pants-front1.png"
   }
   images {
-    image: "/_assets/yeti/Clothes/pants-front.png"
+    image: "/_assets/yeti/Clothes/pants-idle.png"
   }
   images {
     image: "/_assets/yeti/Clothes/pants-front2.png"
@@ -68,15 +68,15 @@ animations {
   fps: 10
 }
 animations {
-  id: "shirt"
+  id: "shirt-front"
   images {
-    image: "/_assets/yeti/Clothes/shirt-front.png"
+    image: "/_assets/yeti/Clothes/shirt-idle.png"
   }
   images {
     image: "/_assets/yeti/Clothes/shirt-front1.png"
   }
   images {
-    image: "/_assets/yeti/Clothes/shirt-front.png"
+    image: "/_assets/yeti/Clothes/shirt-idle.png"
   }
   images {
     image: "/_assets/yeti/Clothes/shirt-front2.png"
@@ -114,6 +114,40 @@ animations {
   }
   images {
     image: "/_assets/yeti/Clothes/shirt-right2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+}
+animations {
+  id: "pants-back"
+  images {
+    image: "/_assets/yeti/Clothes/pants-idle.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-front1.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-idle.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-front2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+}
+animations {
+  id: "shirt-back"
+  images {
+    image: "/_assets/yeti/Clothes/shirt-idle.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-front1.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-idle.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-front2.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
   fps: 10

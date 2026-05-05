@@ -50,12 +50,18 @@ function update(self, dt)
 		self.current_anim = anim
 		sprite.play_flipbook("#sprite", anim)
 
-		-- 1. Identifichiamo la direzione per il movimento (come facevi già)
-		local dir_str = ""
+		-- Determiniamo il suffisso basandoci sull'animazione dello Yeti
+		local suffix = ""
 		if anim == hash("right") then 
-			dir_str = "right"
+			suffix = "-right"
 		elseif anim == hash("left") then 
-			dir_str = "left"
+			suffix = "-left"
+		elseif anim == hash("back") then 
+			suffix = "-back"
+		elseif anim == hash("front") then 
+			suffix = "-front"
+		else
+			suffix = "-idle" -- Per hash("idle_front") o altri stati fermi
 		end
 
 		local categories = { "head", "shirt", "pants" }
@@ -64,28 +70,19 @@ function update(self, dt)
 			local item_id = GameManager.equipped[gm_key]
 			local sprite_url = msg.url(nil, cat, "sprite")
 
-			pcall(function()
-				if item_id and item_id ~= "none" then
-					msg.post(sprite_url, "enable")
+			if item_id and item_id ~= "none" then
+				msg.post(sprite_url, "enable")
 
-					local final_anim_name = item_id
+				-- Componiamo il nome: es. "ColorfulHat" .. "-front"
+				local final_anim_name = item_id .. suffix
 
-					-- 2. LOGICA RICHIESTA:
-					-- Se lo yeti è fermo (idle), usa -front
-					if anim == hash("idle_front") then
-						final_anim_name = item_id .. "-front"
-						-- Altrimenti, se si muove a destra o sinistra, usa il tuo dir_str
-					elseif dir_str ~= "" then
-						final_anim_name = item_id .. "-" .. dir_str
-					end
-					-- Se cammina Su/Giù (senza dir_str), userà item_id base come ora
-
-					print("Provo a caricare animazione: " .. final_anim_name)
+				-- Usiamo pcall per evitare crash se manca un'animazione specifica nel Tile Source
+				pcall(function()
 					sprite.play_flipbook(sprite_url, hash(final_anim_name))
-				else
-					msg.post(sprite_url, "disable")
-				end
-			end)
+				end)
+			else
+				msg.post(sprite_url, "disable")
+			end
 		end
 	end
 
