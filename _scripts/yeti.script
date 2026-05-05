@@ -29,9 +29,6 @@ function update(self, dt)
 	local p = go.get_position()
 	local new_p = p + move_dir * speed * dt
 
-	-- Limiti schermo
-	new_p.x = math.max(self.margin_x, math.min(new_p.x, WINDOW_WIDTH - self.margin_x))
-	new_p.y = math.max(self.margin_y, math.min(new_p.y, WINDOW_HEIGHT - self.margin_y))
 	go.set_position(new_p)
 
 	-- 2. Calcolo Animazione Corrente
