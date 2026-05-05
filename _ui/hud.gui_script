@@ -16,6 +16,15 @@ function init(self)
 	gui.set_enabled(gui.get_node("foodBox"), false)
 	gui.set_enabled(gui.get_node("OptionsBox"), false)
 	gui.set_enabled(gui.get_node("LeaderboardBox"), false)
+
+	local current_scene = data.get_current_level()
+	if current_scene == "StartPage" then
+		gui.set_enabled(gui.get_node("leaderBoard"), true)
+		gui.set_enabled(gui.get_node("leaderboard"), true)
+	else
+		gui.set_enabled(gui.get_node("leaderBoard"), false)
+		gui.set_enabled(gui.get_node("leaderboard"), false)
+	end
 end
 
 --- --- FUNZIONI DI UTILITÀ --- ---
@@ -100,7 +109,8 @@ end
 function on_input(self, action_id, action)
 	if action_id ~= hash("touch") or not action.pressed then return false end
 
-	if gui.pick_node(gui.get_node("leaderBoard"), action.x, action.y) then
+	local lb_btn = gui.get_node("leaderBoard")
+	if gui.is_enabled(lb_btn) and gui.pick_node(lb_btn, action.x, action.y) then
 		self.leaderboard_open = true
 		gui.set_enabled(gui.get_node("LeaderboardBox"), true)
 		refresh_leaderboard(self)
