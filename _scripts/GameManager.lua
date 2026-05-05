@@ -9,9 +9,11 @@ M.current_language = "en"
 M.lang_data = lang_en.strings
 
 -- DATI DEL GIOCATORE
+M.name = nil
 M.player_id = nil
 M.coins = 0
 M.knowledge_amount = 0
+M.high_score = 0
 M.hunger = 50
 M.inventory = {} 
 M.mood = 100 
@@ -179,6 +181,15 @@ function M.get_text(key)
 		return M.lang_data[key]
 	end
 	return key
+end
+
+function M.update_high_score(new_score)
+	if new_score > (M.high_score or 0) then
+		M.high_score = new_score
+		print("Nuovo Record Locale: " .. M.high_score)
+		return true
+	end
+	return false
 end
 
 return M

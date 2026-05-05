@@ -1,38 +1,40 @@
 local GameManager = require "_scripts.GameManager"
 
 local function handle_game_over(self, message)
-	-- Recupero i nodi
 	local coin_label = gui.get_node("coinLabel")
 	local finish_label = gui.get_node("finishLabel")
 	local exit_node = gui.get_node("ExitButton")
 	local exit_text_node = gui.get_node("exitLabel")
 	local background = gui.get_node("Background")
 	local knowledge_label = gui.get_node("knowledgeLabel")
+	local score_label = gui.get_node("scoreLabel")
+	local high_score_label = gui.get_node("highScoreLabel")
 
-	-- 1. Recupero i prefissi tradotti
 	local label_coins = GameManager.get_text("label_coins_gained") or "COINS GAINED:"
 	local label_knowledge = GameManager.get_text("label_knowledge_gained") or "KNOWLEDGE GAINED:"
+	local label_score = GameManager.get_text("label_score") or "FINAL SCORE:"
+	local label_record = GameManager.get_text("label_highScore") or "NEW RECORD!"
 	local label_exit = GameManager.get_text("button_exit") or "EXIT"
 
-	-- 2. Gestione dinamica della "Reason" (Vittoria/Sconfitta)
-	-- Se message.reason è una chiave (es. "msg_win"), la traduciamo
 	local reason_text = GameManager.get_text(message.reason) or message.reason
+	local high_score = GameManager.high_score
 
-	-- 3. Imposto i testi finali
 	gui.set_text(knowledge_label, label_knowledge .. " " .. tostring(message.knowledge or 0))
 	gui.set_text(coin_label, label_coins .. " " .. tostring(message.coins or 0))
+	gui.set_text(score_label, label_score .. " " .. tostring(message.score or 0) .. " m")
+	gui.set_text(high_score_label, label_record .. high_score .. " m")
 	gui.set_text(finish_label, reason_text)
 
-	-- Se hai un testo sul bottone di uscita, localizziamo anche quello
 	if exit_text_node then
 		gui.set_text(exit_text_node, label_exit)
 	end
 
-	-- Rendo tutto visibile
 	gui.set_enabled(background, true)
 	gui.set_enabled(finish_label, true)
 	gui.set_enabled(coin_label, true)
 	gui.set_enabled(knowledge_label, true)
+	gui.set_enabled(score_label, true)
+	gui.set_enabled(high_score_label, true)
 	gui.set_enabled(exit_node, true) 
 end
 
@@ -40,11 +42,12 @@ function init(self)
 	msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
 	msg.post(".", "acquire_input_focus")
 
-	-- Nascondo tutto il menu all'inizio
 	gui.set_enabled(gui.get_node("Background"), false)
 	gui.set_enabled(gui.get_node("coinLabel"), false)
 	gui.set_enabled(gui.get_node("finishLabel"), false)
 	gui.set_enabled(gui.get_node("knowledgeLabel"), false)
+	gui.set_enabled(gui.get_node("scoreLabel"), false)
+	gui.set_enabled(gui.get_node("highScoreLabel"), false)
 	gui.set_enabled(gui.get_node("ExitButton"), false)
 end
 

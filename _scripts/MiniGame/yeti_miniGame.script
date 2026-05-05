@@ -93,7 +93,17 @@ function on_message(self, message_id, message, sender)
 			state.active = false
 			msg.post("spawner#ObstacleSpawner", "stop_spawning")
 
-			local data = {coins = gainedCoins, knowledge = gainedKnowledgeItems, reason = ""}
+			local current_meters = math.floor(go.get("spawner#ObstacleSpawner", "score_meters"))
+
+			-- 2. Controlla e aggiorna il record nel GameManager
+			local is_new_record = GameManager.update_high_score(current_meters)
+
+			local data = {
+				coins = gainedCoins, 
+				knowledge = gainedKnowledgeItems, 
+				score = current_meters,
+				reason = (group == hash("FinishLine")) and "msg_victory" or "msg_gameover"
+			}
 
 			-- 1. Aggiorna i dati nel GameManager locale (UNA SOLA VOLTA)
 			GameManager.coins = (GameManager.coins or 0) + gainedCoins

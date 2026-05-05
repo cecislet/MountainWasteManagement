@@ -1,5 +1,7 @@
 local state = require "_scripts/MiniGame.Game_State"
 
+go.property("score_meters", 0)
+
 local lanes = {}
 for i=1,25 do lanes[i] = i * 30 end
 local coin_w = 20
@@ -113,7 +115,6 @@ local function update_progression(self, dt)
 
 	local duration = LEVEL_CONFIG[self.current_level] or 999999
 	if self.level_timer >= duration and self.current_level < 10 then
-		print("livello: " .. self.current_level)
 		self.current_level = self.current_level + 1
 		self.level_timer = 0
 		self.level_start_time = os.clock()
