@@ -20,6 +20,7 @@ end
 -- --- FUNZIONI DI RETE ---
 
 -- 1. LOGIN + CARICAMENTO DATI + ENTRATA DIRETTA
+-- Nel MainMenu.lua
 local function appwrite_login(self, username, password, quiet)
 	local email = username .. SUFFIX
 	local url = BASE_URL .. "/account/sessions/email"
@@ -30,25 +31,22 @@ local function appwrite_login(self, username, password, quiet)
 		if response.status == 201 then
 			local data = json.decode(response.response)
 			gm.player_id = data.userId
+			gm.name = username
 			self.is_logged_in = true
 
-			print("Login OK, sincronizzazione dati...")
 			gui.hide_keyboard() 
 
 			api.load(self, function(success)
 				if success then
-					print("Dati sincronizzati: " .. (gm.coins or 0) .. " monete.")
-					-- RIMOSSO IL msg.post QUI, perché lo yeti non esiste ancora!
+					api.save(self, function(saved)
+					end)
 				else
-					print("Nuovo profilo: inizio da zero.")
+					api.save(self, function(saved)
+					end)
 				end
 
 				if not quiet then
-					-- Carichiamo la pagina dello Yeti
 					msg.post("main:/SceneParent#Main", "change_level", { target = "StartPage"})
-
-					-- Trucco: Inviamo il messaggio con un leggerissimo ritardo 
-					-- o meglio, lo facciamo gestire direttamente alla StartPage quando "nasce"
 				end
 			end)
 		else

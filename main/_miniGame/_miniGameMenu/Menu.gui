@@ -39,7 +39,7 @@ nodes {
 }
 nodes {
   position {
-    y: -198.0
+    y: -305.0
   }
   size {
     x: 200.0
@@ -223,6 +223,96 @@ nodes {
   texture: "icons/knowledge"
   id: "coinIcon1"
   parent: "Knowledge_Label"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -200.0
+    y: -177.0
+  }
+  scale {
+    x: 0.845817
+  }
+  size {
+    x: 400.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "Score_Label"
+  parent: "Background"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    x: -81.9218
+  }
+  size {
+    x: 300.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "SCORE: "
+  font: "pixelFont"
+  id: "scoreLabel"
+  line_break: true
+  parent: "Score_Label"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 200.0
+    y: -177.0
+  }
+  scale {
+    x: 0.845817
+  }
+  size {
+    x: 400.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "HighScore_Label"
+  parent: "Background"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    x: -50.0
+  }
+  size {
+    x: 300.0
+    y: 100.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "HIGHSCORE: "
+  font: "pixelFont"
+  id: "highScoreLabel"
+  line_break: true
+  parent: "HighScore_Label"
   inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"

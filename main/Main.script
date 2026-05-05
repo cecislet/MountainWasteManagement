@@ -49,6 +49,7 @@ function on_message(self, message_id, message, sender)
 		self.pending_end_message = {
 			coins = message.coins,
 			knowledge = message.knowledge,
+			score = message.score,
 			reason = message.reason
 		}
 		switch_to_level(self, "MiniGame", "MiniGameMenu")
