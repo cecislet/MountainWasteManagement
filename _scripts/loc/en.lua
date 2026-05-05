@@ -3,7 +3,7 @@ local M = {}
 M.strings = {
 	play = "PLAY",
 	credits = "CREDITS",
-	exit = "EXIT",
+	story = "STORY",
 	label_username = "Username:",
 	label_password = "Password:",
 	insert_user = "Insert Username",
@@ -25,8 +25,15 @@ M.strings = {
 	label_coins_gained = "COINS GAINED:",
 	label_knowledge_gained = "KNOWLEDGE GAINED:",
 	button_exit = "EXIT",
+	error_coins = "You don't have enough Coins!",
 	msg_victory = "VICTORY!",
 	msg_gameover = "GAME OVER!",
+	button_trash = "TRASH",
+	button_eat = "EAT",
+	msg_saving = "Saving",
+	msg_save_ok = "Game Saved!",
+	msg_save_error = "Save Failed!",
+	story_text = "YETI SUSTAINABILITY PROJECT\nWasted food drains energy from the mountain and disrupts the village's balance.\n\nGAME MECHANICS:\n1. SKI LIFT: Collect coins and Knowledge Points while dodging obstacles.\n2. MOOD SYSTEM: The Yeti's emotional state affects his hunger. If he becomes Furious, the game locks.\n3. MARKET: Buy food from mentors, but watch the expiration dates to avoid waste.\n4. SCHOOL: Consult Professor Owl to get Fun Facts and increase your level.\n\nWork with the mountain mentors to save the village and feed the Yeti sustainably!",
 	school_guide = [[
 	WELCOME TO THE SCHOOL!
 
@@ -101,6 +108,21 @@ M.strings = {
 
 	q20 = "Approximately how many liters of water are needed to produce a single cup of coffee?",
 	q20_a1 = "1 liter", q20_a2 = "140 liters", q20_a3 = "50 liters", q20_a4 = "500 liters",
+
+	equip_btn = "EQUIP",
+	
+	shop_guide = [[
+	WELCOME TO THE YETI BOUTIQUE!
+
+	Express your style and keep your Yeti looking sharp!
+
+	1. CUSTOMIZE: Use the arrows to browse through different hats, shirts, and pants.
+	2. UNLOCK: Items can be purchased using Coins earned in the Ski Lift. Once bought, they are yours forever!
+	3. EQUIP: Already owned items will show as 'EQUIP'. Click to change your Yeti's outfit instantly.
+	4. SYNCED CLOSET: Your wardrobe is saved to your account. Your style follows you wherever you go!
+
+	Look good, feel good, and show off your unique Yeti!
+	]],
 	
 	market_guide = [[
 	WELCOME TO THE GENERAL STORE!
@@ -167,7 +189,7 @@ M.strings = {
 	fruit_orange_slice_desc = "A quick dose of vitamin C.",
 	fruit_watermelon_slice = "Watermelon Slice",
 	fruit_watermelon_slice_desc = "The ultimate summer refresher.",
-	rosti = "Rösti",
+	rosti = "Rosti",
 	rosti_desc = "Swiss potato specialty, golden and crispy.",
 
 	eggs_fried = "Fried Eggs",

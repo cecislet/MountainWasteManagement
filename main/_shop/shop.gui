@@ -1,0 +1,595 @@
+script: "/_scripts/Shop/shop.gui_script"
+fonts {
+  name: "pixelFont"
+  font: "/_assets/fonts/pixelFont.font"
+}
+fonts {
+  name: "pixelFont_Title"
+  font: "/_assets/fonts/pixelFont_Title.font"
+}
+textures {
+  name: "buttons"
+  texture: "/_assets/School/buttons.atlas"
+}
+textures {
+  name: "icons"
+  texture: "/_assets/icons/icons.atlas"
+}
+textures {
+  name: "yeti"
+  texture: "/main/yeti.atlas"
+}
+textures {
+  name: "clothes"
+  texture: "/_assets/yeti/clothes.atlas"
+}
+nodes {
+  position {
+    x: 41.867867
+    y: 726.06696
+    z: 0.1
+  }
+  scale {
+    z: 0.1
+  }
+  type: TYPE_BOX
+  texture: "buttons/exit"
+  id: "exit"
+  layer: "ui"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 41.867867
+    y: 660.06696
+    z: 0.1
+  }
+  scale {
+    z: 0.1
+  }
+  type: TYPE_BOX
+  texture: "buttons/info"
+  id: "info"
+  layer: "ui"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 384.0
+    y: 325.0
+  }
+  size {
+    x: 650.0
+    y: 430.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "infoBox"
+  layer: "ui"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    y: 30.0
+  }
+  size {
+    x: 630.0
+    y: 350.0
+  }
+  type: TYPE_TEXT
+  text: "WELCOME TO THE YETI BOUTIQUE!\n"
+  "\n"
+  "\tExpress your style and keep your Yeti looking sharp!\n"
+  "\n"
+  "\t1. CUSTOMIZE: Use the arrows to browse through different hats, shirts, and pants.\n"
+  "\t2. UNLOCK: Items can be purchased using Coins earned in the Ski Lift. Once bought, they are yours forever!\n"
+  "\t3. EQUIP: Already owned items will show as \'EQUIP\'. Click to change your Yeti\'s outfit instantly.\n"
+  "\t4. SYNCED CLOSET: Your wardrobe is saved to your account. Your style follows you wherever you go!\n"
+  "\n"
+  "\tLook good, feel good, and show off your unique Yeti!"
+  font: "pixelFont"
+  id: "infoText"
+  line_break: true
+  parent: "infoBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -171.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceWrongButton"
+  id: "exitInfo"
+  parent: "infoBox"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "EXIT"
+  font: "pixelFont"
+  id: "exitText"
+  parent: "exitInfo"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 276.59546
+    y: 332.4969
+  }
+  scale {
+    x: 4.0
+    y: 4.0
+  }
+  type: TYPE_BOX
+  texture: "yeti/idle_front"
+  id: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  type: TYPE_BOX
+  texture: "clothes/shirt"
+  id: "hat"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  type: TYPE_BOX
+  texture: "clothes/shirt"
+  id: "shirt"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  type: TYPE_BOX
+  texture: "clothes/pants"
+  id: "pants"
+  parent: "npcImage"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 62.75
+    y: 36.25
+  }
+  rotation {
+    y: 180.0
+  }
+  scale {
+    x: 0.191519
+    z: 0.1856
+  }
+  size {
+    x: 60.0
+    y: 40.0
+  }
+  type: TYPE_BOX
+  texture: "icons/arrowHud"
+  id: "nextHat"
+  parent: "npcImage"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 62.75
+    y: -6.5
+  }
+  rotation {
+    y: 180.0
+  }
+  scale {
+    x: 0.191519
+    z: 0.1856
+  }
+  size {
+    x: 60.0
+    y: 40.0
+  }
+  type: TYPE_BOX
+  texture: "icons/arrowHud"
+  id: "nextShirt"
+  parent: "npcImage"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 62.75
+    y: -43.75
+  }
+  rotation {
+    y: 180.0
+  }
+  scale {
+    x: 0.191519
+    z: 0.1856
+  }
+  size {
+    x: 60.0
+    y: 30.0
+  }
+  type: TYPE_BOX
+  texture: "icons/arrowHud"
+  id: "nextPants"
+  parent: "npcImage"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -61.25
+    y: 36.25
+  }
+  scale {
+    x: 0.191519
+    z: 0.1856
+  }
+  size {
+    x: 60.0
+    y: 40.0
+  }
+  type: TYPE_BOX
+  texture: "icons/arrowHud"
+  id: "prevHat"
+  parent: "npcImage"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -61.25
+    y: -6.5
+  }
+  scale {
+    x: 0.191519
+    z: 0.1856
+  }
+  size {
+    x: 60.0
+    y: 40.0
+  }
+  type: TYPE_BOX
+  texture: "icons/arrowHud"
+  id: "prevShirt"
+  parent: "npcImage"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -61.25
+    y: -43.75
+  }
+  scale {
+    x: 0.191519
+    z: 0.1856
+  }
+  size {
+    x: 60.0
+    y: 30.0
+  }
+  type: TYPE_BOX
+  texture: "icons/arrowHud"
+  id: "prevPants"
+  parent: "npcImage"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 85.0
+    y: 45.25
+  }
+  scale {
+    x: 0.240192
+    y: 0.240192
+    z: 0.240192
+  }
+  size {
+    x: 100.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "buyHat"
+  parent: "npcImage"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 80.0
+    y: 60.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont_Title"
+  id: "buyHatText"
+  parent: "buyHat"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 2.0
+    y: -76.0
+  }
+  size {
+    x: 90.0
+    y: 60.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "priceHat"
+  parent: "buyHat"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 70.0
+    y: 40.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "pricetextHat"
+  parent: "priceHat"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 85.0
+    y: 4.0
+  }
+  scale {
+    x: 0.240192
+    y: 0.240192
+    z: 0.240192
+  }
+  size {
+    x: 100.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "buyShirt"
+  parent: "npcImage"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 80.0
+    y: 60.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont_Title"
+  id: "buyShirtText"
+  parent: "buyShirt"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 2.0
+    y: -76.0
+  }
+  size {
+    x: 90.0
+    y: 60.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "priceShirt"
+  parent: "buyShirt"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 70.0
+    y: 40.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "pricetextShirt"
+  parent: "priceShirt"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 85.0
+    y: -36.0
+  }
+  scale {
+    x: 0.240192
+    y: 0.240192
+    z: 0.240192
+  }
+  size {
+    x: 100.0
+    y: 80.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceRightButton"
+  id: "buyPants"
+  parent: "npcImage"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 80.0
+    y: 60.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont_Title"
+  id: "buyPantsText"
+  parent: "buyPants"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 2.0
+    y: -76.0
+  }
+  size {
+    x: 90.0
+    y: 60.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "pricePants"
+  parent: "buyPants"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 70.0
+    y: 40.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "pricetextPants"
+  parent: "pricePants"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -0.5
+    y: 8.25
+  }
+  scale {
+    x: 0.25
+    y: 0.25
+  }
+  size {
+    x: 400.0
+    y: 300.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "errBox"
+  parent: "npcImage"
+  layer: "ui"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    y: 28.0
+  }
+  size {
+    x: 380.0
+    y: 220.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "errText"
+  line_break: true
+  parent: "errBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -115.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceWrongButton"
+  id: "exitErr"
+  parent: "errBox"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "EXIT"
+  font: "pixelFont"
+  id: "exitErrText"
+  parent: "exitErr"
+  inherit_alpha: true
+}
+layers {
+  name: "bgProps"
+}
+layers {
+  name: "ui"
+}
+layers {
+  name: "food"
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

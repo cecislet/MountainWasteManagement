@@ -42,5 +42,11 @@ embedded_instances {
   "  data: \"collection: \\\"/main/_mainMenu/mainMenu.collection\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"Shop\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/main/_shop/Shop.collection\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }

@@ -12,11 +12,14 @@ embedded_instances {
   "  texture: \\\"/main/school/SchoolBg.atlas\\\"\\n"
   "}\\n"
   "\"\n"
+  "  position {\n"
+  "    z: 0.1\n"
+  "  }\n"
   "}\n"
   ""
   position {
     x: 384.0
-    y: 384.0
+    y: 386.0
   }
   scale3 {
     x: 1.2
@@ -31,6 +34,9 @@ embedded_instances {
   "  component: \"/main/school/buttons.gui\"\n"
   "}\n"
   ""
+  position {
+    y: 2.0
+  }
   scale3 {
     x: 1.002453
     y: 0.99851
@@ -44,4 +50,7 @@ embedded_instances {
   "  component: \"/_assets/hud.gui\"\n"
   "}\n"
   ""
+  position {
+    y: 2.0
+  }
 }

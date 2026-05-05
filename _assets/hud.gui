@@ -25,27 +25,28 @@ textures {
 }
 nodes {
   position {
-    x: 472.0
-    y: 710.0
+    x: 503.0
+    y: 707.0
   }
   size {
-    x: 580.0
-    y: 100.0
-  }
-  color {
-    x: 0.3019608
-    y: 0.4
-    z: 0.8
+    x: 520.0
+    y: 110.0
   }
   type: TYPE_BOX
+  texture: "buttons/9SliceButton"
   id: "hud_bg"
   layer: "ui"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
 }
 nodes {
   position {
-    x: 240.0
+    x: 203.0
   }
   size {
     x: 90.0
@@ -58,7 +59,12 @@ nodes {
 }
 nodes {
   position {
-    x: -91.0
+    x: -84.0
+  }
+  scale {
+    x: 0.86
+    y: 0.86
+    z: 0.86
   }
   type: TYPE_BOX
   texture: "icons/money"
@@ -81,16 +87,21 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "money"
-  font: "pixelFont"
+  text: ":100"
+  font: "pixelFont_Title"
   id: "money_text"
   parent: "money_icon"
   inherit_alpha: true
 }
 nodes {
   position {
-    x: 70.0
+    x: 51.0
     y: -1.0
+  }
+  scale {
+    x: 0.86
+    y: 0.86
+    z: 0.86
   }
   type: TYPE_BOX
   texture: "icons/food"
@@ -114,16 +125,21 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "hunger"
-  font: "pixelFont"
+  text: "85%"
+  font: "pixelFont_Title"
   id: "hunger_text"
   parent: "hunger_icon"
   inherit_alpha: true
 }
 nodes {
   position {
-    x: -252.0
+    x: -220.0
     y: -1.0
+  }
+  scale {
+    x: 0.86
+    y: 0.86
+    z: 0.86
   }
   type: TYPE_BOX
   texture: "icons/knowledge"
@@ -147,15 +163,15 @@ nodes {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "know"
-  font: "pixelFont"
+  text: ":100"
+  font: "pixelFont_Title"
   id: "knowledge_text"
   parent: "know_icon"
   inherit_alpha: true
 }
 nodes {
   position {
-    x: 270.0
+    x: 234.0
     y: -418.0
     z: 1.0
   }
@@ -172,26 +188,169 @@ nodes {
 }
 nodes {
   position {
-    x: 701.0
-    y: 291.0
+    x: -322.0
   }
   size {
-    x: 120.0
-    y: 560.0
-  }
-  color {
-    x: 0.3019608
-    y: 0.4
-    z: 0.8
+    x: 110.0
+    y: 110.0
   }
   type: TYPE_BOX
-  id: "inventory_bg"
+  texture: "buttons/9SliceButton"
+  id: "options"
+  parent: "hud_bg"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  type: TYPE_BOX
+  texture: "icons/settings"
+  id: "Settingsicon"
+  parent: "options"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
-    y: 221.0
+    x: -130.0
+    y: -325.0
+  }
+  size {
+    x: 400.0
+    y: 250.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "OptionsBox"
+  parent: "hud_bg"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    y: -88.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceWrongButton"
+  id: "exit"
+  parent: "OptionsBox"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "EXIT\n"
+  ""
+  font: "pixelFont"
+  id: "exitText"
+  parent: "exit"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -117.0
+    y: 32.0
+  }
+  size {
+    x: 110.0
+    y: 110.0
+  }
+  type: TYPE_BOX
+  texture: "icons/pfpIcon"
+  id: "user"
+  parent: "OptionsBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 1.0
+    y: 32.0
+  }
+  size {
+    x: 110.0
+    y: 110.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/save"
+  id: "save"
+  parent: "OptionsBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 119.0
+    y: 32.0
+  }
+  size {
+    x: 110.0
+    y: 110.0
+  }
+  type: TYPE_BOX
+  texture: "icons/USA"
+  id: "language"
+  parent: "OptionsBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -47.0
+  }
+  size {
+    x: 200.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "saveResult"
+  parent: "OptionsBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 701.0
+    y: 291.0
+  }
+  size {
+    x: 130.0
+    y: 560.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "inventory_bg"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    y: 219.0
   }
   size {
     x: 100.0
@@ -223,7 +382,7 @@ nodes {
 }
 nodes {
   position {
-    y: 109.0
+    y: 107.0
   }
   size {
     x: 100.0
@@ -254,6 +413,9 @@ nodes {
   size_mode: SIZE_MODE_AUTO
 }
 nodes {
+  position {
+    y: -2.0
+  }
   size {
     x: 100.0
     y: 100.0
@@ -284,7 +446,7 @@ nodes {
 }
 nodes {
   position {
-    y: -109.0
+    y: -111.0
   }
   size {
     x: 100.0
@@ -316,7 +478,7 @@ nodes {
 }
 nodes {
   position {
-    y: -218.0
+    y: -220.0
   }
   size {
     x: 100.0
@@ -349,7 +511,7 @@ nodes {
 nodes {
   position {
     x: -400.0
-    y: -2.0
+    y: 26.0
   }
   size {
     x: 500.0
@@ -387,7 +549,7 @@ nodes {
 }
 nodes {
   position {
-    x: -8.0
+    x: -61.0
     y: -214.0
   }
   size {
@@ -510,7 +672,41 @@ nodes {
 }
 nodes {
   position {
-    x: -88.0
+    x: 55.0
+    y: -214.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceWrongButton"
+  id: "trash"
+  parent: "foodBox"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "TRASH\n"
+  ""
+  font: "pixelFont"
+  id: "trashText"
+  parent: "trash"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: -96.0
     y: 3.0
   }
   rotation {
@@ -525,17 +721,6 @@ nodes {
   id: "inventoryClose"
   parent: "inventory_bg"
   inherit_alpha: true
-}
-nodes {
-  position {
-    x: 40.0
-    y: 656.0
-  }
-  type: TYPE_BOX
-  texture: "buttons/save"
-  id: "save"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
 }
 layers {
   name: "ui"

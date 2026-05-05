@@ -339,11 +339,10 @@ nodes {
   parent: "Background"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
-  enabled: false
 }
 nodes {
   position {
-    y: -295.0
+    y: -186.0
   }
   size {
     x: 400.0
@@ -351,7 +350,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
-  id: "ExitButton"
+  id: "StoryButton"
   parent: "Menu"
   inherit_alpha: true
   slice9 {
@@ -367,10 +366,10 @@ nodes {
     y: 100.0
   }
   type: TYPE_TEXT
-  text: "EXIT"
+  text: "STORY"
   font: "pixelFont_Title"
-  id: "exitTxt"
-  parent: "ExitButton"
+  id: "storyTxt"
+  parent: "StoryButton"
   inherit_alpha: true
 }
 nodes {
@@ -443,7 +442,7 @@ nodes {
 }
 nodes {
   position {
-    y: -185.0
+    y: -294.0
   }
   size {
     x: 400.0
@@ -451,7 +450,7 @@ nodes {
   }
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
-  id: "Credits"
+  id: "CreditsButton"
   parent: "Menu"
   inherit_alpha: true
   slice9 {
@@ -470,7 +469,7 @@ nodes {
   text: "CREDITS"
   font: "pixelFont_Title"
   id: "creditsTxt"
-  parent: "Credits"
+  parent: "CreditsButton"
   inherit_alpha: true
 }
 nodes {
@@ -538,7 +537,7 @@ nodes {
   }
   size {
     x: 650.0
-    y: 400.0
+    y: 600.0
   }
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
@@ -552,7 +551,6 @@ nodes {
     z: 20.0
     w: 20.0
   }
-  enabled: false
 }
 nodes {
   position {
@@ -560,7 +558,7 @@ nodes {
   }
   size {
     x: 600.0
-    y: 300.0
+    y: 450.0
   }
   type: TYPE_TEXT
   text: "<text>"
@@ -572,7 +570,7 @@ nodes {
 }
 nodes {
   position {
-    y: -158.0
+    y: -258.0
   }
   size {
     x: 100.0

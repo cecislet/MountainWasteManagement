@@ -10,14 +10,17 @@ function init(self)
 	self.current_anim = nil
 	self.correction = vmath.vector3()
 
+	-- Setup margini collisione
 	local shape_props = physics.get_shape("#yeti_collisionobject", "yeti_hitbox")
 	self.margin_x = shape_props.dimensions.x / 2
 	self.margin_y = shape_props.dimensions.y / 2
+	msg.post("#", "sync_clothes")
 end
 
 function update(self, dt)
 	self.correction = vmath.vector3()
 
+	-- 1. Calcolo Movimento
 	local move_dir = vmath.vector3(self.dir.x, self.dir.y, 0)
 	if vmath.length_sqr(move_dir) > 1 then
 		move_dir = vmath.normalize(move_dir)
@@ -26,26 +29,89 @@ function update(self, dt)
 	local p = go.get_position()
 	local new_p = p + move_dir * speed * dt
 
-	new_p.x = math.max(self.margin_x, math.min(new_p.x, WINDOW_WIDTH - self.margin_x))
-	new_p.y = math.max(self.margin_y, math.min(new_p.y, WINDOW_HEIGHT - self.margin_y))
-
 	go.set_position(new_p)
 
-	local anim = self.current_anim or hash("front")
-	if move_dir.x > 0 then anim = hash("right")
-	elseif move_dir.x < 0 then anim = hash("left")
-	elseif move_dir.y > 0 then anim = hash("back")
-	elseif move_dir.y < 0 then anim = hash("front")
+	-- 2. Calcolo Animazione Corrente
+	local is_moving = vmath.length_sqr(move_dir) > 0.1
+	local anim = self.current_anim
+
+	if is_moving then
+		if math.abs(move_dir.x) > math.abs(move_dir.y) then
+			anim = (move_dir.x > 0) and hash("right") or hash("left")
+		else
+			anim = (move_dir.y > 0) and hash("back") or hash("front")
+		end
+	else
+		anim = hash("idle_front") -- Default idle
 	end
 
+	-- 3. Applicazione Animazioni (Yeti + Vestiti)
 	if anim ~= self.current_anim then
-		sprite.play_flipbook("#sprite", anim)
 		self.current_anim = anim
+		sprite.play_flipbook("#sprite", anim)
+
+		-- 1. Identifichiamo la direzione per il movimento (come facevi già)
+		local dir_str = ""
+		if anim == hash("right") then 
+			dir_str = "right"
+		elseif anim == hash("left") then 
+			dir_str = "left"
+		end
+
+		local categories = { "head", "shirt", "pants" }
+		for _, cat in ipairs(categories) do
+			local gm_key = (cat == "head") and "hat" or cat
+			local item_id = GameManager.equipped[gm_key]
+			local sprite_url = msg.url(nil, cat, "sprite")
+
+			pcall(function()
+				if item_id and item_id ~= "none" then
+					msg.post(sprite_url, "enable")
+
+					local final_anim_name = item_id
+
+					-- 2. LOGICA RICHIESTA:
+					-- Se lo yeti è fermo (idle), usa -front
+					if anim == hash("idle_front") then
+						final_anim_name = item_id .. "-front"
+						-- Altrimenti, se si muove a destra o sinistra, usa il tuo dir_str
+					elseif dir_str ~= "" then
+						final_anim_name = item_id .. "-" .. dir_str
+					end
+					-- Se cammina Su/Giù (senza dir_str), userà item_id base come ora
+
+					print("Provo a caricare animazione: " .. final_anim_name)
+					sprite.play_flipbook(sprite_url, hash(final_anim_name))
+				else
+					msg.post(sprite_url, "disable")
+				end
+			end)
+		end
 	end
 
+	-- 4. Z-Sorting dinamico (Yeti nel mondo)
 	local pos = go.get_position()
-	pos.z = 1 - (pos.y / 10000)
+	-- Moltiplichiamo per 0.1 per far sì che lo Yeti resti sempre tra Z 0.0 e 0.1
+	-- Così non raggiungerà mai il limite di 1.0 della telecamera
+	local base_z = (1 - (pos.y / 10000)) * 0.1 
+	pos.z = base_z
 	go.set_position(pos)
+
+	-- 5. FORZA I VESTITI SOPRA IL CORPO
+	-- Usiamo un valore piccolissimo per non rischiare di uscire dal range
+	local offset_z = 0.001 
+
+	local head_pos = go.get_position("head")
+	head_pos.z = offset_z
+	go.set_position(head_pos, "head")
+
+	local shirt_pos = go.get_position("shirt")
+	shirt_pos.z = offset_z
+	go.set_position(shirt_pos, "shirt")
+
+	local pants_pos = go.get_position("pants")
+	pants_pos.z = offset_z
+	go.set_position(pants_pos, "pants")
 end
 
 local function update_direction(self, axis, value, is_pressed)
@@ -58,18 +124,24 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("trigger_response") and message.enter then
-		local target = nil
-		if message.other_group == hash("Game") then target = "MiniGame"
-		elseif message.other_group == hash("School") then target = "School"
-		elseif message.other_group == hash("Market") then target = "Market"
-		--elseif message.other_group == hash("Restaurant") then target = "Restaurant"
-		end
-
+		local targets = {
+			[hash("Game")] = "MiniGame",
+			[hash("School")] = "School",
+			[hash("Market")] = "Market",
+			[hash("Shop")] = "Shop"
+		}
+		local target = targets[message.other_group]
 		if target then
 			msg.post("main:/SceneParent#Main", "change_level", { target = target })
 		end
 	end
 
+	if message_id == hash("sync_clothes") then
+		-- Forza il cambio animazione per far scattare l'aggiornamento dei vestiti
+		self.current_anim = nil 
+	end
+	
+	-- Gestione collisioni muri/ostacoli
 	if message_id == hash("contact_point_response") then
 		if message.group == hash("Fence") and message.distance > 0 then
 			local proj = vmath.project(self.correction, message.normal * message.distance)
@@ -79,12 +151,6 @@ function on_message(self, message_id, message, sender)
 				self.correction = self.correction + comp
 			end
 		end
-	end
-
-	if message_id == hash("move_up") then update_direction(self, "y", 1, message.pressed)
-	elseif message_id == hash("move_down") then update_direction(self, "y", -1, message.pressed)
-	elseif message_id == hash("move_left") then update_direction(self, "x", -1, message.pressed)
-	elseif message_id == hash("move_right") then update_direction(self, "x", 1, message.pressed)
 	end
 end
 

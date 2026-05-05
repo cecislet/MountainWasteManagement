@@ -16,6 +16,24 @@ M.hunger = 50
 M.inventory = {} 
 M.mood = 100 
 
+M.cosmetics = {
+	hats = {
+		{ id = "none", price = 0 },
+		{ id = "hat", price = 50 },
+	},
+	shirts = {
+		{ id = "none", price = 0 },
+		{ id = "shirt", price = 80 }
+	},
+	pants = {
+		{ id = "none", price = 0 },
+		{ id = "pants", price = 100 }
+	}
+}
+
+M.equipped = M.equipped or { hat = "none", shirt = "none", pants = "none" }
+M.unlocked_items = M.unlocked_items or { "none" }
+
 -- COSTANTI FAME
 M.hunger_rate_offline = 0.00115 
 M.hunger_rate_online = 0.00345
@@ -79,6 +97,15 @@ function M.get_current_season()
 	end
 
 	return "UNKNOWN"
+end
+
+function M.discard_food(index)
+	if M.inventory[index] then
+		table.remove(M.inventory, index)
+		M.add_mood(-50) 
+		return true
+	end
+	return false
 end
 
 function M.eat_food(index)

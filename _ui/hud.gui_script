@@ -1,16 +1,22 @@
-local data = require "_scripts.GameManager" 
+local data = require "_scripts.GameManager"
 local api = require "_scripts.api"
+
+--- --- INIZIALIZZAZIONE --- ---
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.inventory_open = false
 	self.food_box_open = false
-	self.selected_item_index = nil 
+	self.options_open = false
+	self.selected_item_index = nil
 
-	-- Inizializzazione UI
+	-- Stato iniziale UI
 	gui.set_enabled(gui.get_node("inventory_bg"), false)
 	gui.set_enabled(gui.get_node("foodBox"), false)
+	gui.set_enabled(gui.get_node("OptionsBox"), false)
 end
+
+--- --- FUNZIONI DI UTILITÀ --- ---
 
 local function close_inventory(self)
 	self.inventory_open = false
@@ -24,7 +30,7 @@ end
 
 local function refresh_inventory_slots(self)
 	local inv = data.inventory or {}
-	local now = os.time() -- Usiamo il tempo locale per coerenza con purchased_at
+	local now = os.time()
 
 	for i = 1, 5 do
 		local slot_node = gui.get_node("item" .. i)
@@ -33,191 +39,175 @@ local function refresh_inventory_slots(self)
 		gui.set_enabled(slot_node, true)
 
 		if inv[i] then
-			-- Mostra l'icona
 			gui.set_enabled(icon_node, true)
 			gui.play_flipbook(icon_node, hash(inv[i].icon))
 
-			-- Recuperiamo i dati originali dal GameManager per le soglie di tempo
 			local original_data = data.get_item_data_by_id(inv[i].id)
 			local time_passed = now - (inv[i].purchased_at or now)
 
 			if original_data then
 				if time_passed <= original_data.fresh_duration then
-					-- FASE 1: BUONO (Right)
-					gui.play_flipbook(slot_node, hash("9SliceRightButton"))
+					gui.play_flipbook(slot_node, hash("9SliceRightButton")) -- FASE 1: BUONO
 				elseif time_passed <= original_data.max_duration then
-					-- FASE 2: NEL MEZZO (Orange)
-					gui.play_flipbook(slot_node, hash("9SliceOrangeButton")) -- Assicurati che questo nome esista nell'atlas
+					gui.play_flipbook(slot_node, hash("9SliceOrangeButton")) -- FASE 2: MEDIO
 				else
-					-- FASE 3: SCADUTO (Wrong)
-					gui.play_flipbook(slot_node, hash("9SliceWrongButton"))
+					gui.play_flipbook(slot_node, hash("9SliceWrongButton")) -- FASE 3: SCADUTO
 				end
 			end
 			gui.set_color(icon_node, vmath.vector4(1, 1, 1, 1))
 		else
-			-- SLOT VUOTO
 			gui.set_enabled(icon_node, false)
-			gui.play_flipbook(slot_node, hash("9SliceButton"))
+			gui.play_flipbook(slot_node, hash("9SliceButton")) -- VUOTO
 		end
 	end
 end
+
+--- --- UPDATE --- ---
 
 function update(self, dt)
 	gui.set_text(gui.get_node("money_text"), math.floor(data.coins or 0))
 	gui.set_text(gui.get_node("knowledge_text"), math.floor(data.knowledge_amount or 0))
 	gui.set_text(gui.get_node("hunger_text"), math.ceil(data.hunger or 0) .. "%")
 
-	-- Aggiorna l'icona del mood del Yeti
 	local state_name = data.get_mood_state_name()
 	gui.play_flipbook(gui.get_node("yetiMood"), hash(state_name))
 end
 
+local function refresh_options_texts(self)
+	-- Aggiorna i testi dei pulsanti e delle etichette
+	gui.set_text(gui.get_node("exitText"), data.get_text("close") or "EXIT")
+end
+--- --- GESTIONE INPUT --- ---
+
 function on_input(self, action_id, action)
-	if action_id ~= hash("touch") then return false end
+	if action_id ~= hash("touch") or not action.pressed then return false end
 
-	-- 1. LOGICA CHIUSURA TOTALE (inventoryClose)
-	if action.pressed and gui.pick_node(gui.get_node("inventoryClose"), action.x, action.y) then
-		self.inventory_open = false
-		self.food_box_open = false
-		self.selected_item_index = nil -- Resettiamo la selezione
-		gui.set_enabled(gui.get_node("inventory_bg"), false)
-		gui.set_enabled(gui.get_node("foodBox"), false)
+	-- 1. GESTIONE MENU OPZIONI
+	if gui.pick_node(gui.get_node("options"), action.x, action.y) then
+		self.options_open = true
+		gui.set_enabled(gui.get_node("OptionsBox"), true)
+		gui.set_text(gui.get_node("exitText"), data.get_text("close") or "EXIT")
+		gui.set_text(gui.get_node("saveResult"), "")
 
-		gui.set_enabled(gui.get_node("inventoryOpen"), true)
-		gui.set_enabled(gui.get_node("inventoryClose"), false)
+		local flag_node = gui.get_node("language")
+		local flag_icon = (data.current_language == "en") and "USA" or "SwissItaly"
+		gui.play_flipbook(flag_node, hash(flag_icon))
 		return true
 	end
 
-	if action.pressed and gui.pick_node(gui.get_node("save"), action.x, action.y) then
-		-- Feedback visivo opzionale: potresti far pulsare il tasto o cambiare testo
-		print("Salvataggio manuale in corso...")
-
-		api.save(self, function(success) 
-			if success then
-				print("Dati salvati con successo!")
-			else
-				print("Errore nel salvataggio manuale.")
-			end
-		end)
-		return true
-	end
-	
-	-- 2. LOGICA FOOD BOX (Popup aperto)
-	-- Nota: Spostiamo la logica degli slot PRIMA del blocco totale del popup 
-	-- se vogliamo che ricliccare lo slot funzioni come interruttore.
-
-	if action.pressed and self.inventory_open then
-		for i = 1, 5 do
-			local node = gui.get_node("item" .. i)
-			-- Controlliamo se esiste un oggetto nell'inventario a quell'indice
-			local item = data.inventory[i]
-
-			if gui.pick_node(node, action.x, action.y) and item then
-				-- SE RICLICCATO LO STESSO SLOT: CHIUDI
-				if self.food_box_open and self.selected_item_index == i then
-					self.food_box_open = false
-					self.selected_item_index = nil
-					gui.set_enabled(gui.get_node("foodBox"), false)
+	if self.options_open then
+		if gui.pick_node(gui.get_node("exit"), action.x, action.y) then
+			self.options_open = false
+			gui.set_enabled(gui.get_node("OptionsBox"), false)
+		elseif gui.pick_node(gui.get_node("user"), action.x, action.y) then
+			data.player_id = nil
+			msg.post("main:/SceneParent#Main", "change_level", { target = "MainMenu" })
+		elseif gui.pick_node(gui.get_node("language"), action.x, action.y) then
+			local new_lang = (data.current_language == "it") and "en" or "it"
+			local new_flag = (new_lang == "en") and "USA" or "SwissItaly"
+			data.load_language(new_lang)
+			gui.play_flipbook(gui.get_node("language"), hash(new_flag))
+			gui.set_text(gui.get_node("exitText"), data.get_text("close") or "EXIT")
+		elseif gui.pick_node(gui.get_node("save"), action.x, action.y) then
+			gui.set_text(gui.get_node("saveResult"), data.get_text("msg_saving") or "Saving...")
+			api.save(self, function(success)
+				if success then
+					gui.set_text(gui.get_node("saveResult"), data.get_text("msg_save_ok") or "Game Saved!")
+					timer.delay(3, false, function()
+						self.options_open = false
+						gui.set_enabled(gui.get_node("OptionsBox"), false)
+					end)
 				else
-					-- ALTRIMENTI: APRI IL POPUP
-					self.selected_item_index = i
-					self.food_box_open = true
-
-					local item = data.inventory[i]
-					local original_data = data.get_item_data_by_id(item.id)
-					if not original_data then 
-						print("Errore: Dati non trovati per l'item " .. item.id)
-						return true 
-					end
-					local now = os.time()
-					local time_passed = now - (item.purchased_at or now)
-
-					-- 1. ENERGIA (Quanto sfama)
-					-- Se il cibo è fresco dà il 100%, se è arancione il 50%, se è rosso peggiora la fame
-					local energy_val = original_data.energy or 0
-					if time_passed > original_data.max_duration then
-						energy_val = -15 -- Cibo avariato
-					elseif time_passed > original_data.fresh_duration then
-						energy_val = math.floor(energy_val / 2)
-					end
-					gui.set_text(gui.get_node("energy"), data.get_text("label_energy") .. " " .. energy_val)
-
-					-- 2. CALCOLO DATE (in giorni)
-					local function format_days(seconds)
-						local d = math.ceil(seconds / 86400)
-						return d > 0 and (d .. " " .. data.get_text("days_left")) or data.get_text("expired")
-					end
-
-					-- Best Before: entro quanto diventa arancione
-					local best_before_remaining = original_data.fresh_duration - time_passed
-					gui.set_text(gui.get_node("labelBestBefore"), data.get_text("label_best_before") .. " " .. format_days(best_before_remaining))
-
-					-- Expiry: entro quanto diventa rosso (incomestibile)
-					local expiry_remaining = original_data.max_duration - time_passed
-					gui.set_text(gui.get_node("labelExpiry"), data.get_text("label_expiry") .. " " .. format_days(expiry_remaining))
-					
-					gui.play_flipbook(gui.get_node("icon"), hash(item.icon))
-					local key = item.icon
-					local localized_name = data.get_text(key)
-					local localized_desc = data.get_text(key .. "_desc")
-
-					if key:find("popsicle") then
-						localized_desc = data.get_text("popsicle_desc")
-					end
-
-					gui.set_text(gui.get_node("foodName"), localized_name or item.name)
-					gui.set_text(gui.get_node("foodText"), localized_desc or data.get_text("no_description"))
-
-					gui.set_enabled(gui.get_node("foodBox"), true)
+					gui.set_text(gui.get_node("saveResult"), data.get_text("msg_save_error") or "Save Failed!")
 				end
-				return true
-			elseif gui.pick_node(node, action.x, action.y) and not item then
-				-- Se clicco uno slot vuoto, non fare nulla (ma blocca il click)
-				return true
-			end
+			end)
 		end
+		return true -- Blocca input sotto le opzioni
 	end
 
-	-- 3. GESTIONE PULSANTI INTERNI AL FOOD BOX (Eat / Close)
-	if self.food_box_open then
-		if action.pressed then
-			if gui.pick_node(gui.get_node("eat"), action.x, action.y) then
-				local item = data.inventory[self.selected_item_index]
-				if item then
-					data.eat_food(self.selected_item_index)
-				end
-				close_inventory(self)
-				return true
-			end
-		end
-		-- Blocca input che passano attraverso il box (ma non gli slot gestiti sopra)
-		if gui.pick_node(gui.get_node("foodBox"), action.x, action.y) then
-			return true
-		end
-	end
-
-	-- 4. APERTURA INVENTARIO (inventoryOpen)
-	if action.pressed and gui.pick_node(gui.get_node("inventoryOpen"), action.x, action.y) then
+	-- 2. GESTIONE INVENTARIO (APERTURA/CHIUSURA)
+	if gui.pick_node(gui.get_node("inventoryOpen"), action.x, action.y) then
 		self.inventory_open = true
 		gui.set_enabled(gui.get_node("inventory_bg"), true)
 		gui.set_enabled(gui.get_node("inventoryOpen"), false)
 		gui.set_enabled(gui.get_node("inventoryClose"), true)
 		refresh_inventory_slots(self)
 		return true
+	elseif gui.pick_node(gui.get_node("inventoryClose"), action.x, action.y) then
+		close_inventory(self)
+		return true
 	end
 
-	-- 5. CHIUSURA AL CLICK ESTERNO (Sfondo)
-	if self.inventory_open and action.pressed and gui.pick_node(gui.get_node("inventory_bg"), action.x, action.y) then
-		-- Se il popup del cibo NON è aperto, chiudi tutto
-		if not self.food_box_open then
-			close_inventory(self)
-			return true
-		else
-			-- Se il popup è aperto, chiudi solo se clicchi fuori dal popup stesso
-			if not gui.pick_node(gui.get_node("foodBox"), action.x, action.y) then
+	-- 3. LOGICA SLOT INVENTARIO E FOOD BOX
+	if self.inventory_open then
+		-- Controllo click sugli slot
+		for i = 1, 5 do
+			local node = gui.get_node("item" .. i)
+			local item = data.inventory[i]
+
+			if gui.pick_node(node, action.x, action.y) and item then
+				if self.food_box_open and self.selected_item_index == i then
+					self.food_box_open = false
+					gui.set_enabled(gui.get_node("foodBox"), false)
+				else
+					-- Apri/Aggiorna Food Box
+					self.selected_item_index = i
+					self.food_box_open = true
+
+					local original_data = data.get_item_data_by_id(item.id)
+					local now = os.time()
+					local time_passed = now - (item.purchased_at or now)
+
+					-- Calcolo energia e testi
+					local energy_val = original_data.energy or 0
+					if time_passed > original_data.max_duration then
+						energy_val = -15
+					elseif time_passed > original_data.fresh_duration then
+						energy_val = math.floor(energy_val / 2)
+					end
+
+					local function format_days(seconds)
+						if seconds <= 0 then return data.get_text("expired") end
+						if seconds < 3600 then return math.ceil(seconds / 60) .. " m"
+						elseif seconds < 86400 then return math.ceil(seconds / 3600) .. " h"
+						else return math.ceil(seconds / 86400) .. " " .. data.get_text("days_left") end
+					end
+
+					gui.set_text(gui.get_node("energy"), data.get_text("label_energy") .. " " .. energy_val)
+					gui.set_text(gui.get_node("labelBestBefore"), data.get_text("label_best_before") .. " " .. format_days(original_data.fresh_duration - time_passed))
+					gui.set_text(gui.get_node("labelExpiry"), data.get_text("label_expiry") .. " " .. format_days(original_data.max_duration - time_passed))
+
+					gui.play_flipbook(gui.get_node("icon"), hash(item.icon))
+					gui.set_text(gui.get_node("foodName"), data.get_text(item.icon) or item.name)
+					gui.set_text(gui.get_node("foodText"), data.get_text(item.icon .. "_desc") or data.get_text("no_description"))
+					gui.set_text(gui.get_node("trashText"), data.get_text("button_trash") or "TRASH")
+					gui.set_text(gui.get_node("eatText"), data.get_text("button_eat") or "EAT")
+
+					gui.set_enabled(gui.get_node("foodBox"), true)
+				end
+				return true
+			end
+		end
+
+		-- Pulsanti interni al Food Box
+		if self.food_box_open then
+			if gui.pick_node(gui.get_node("eat"), action.x, action.y) then
+				data.eat_food(self.selected_item_index)
+				close_inventory(self)
+				return true
+			elseif gui.pick_node(gui.get_node("trash"), action.x, action.y) then
+				data.discard_food(self.selected_item_index)
 				close_inventory(self)
 				return true
 			end
+
+			if gui.pick_node(gui.get_node("foodBox"), action.x, action.y) then return true end
+		end
+
+		-- Chiusura cliccando lo sfondo
+		if gui.pick_node(gui.get_node("inventory_bg"), action.x, action.y) then
+			close_inventory(self)
+			return true
 		end
 	end
 

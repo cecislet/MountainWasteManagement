@@ -3,7 +3,7 @@ local M = {}
 M.strings = {
 	play = "GIOCA",
 	credits = "CREDITI",
-	exit = "ESCI",
+	story = "STORIA",
 	label_username = "Utente:",
 	label_password = "Password:",
 	insert_user = "Inserisci Utente",
@@ -25,8 +25,15 @@ M.strings = {
 	label_coins_gained = "MONETE:",
 	label_knowledge_gained = "CONOSCENZA:",
 	button_exit = "ESCI",
+	error_coins = "Non hai abbastanza monete!",
 	msg_victory = "HAI VINTO!",
 	msg_gameover = "HAI PERSO!",
+	button_trash = "BUTTA",
+	button_eat = "MANGIA",
+	msg_saving = "Salvataggio in corso",
+	msg_save_ok = "Gioco Salvato!",
+	msg_save_error = "Errore Salvataggio!",
+	story_text = "YETI SUSTAINABILITY PROJECT\nIl cibo sprecato sottrae energia alla montagna e danneggia l'equilibrio del villaggio.\n\nMECCANICHE DI GIOCO:\n1. SKI LIFT: Raccogli monete e Punti Conoscenza schivando gli ostacoli.\n2. MOOD SYSTEM: Lo stato emotivo del Yeti influenza la sua fame. Se è furioso, il gioco si blocca.\n3. MARKET: Acquista cibo dai mentor, ma attenzione alla data di scadenza per evitare sprechi.\n4. SCHOOL: Consulta Professor Owl per ottenere Fun Facts e aumentare il tuo livello.\n\nCollabora con i mentor della montagna per salvare il villaggio e nutrire il Yeti in modo sostenibile!",
 	school_guide = [[
 	BENVENUTO A SCUOLA!
 
@@ -102,6 +109,21 @@ M.strings = {
 	q20 = "Quanti litri d'acqua servono circa per produrre una singola tazza di caffe'?",
 	q20_a1 = "1 litro", q20_a2 = "140 litri", q20_a3 = "50 litri", q20_a4 = "500 litri",
 
+	shop_guide = [[
+	BENVENUTI NELLA BOUTIQUE DELLO YETI!
+
+	Esprimi il tuo stile e rendi il tuo Yeti il più elegante della montagna!
+
+	1. PERSONALIZZA: Usa le frecce per sfogliare i diversi modelli di cappelli, magliette e pantaloni.
+	2. SBLOCCA: Gli oggetti possono essere acquistati usando le Monete guadagnate nello Ski Lift. Una volta comprati, saranno tuoi per sempre!
+	3. EQUIPAGGIA: Gli oggetti che già possiedi mostreranno la scritta 'EQUIPAGGIA'. Clicca per cambiare l'outfit del tuo Yeti istantaneamente.
+	4. ARMADIO SINCRONIZZATO: Il tuo guardaroba è salvato sul tuo account. Il tuo stile ti segue ovunque tu vada!
+
+	Vesti bene, senti bene e mostra a tutti il tuo Yeti unico!
+	]],
+
+	equip_btn = "EQUIPAGGIA",
+	
 	market_guide = [[
 	BENVENUTI ALL'EMPORIO GENERALE!
 

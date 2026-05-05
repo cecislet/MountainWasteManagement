@@ -66,4 +66,21 @@ animations {
   playback: PLAYBACK_LOOP_FORWARD
   fps: 10
 }
+animations {
+  id: "idle_front"
+  images {
+    image: "/_assets/yeti/yeti_front_03.png"
+  }
+  images {
+    image: "/_assets/yeti/yeti_front_01.png"
+  }
+  images {
+    image: "/_assets/yeti/yeti_front_01.png"
+  }
+  images {
+    image: "/_assets/yeti/yeti_front_01.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
 extrude_borders: 2

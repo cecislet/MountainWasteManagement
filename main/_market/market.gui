@@ -110,8 +110,8 @@ nodes {
 }
 nodes {
   position {
-    x: 113.86787
-    y: 726.06696
+    x: 41.867867
+    y: 659.06696
     z: 0.1
   }
   scale {
@@ -209,11 +209,11 @@ nodes {
 nodes {
   position {
     x: 384.0
-    y: 384.0
+    y: 322.0
   }
   size {
     x: 650.0
-    y: 400.0
+    y: 600.0
   }
   type: TYPE_BOX
   texture: "buttons/9SliceButton"
@@ -229,14 +229,27 @@ nodes {
 }
 nodes {
   position {
-    y: 31.0
+    y: 28.0
   }
   size {
     x: 630.0
-    y: 320.0
+    y: 510.0
   }
   type: TYPE_TEXT
-  text: "<text>"
+  text: "BENVENUTI ALL\'EMPORIO GENERALE!\n"
+  "\n"
+  "\tAssicurati che il tuo Yeti rimanga in salute e felice mantenendo le scorte piene.\n"
+  "\n"
+  "\t1. NUTRI IL TUO AMICO: Acquista cibo e prelibatezze. Ricorda che la fame sale verso il 100% (pericolo) e scende verso lo 0% (sazio).\n"
+  "\t2. VALUTA: Tutti gli articoli sono prezzati in Punti Conoscenza. Usa la tua saggezza per provvedere allo Yeti!\n"
+  "\t3. PREZZI STAGIONALI: I prezzi fluttuano in base alla stagione corrente. Comprare prodotti di stagione conviene e nutre di pi\303\271!\n"
+  "\t4. CONSERVAZIONE REALE: Impara dove conservare i cibi (Frigo vs Scaffale) per farli durare pi\303\271 a lungo.\n"
+  "\n"
+  "\t--- LA GESTIONE DELLA SCADENZA ---\n"
+  "\tOgni cibo nell\'inventario mostra il suo stato tramite il colore del bottone:\n"
+  "\t- VERDE (Fresco): Massima efficacia! Riduce molta fame e aumenta il Mood.\n"
+  "\t- ARANCIONE (Da consumare): Qualit\303\240 ridotta. Sazia la met\303\240 e peggiora leggermente il Mood.\n"
+  "\t- ROSSO (Avariato): ATTENZIONE! Se lo mangia, la fame AUMENTA (+15) e il Mood crolla. Lo Yeti star\303\240 male!"
   font: "pixelFont"
   id: "infoText"
   line_break: true
@@ -245,7 +258,7 @@ nodes {
 }
 nodes {
   position {
-    y: -158.0
+    y: -257.0
   }
   size {
     x: 100.0
@@ -396,6 +409,7 @@ nodes {
 }
 nodes {
   position {
+    x: -14.0
     y: 153.0
   }
   size {
@@ -411,8 +425,8 @@ nodes {
 }
 nodes {
   position {
-    x: 215.0
-    y: 152.0
+    x: 159.0
+    y: -101.0
   }
   size {
     x: 50.0
@@ -471,6 +485,36 @@ nodes {
   id: "labelExpiry"
   line_break: true
   parent: "foodBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 52.0
+    y: -101.0
+  }
+  size {
+    x: 50.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "icons/knowledge"
+  id: "priceIcon"
+  parent: "foodBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 48.0
+  }
+  size {
+    x: 50.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: ":50"
+  font: "pixelFont_Title"
+  id: "price"
+  parent: "priceIcon"
   inherit_alpha: true
 }
 nodes {

@@ -1,0 +1,121 @@
+images {
+  image: "/_assets/yeti/Clothes/hat.png"
+}
+images {
+  image: "/_assets/yeti/Clothes/hat-right.png"
+}
+images {
+  image: "/_assets/yeti/Clothes/hat-left.png"
+}
+images {
+  image: "/_assets/yeti/Clothes/hat-front.png"
+}
+images {
+  image: "/_assets/yeti/Clothes/pants-front.png"
+}
+images {
+  image: "/_assets/yeti/Clothes/shirt-front.png"
+}
+animations {
+  id: "pants-left"
+  images {
+    image: "/_assets/yeti/Clothes/pants-left.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-left1.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-left.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-left2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+}
+animations {
+  id: "pants-right"
+  images {
+    image: "/_assets/yeti/Clothes/pants-right.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-right1.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-right.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-right2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+}
+animations {
+  id: "pants"
+  images {
+    image: "/_assets/yeti/Clothes/pants-front.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-front1.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-front.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/pants-front2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+}
+animations {
+  id: "shirt"
+  images {
+    image: "/_assets/yeti/Clothes/shirt-front.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-front1.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-front.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-front2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+}
+animations {
+  id: "shirt-left"
+  images {
+    image: "/_assets/yeti/Clothes/shirt-left.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-left1.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-left.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-left2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+}
+animations {
+  id: "shirt-right"
+  images {
+    image: "/_assets/yeti/Clothes/shirt-right.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-right1.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-right.png"
+  }
+  images {
+    image: "/_assets/yeti/Clothes/shirt-right2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+}
+extrude_borders: 2
