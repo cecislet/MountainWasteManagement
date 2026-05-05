@@ -1,16 +1,16 @@
 images {
-  image: "/_assets/yeti/happy.png"
+  image: "/_assets/yeti/Mood/angry.png"
 }
 images {
-  image: "/_assets/yeti/angry.png"
+  image: "/_assets/yeti/Mood/furious.png"
 }
 images {
-  image: "/_assets/yeti/sad.png"
+  image: "/_assets/yeti/Mood/happy.png"
 }
 images {
-  image: "/_assets/yeti/neutral.png"
+  image: "/_assets/yeti/Mood/neutral.png"
 }
 images {
-  image: "/_assets/yeti/furious.png"
+  image: "/_assets/yeti/Mood/sad.png"
 }
 extrude_borders: 2

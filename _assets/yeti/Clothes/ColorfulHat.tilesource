@@ -1,0 +1,79 @@
+image: "/_assets/yeti/Clothes/hats.png"
+tile_width: 144
+tile_height: 144
+animations {
+  id: "ColorfulHat-back"
+  start_tile: 5
+  end_tile: 5
+}
+animations {
+  id: "ColorfulHat-front"
+  start_tile: 2
+  end_tile: 2
+}
+animations {
+  id: "ColorfulHat-idle"
+  start_tile: 2
+  end_tile: 2
+}
+animations {
+  id: "ColorfulHat-left"
+  start_tile: 11
+  end_tile: 11
+}
+animations {
+  id: "ColorfulHat-right"
+  start_tile: 15
+  end_tile: 15
+}
+animations {
+  id: "PitVipers-back"
+  start_tile: 8
+  end_tile: 8
+}
+animations {
+  id: "PitVipers-front"
+  start_tile: 4
+  end_tile: 4
+}
+animations {
+  id: "PitVipers-idle"
+  start_tile: 4
+  end_tile: 4
+}
+animations {
+  id: "PitVipers-left"
+  start_tile: 10
+  end_tile: 10
+}
+animations {
+  id: "PitVipers-right"
+  start_tile: 14
+  end_tile: 14
+}
+animations {
+  id: "TopHat-back"
+  start_tile: 7
+  end_tile: 7
+}
+animations {
+  id: "TopHat-front"
+  start_tile: 3
+  end_tile: 3
+}
+animations {
+  id: "TopHat-idle"
+  start_tile: 3
+  end_tile: 3
+}
+animations {
+  id: "TopHat-left"
+  start_tile: 12
+  end_tile: 12
+}
+animations {
+  id: "TopHat-right"
+  start_tile: 16
+  end_tile: 16
+}
+extrude_borders: 2

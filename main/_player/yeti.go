@@ -5,11 +5,11 @@ components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "default_animation: \"front\"\n"
+  data: "default_animation: \"idle_front\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/main/yeti.atlas\"\n"
+  "  texture: \"/_assets/yeti/yetiAnim.tilesource\"\n"
   "}\n"
   ""
 }
