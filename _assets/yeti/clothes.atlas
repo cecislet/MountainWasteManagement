@@ -1,16 +1,4 @@
 images {
-  image: "/_assets/yeti/Clothes/hat.png"
-}
-images {
-  image: "/_assets/yeti/Clothes/hat-right.png"
-}
-images {
-  image: "/_assets/yeti/Clothes/hat-left.png"
-}
-images {
-  image: "/_assets/yeti/Clothes/hat-front.png"
-}
-images {
   image: "/_assets/yeti/Clothes/pants-idle.png"
 }
 images {

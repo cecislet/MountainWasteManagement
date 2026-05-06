@@ -3,8 +3,8 @@ tile_width: 144
 tile_height: 144
 animations {
   id: "ColorfulHat-back"
-  start_tile: 5
-  end_tile: 5
+  start_tile: 6
+  end_tile: 6
 }
 animations {
   id: "ColorfulHat-front"
@@ -18,13 +18,13 @@ animations {
 }
 animations {
   id: "ColorfulHat-left"
-  start_tile: 11
-  end_tile: 11
+  start_tile: 10
+  end_tile: 10
 }
 animations {
   id: "ColorfulHat-right"
-  start_tile: 15
-  end_tile: 15
+  start_tile: 14
+  end_tile: 14
 }
 animations {
   id: "PitVipers-back"
@@ -43,13 +43,13 @@ animations {
 }
 animations {
   id: "PitVipers-left"
-  start_tile: 10
-  end_tile: 10
+  start_tile: 12
+  end_tile: 12
 }
 animations {
   id: "PitVipers-right"
-  start_tile: 14
-  end_tile: 14
+  start_tile: 16
+  end_tile: 16
 }
 animations {
   id: "TopHat-back"
@@ -68,12 +68,12 @@ animations {
 }
 animations {
   id: "TopHat-left"
-  start_tile: 12
-  end_tile: 12
+  start_tile: 11
+  end_tile: 11
 }
 animations {
   id: "TopHat-right"
-  start_tile: 16
-  end_tile: 16
+  start_tile: 15
+  end_tile: 15
 }
 extrude_borders: 2

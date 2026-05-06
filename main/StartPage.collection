@@ -21,7 +21,7 @@ embedded_instances {
   id: "map"
   data: "components {\n"
   "  id: \"map\"\n"
-  "  component: \"/main/_map/map_copy.tilemap\"\n"
+  "  component: \"/main/_map/map.tilemap\"\n"
   "}\n"
   "embedded_components {\n"
   "  id: \"MiniGameHouse\"\n"

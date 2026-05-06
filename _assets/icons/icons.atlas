@@ -37,4 +37,7 @@ images {
 images {
   image: "/_assets/icons/settings.png"
 }
+images {
+  image: "/_assets/icons/leaderboard.png"
+}
 extrude_borders: 2

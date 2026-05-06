@@ -349,12 +349,248 @@ nodes {
   }
 }
 nodes {
+  size {
+    x: 95.0
+    y: 95.0
+  }
   type: TYPE_BOX
-  texture: "buttons/info"
+  texture: "icons/leaderboard"
   id: "leaderboard"
   parent: "leaderBoard"
   inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: -203.0
+    y: -391.0
+  }
+  size {
+    x: 500.0
+    y: 560.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "LeaderboardBox"
+  parent: "hud_bg"
+  layer: "ui"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    y: 236.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  text: "HIGH SCORES"
+  font: "pixelFont_Title"
+  id: "leaderboardLabel"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 200.0
+    y: 234.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceWrongButton"
+  id: "closeLeaderboard"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  scale {
+    x: 3.0
+    y: 3.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "X\n"
+  ""
+  font: "pixelFont"
+  id: "closeText"
+  parent: "closeLeaderboard"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 155.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  font: "pixelFont_Title"
+  id: "lb_name1"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -205.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  font: "pixelFont_Title"
+  id: "lb_name10"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 115.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  font: "pixelFont_Title"
+  id: "lb_name2"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 75.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  font: "pixelFont_Title"
+  id: "lb_name3"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 35.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  font: "pixelFont_Title"
+  id: "lb_name4"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -5.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  font: "pixelFont_Title"
+  id: "lb_name5"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -45.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  font: "pixelFont_Title"
+  id: "lb_name6"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -85.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  font: "pixelFont_Title"
+  id: "lb_name7"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -125.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  font: "pixelFont_Title"
+  id: "lb_name8"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -165.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  font: "pixelFont_Title"
+  id: "lb_name9"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: -245.0
+  }
+  size {
+    x: 460.0
+    y: 80.0
+  }
+  type: TYPE_TEXT
+  font: "pixelFont_Title"
+  id: "lb_name11"
+  parent: "LeaderboardBox"
+  inherit_alpha: true
 }
 nodes {
   position {
@@ -748,238 +984,6 @@ nodes {
   texture: "icons/arrowHud"
   id: "inventoryClose"
   parent: "inventory_bg"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 301.0
-    y: 318.0
-  }
-  size {
-    x: 500.0
-    y: 560.0
-  }
-  type: TYPE_BOX
-  texture: "buttons/9SliceButton"
-  id: "LeaderboardBox"
-  layer: "ui"
-  inherit_alpha: true
-  slice9 {
-    x: 20.0
-    y: 20.0
-    z: 20.0
-    w: 20.0
-  }
-}
-nodes {
-  position {
-    y: 236.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  text: "HIGH SCORES"
-  font: "pixelFont_Title"
-  id: "leaderboardLabel"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 200.0
-    y: 234.0
-  }
-  scale {
-    x: 0.5
-    y: 0.5
-  }
-  size {
-    x: 100.0
-    y: 100.0
-  }
-  type: TYPE_BOX
-  texture: "buttons/9SliceWrongButton"
-  id: "closeLeaderboard"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-  slice9 {
-    x: 20.0
-    y: 20.0
-    z: 20.0
-    w: 20.0
-  }
-}
-nodes {
-  scale {
-    x: 3.0
-    y: 3.0
-  }
-  size {
-    x: 100.0
-    y: 50.0
-  }
-  type: TYPE_TEXT
-  text: "X\n"
-  ""
-  font: "pixelFont"
-  id: "closeText"
-  parent: "closeLeaderboard"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: 155.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  font: "pixelFont_Title"
-  id: "lb_name1"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: -205.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  font: "pixelFont_Title"
-  id: "lb_name10"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: 115.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  font: "pixelFont_Title"
-  id: "lb_name2"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: 75.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  font: "pixelFont_Title"
-  id: "lb_name3"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: 35.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  font: "pixelFont_Title"
-  id: "lb_name4"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: -5.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  font: "pixelFont_Title"
-  id: "lb_name5"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: -45.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  font: "pixelFont_Title"
-  id: "lb_name6"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: -85.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  font: "pixelFont_Title"
-  id: "lb_name7"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: -125.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  font: "pixelFont_Title"
-  id: "lb_name8"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: -165.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  font: "pixelFont_Title"
-  id: "lb_name9"
-  parent: "LeaderboardBox"
-  inherit_alpha: true
-}
-nodes {
-  position {
-    y: -245.0
-  }
-  size {
-    x: 460.0
-    y: 80.0
-  }
-  type: TYPE_TEXT
-  font: "pixelFont_Title"
-  id: "lb_name11"
-  parent: "LeaderboardBox"
   inherit_alpha: true
 }
 layers {
