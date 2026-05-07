@@ -7,6 +7,7 @@ M.items_data = require "_scripts.Market.items_data" -- Assicurati che il percors
 
 M.current_language = "en"
 M.lang_data = lang_en.strings
+M.last_house_pos = vmath.vector3(255, 124, 0)
 
 -- DATI DEL GIOCATORE
 M.name = nil

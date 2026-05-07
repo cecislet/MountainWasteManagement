@@ -9,6 +9,9 @@ function init(self)
 	self.dir = vmath.vector3()
 	self.current_anim = nil
 	self.correction = vmath.vector3()
+	local position_to_spawn = GameManager.last_house_pos
+	position_to_spawn.y = position_to_spawn.y - 30
+	go.set_position(position_to_spawn)
 
 	-- Setup margini collisione
 	local shape_props = physics.get_shape("#yeti_collisionobject", "yeti_hitbox")
@@ -131,6 +134,7 @@ function on_message(self, message_id, message, sender)
 		if target then
 			msg.post("main:/SceneParent#Main", "change_level", { target = target })
 		end
+		GameManager.last_house_pos = go.get_position()
 	end
 
 	if message_id == hash("sync_clothes") then
