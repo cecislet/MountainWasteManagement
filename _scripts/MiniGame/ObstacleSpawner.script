@@ -4,9 +4,9 @@ go.property("score_meters", 0)
 
 local lanes = {}
 for i=1,25 do lanes[i] = i * 30 end
-local coin_w = 20
-local coinPowerUp_w = 7
-local knowledgePowerUp_w = 7
+local coin_w = 26
+local coinPowerUp_w = 5
+local knowledgePowerUp_w = 3
 local knowledgeItem_w = 0
 
 local last_lane = 0
