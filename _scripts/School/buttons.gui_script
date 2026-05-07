@@ -190,7 +190,7 @@ function on_input(self, action_id, action)
 
 					if i == self.correct_index then
 						gm.add_mood(5)
-						gm.knowledge_amount = (gm.knowledge_amount or 0) + 1
+						gm.knowledge_amount = (gm.knowledge_amount or 0) + 2
 					else
 						gm.add_mood(-10)
 					end
