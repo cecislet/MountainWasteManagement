@@ -114,8 +114,12 @@ function on_message(self, message_id, message, sender)
 				GameManager.add_mood(20)
 			else
 				data.reason = "msg_gameover" -- Usa la chiave, non il testo
-				GameManager.hunger = (GameManager.hunger or 100) + 10
-				GameManager.add_mood(-10)
+				if GameManager.hunger < 100 then
+					GameManager.hunger = (GameManager.hunger or 100) + 10
+				end
+				if GameManager.mood >= 10 then
+					GameManager.add_mood(-10)
+				end
 			end
 
 			-- 2. Salvataggio su Database (Appwrite)
