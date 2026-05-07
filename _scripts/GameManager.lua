@@ -194,4 +194,12 @@ function M.update_high_score(new_score)
 	return false
 end
 
+function M.reset_player_data()
+	M.player_id = nil
+	M.high_score = 0
+	M.coins = 0
+	M.mood = 100
+	M.knowledge_amount = 0
+end
+
 return M
