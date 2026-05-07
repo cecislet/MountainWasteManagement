@@ -1,6 +1,11 @@
 local M = {}
 
 M.strings = {
+	login_failed = "LOGIN FAILED: Wrong credentials.",
+	registration_failed = "ERROR: Registration failed",
+	invalid_username = "INVALID USERNAME",
+	short_psw = "TOO SHORT PASSWORD (MIN 8 CHAR.)",
+	missing_data = "FILL ALL THE REQUIRED FILEDS!",
 	play = "PLAY",
 	credits = "CREDITS",
 	story = "STORY",

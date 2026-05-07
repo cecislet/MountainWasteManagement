@@ -51,7 +51,7 @@ local function appwrite_login(self, username, password, quiet)
 				end
 			end)
 		else
-			show_popup(self, "LOGIN FALLITO: Credenziali errate.")
+			show_popup(self, gm.get_text("login_failed"))
 		end
 	end, headers, json.encode(payload))
 end
@@ -74,7 +74,7 @@ local function appwrite_register(self, username, password)
 			appwrite_login(self, username, password, false) 
 		else
 			local err = json.decode(response.response)
-			show_popup(self, "ERRORE: " .. (err.message or "Registrazione fallita"))
+			show_popup(self, gm.get_text("registration_failed") or ("ERROR: " .. (err.message or "Registration faailed")))
 		end
 	end, headers, json.encode(payload))
 end
@@ -222,7 +222,7 @@ function on_input(self, action_id, action)
 				if #self.username_text > 0 and #self.password_text > 0 then
 					appwrite_login(self, self.username_text, self.password_text, false)
 				else
-					show_popup(self, "INSERISCI TUTTI I DATI!")
+					show_popup(self, gm.get_text("missing_data"))
 				end
 
 			elseif gui.pick_node(gui.get_node("BackButton"), action.x, action.y) then
@@ -233,9 +233,9 @@ function on_input(self, action_id, action)
 				
 			elseif gui.pick_node(gui.get_node("RegisterButton"), action.x, action.y) then
 				if not is_valid_username(self.username_text) then
-					show_popup(self, "USERNAME NON VALIDO")
+					show_popup(self, gm.get_text("invalid_username"))
 				elseif #self.password_text < 8 then
-					show_popup(self, "PASSWORD TROPPO CORTA (MIN 8 CAR.)")
+					show_popup(self, gm.get_text("short_psw"))
 				else
 					appwrite_register(self, self.username_text, self.password_text)
 				end
