@@ -79,9 +79,19 @@ end
 function M.save(self, callback)
 	if not gm.player_id then return end
 
+	if gm.hunger > 100 then
+		gm.hunger = 100
+	elseif gm.hunger < 0 then
+		gm.hunger = 0
+	end
+
+	if gm.mood > 100 then
+		gm.mood = 100
+	elseif gm.mood < 0 then
+		gm.mood = 0
+	end
+		
 	local url = BASE_URL .. "/databases/" .. DATABASE_ID .. "/collections/" .. COLLECTION_ID .. "/documents/" .. gm.player_id
-	print("HIGH SCORE FROM API: " .. gm.high_score)
-	print("HUNGER FROM API: " .. gm.hunger)
 	local payload = {
 		data = {
 			mood = math.floor(gm.mood or 0),
