@@ -32,6 +32,7 @@ local function appwrite_login(self, username, password, quiet)
 			local data = json.decode(response.response)
 			gm.player_id = data.userId
 			gm.name = username
+			gm.high_score = 0
 			self.is_logged_in = true
 
 			gui.hide_keyboard() 

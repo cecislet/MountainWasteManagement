@@ -41,6 +41,7 @@ function M.load(self, callback)
 		if response.status == 200 then
 			local data = json.decode(response.response)
 
+			gm.high_score = tonumber(data.high_score) or 0
 			gm.mood = tonumber(data.mood) or 100
 			gm.knowledge_amount = tonumber(data.knowledgePoints) or 0
 			gm.coins = tonumber(data.coins) or 0
@@ -79,7 +80,8 @@ function M.save(self, callback)
 	if not gm.player_id then return end
 
 	local url = BASE_URL .. "/databases/" .. DATABASE_ID .. "/collections/" .. COLLECTION_ID .. "/documents/" .. gm.player_id
-
+	print("HIGH SCORE FROM API: " .. gm.high_score)
+	print("HUNGER FROM API: " .. gm.hunger)
 	local payload = {
 		data = {
 			mood = math.floor(gm.mood or 0),
