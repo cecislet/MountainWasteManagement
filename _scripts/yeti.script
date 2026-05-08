@@ -123,6 +123,16 @@ local function update_direction(self, axis, value, is_pressed)
 end
 
 function on_message(self, message_id, message, sender)
+	if message_id == hash("move_up") then
+		update_direction(self, "y", 1, message.pressed)
+	elseif message_id == hash("move_down") then
+		update_direction(self, "y", -1, message.pressed)
+	elseif message_id == hash("move_left") then
+		update_direction(self, "x", -1, message.pressed)
+	elseif message_id == hash("move_right") then
+		update_direction(self, "x", 1, message.pressed)
+	end
+	
 	if message_id == hash("trigger_response") and message.enter then
 		local targets = {
 			[hash("Game")] = "MiniGame",
