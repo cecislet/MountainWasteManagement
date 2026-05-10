@@ -73,6 +73,18 @@ embedded_instances {
   "  data: \"prototype: \\\"/main/_miniGame/knowledgeItem.go\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"log_Factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/_miniGame/_obstacles/log.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"snowman_Factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/_miniGame/_obstacles/snowman.go\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
 embedded_instances {

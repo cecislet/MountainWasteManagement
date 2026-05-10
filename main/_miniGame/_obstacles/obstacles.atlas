@@ -8,7 +8,21 @@ animations {
 animations {
   id: "tree"
   images {
-    image: "/_assets/MiniGame/obstacles/tree.png"
+    image: "/_assets/mapSprites/Trees/Tree_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "log"
+  images {
+    image: "/_assets/mapSprites/Decoration/Log.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+animations {
+  id: "snowman"
+  images {
+    image: "/_assets/mapSprites/Decoration/Snowman_0.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
 }

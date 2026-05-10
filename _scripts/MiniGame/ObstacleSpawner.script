@@ -35,6 +35,8 @@ local function spawn_obstacle(self)
 	local weights = {
 		{ id = "#tree_Factory", w = 0 },
 		{ id = "#rock_Factory", w = 0 },
+		{ id = "#snowman_Factory", w = 0 },
+		{ id = "#log_Factory", w = 0 },
 		{ id = "#coin_Factory", w = coin_w },
 		{ id = "#finish_Factory", w = finish_w },
 		{ id = "#coinPowerUp_Factory", w = coinPowerUp_w},
@@ -48,10 +50,12 @@ local function spawn_obstacle(self)
 	end
 
 	local remaining_w = math.max(0, 100 - current_total)
-	local obs_w = remaining_w / 2
+	local obs_w = remaining_w / 4
 	weights[1].w = obs_w
 	weights[2].w = obs_w
-
+	weights[3].w = obs_w
+	weights[4].w = obs_w
+	
 	local roll = math.random() * 100
 	local current = 0
 	local selected_id = weights[1].id

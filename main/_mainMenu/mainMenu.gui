@@ -12,10 +12,6 @@ fonts {
   font: "/_assets/fonts/pixelFont_Title.font"
 }
 textures {
-  name: "menu"
-  texture: "/main/_miniGame/_miniGameMenu/menu.atlas"
-}
-textures {
   name: "buttons"
   texture: "/_assets/School/buttons.atlas"
 }
@@ -31,6 +27,10 @@ textures {
   name: "icons1"
   texture: "/_assets/icons/icons.atlas"
 }
+textures {
+  name: "minigamemap"
+  texture: "/main/_miniGame/minigamemap.tilesource"
+}
 nodes {
   position {
     x: 385.0
@@ -41,7 +41,7 @@ nodes {
     y: 768.0
   }
   type: TYPE_BOX
-  texture: "MiniGameMap/background"
+  texture: "minigamemap/anim"
   id: "Background"
   inherit_alpha: true
 }
