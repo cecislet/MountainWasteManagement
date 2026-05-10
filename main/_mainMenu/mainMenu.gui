@@ -600,47 +600,6 @@ nodes {
   parent: "closeErr"
   inherit_alpha: true
 }
-nodes {
-  position {
-    x: -439.0
-    y: 408.0
-  }
-  scale {
-    x: 0.684932
-    y: 0.790368
-    z: 1.74
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  color {
-    y: 0.0
-    z: 0.0
-  }
-  type: TYPE_BOX
-  id: "DebugButton"
-  parent: "Background"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-  enabled: false
-  visible: false
-}
-nodes {
-  scale {
-    x: 0.8533
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "AUTOLOGIN"
-  font: "pixelFont_Title"
-  id: "text"
-  parent: "DebugButton"
-  inherit_alpha: true
-}
 layers {
   name: "err"
 }

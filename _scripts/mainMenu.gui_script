@@ -107,7 +107,7 @@ local function update_ui_texts(self)
 	gui.set_text(gui.get_node("backTxt"), gm.get_text("back"))        -- Pulsante BACK
 
 	-- --- TESTI EXTRA (Debug e Errori) ---
-	gui.set_text(gui.get_node("text"), gm.get_text("debug_access")) -- Pulsante DEBUG
+	--gui.set_text(gui.get_node("text"), gm.get_text("debug_access")) -- Pulsante DEBUG
 	gui.set_text(gui.get_node("exitErrText"), gm.get_text("close"))     -- Pulsante CLOSE popup
 end
 
@@ -164,10 +164,10 @@ function on_input(self, action_id, action)
 
 		if gui.is_enabled(menu) then
 			-- --- TASTO DEBUG VELOCE ---
-			if gui.pick_node(gui.get_node("DebugButton"), action.x, action.y) then
-				appwrite_login(self, "Corrente", "Sirius2112", false)
-				return true 
-			end
+			--if gui.pick_node(gui.get_node("DebugButton"), action.x, action.y) then
+			--	appwrite_login(self, "Corrente", "Sirius2112", false)
+			--	return true 
+			--end
 
 			if gui.pick_node(gui.get_node("PlayButton"), action.x, action.y) then
 				if self.is_logged_in then
