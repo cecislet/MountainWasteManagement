@@ -1,0 +1,106 @@
+image: "/_assets/yeti/Clothes/pants.png"
+tile_width: 144
+tile_height: 144
+animations {
+  id: "Black-back"
+  start_tile: 19
+  end_tile: 22
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Black-front"
+  start_tile: 6
+  end_tile: 9
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Black-idle"
+  start_tile: 6
+  end_tile: 6
+  fps: 5
+}
+animations {
+  id: "Black-left"
+  start_tile: 45
+  end_tile: 48
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Black-right"
+  start_tile: 32
+  end_tile: 35
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Jeans-back"
+  start_tile: 15
+  end_tile: 18
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Jeans-front"
+  start_tile: 2
+  end_tile: 5
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Jeans-idle"
+  start_tile: 2
+  end_tile: 2
+  fps: 5
+}
+animations {
+  id: "Jeans-left"
+  start_tile: 41
+  end_tile: 44
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Jeans-right"
+  start_tile: 28
+  end_tile: 31
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "White-back"
+  start_tile: 23
+  end_tile: 26
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "White-front"
+  start_tile: 10
+  end_tile: 13
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "White-idle"
+  start_tile: 10
+  end_tile: 10
+  fps: 5
+}
+animations {
+  id: "White-left"
+  start_tile: 49
+  end_tile: 52
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "White-right"
+  start_tile: 36
+  end_tile: 39
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+extrude_borders: 2
