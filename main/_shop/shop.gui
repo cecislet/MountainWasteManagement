@@ -24,12 +24,12 @@ textures {
   texture: "/_assets/yeti/Clothes/Hats.tilesource"
 }
 textures {
-  name: "clothes"
-  texture: "/_assets/yeti/clothes.atlas"
-}
-textures {
   name: "Pants"
   texture: "/_assets/yeti/Clothes/Pants.tilesource"
+}
+textures {
+  name: "Shirts"
+  texture: "/_assets/yeti/Clothes/Shirts.tilesource"
 }
 nodes {
   position {
@@ -166,7 +166,7 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  texture: "clothes/shirt-idle"
+  texture: "Shirts/SUPSI-front"
   id: "shirt"
   parent: "npcImage"
   inherit_alpha: true

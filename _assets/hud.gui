@@ -986,6 +986,75 @@ nodes {
   parent: "inventory_bg"
   inherit_alpha: true
 }
+nodes {
+  position {
+    x: 399.0
+    y: 346.0
+  }
+  size {
+    x: 400.0
+    y: 250.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceButton"
+  id: "errBox"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  position {
+    y: -88.0
+  }
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_BOX
+  texture: "buttons/9SliceWrongButton"
+  id: "exitErr"
+  parent: "errBox"
+  inherit_alpha: true
+  slice9 {
+    x: 20.0
+    y: 20.0
+    z: 20.0
+    w: 20.0
+  }
+}
+nodes {
+  size {
+    x: 100.0
+    y: 50.0
+  }
+  type: TYPE_TEXT
+  text: "EXIT\n"
+  ""
+  font: "pixelFont"
+  id: "closeErrText"
+  parent: "exitErr"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    y: 27.0
+  }
+  size {
+    x: 380.0
+    y: 170.0
+  }
+  type: TYPE_TEXT
+  text: "<text>"
+  font: "pixelFont"
+  id: "errText"
+  line_break: true
+  parent: "errBox"
+  inherit_alpha: true
+}
 layers {
   name: "ui"
 }

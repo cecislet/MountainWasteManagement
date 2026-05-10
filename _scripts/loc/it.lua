@@ -6,6 +6,7 @@ M.strings = {
 	invalid_username = "USERNAME NON VALIDO",
 	short_psw = "PASSWORD TROPPO CORTA (MIN 8 CAR.)",
 	missing_data = "INSERISCI TUTTI I DATI!",
+	err_too_hungry = "Hai troppa fame per giocare! Mangia qualcosa prima.",
 	play = "GIOCA",
 	credits = "CREDITI",
 	story = "STORIA",

@@ -142,7 +142,19 @@ function on_message(self, message_id, message, sender)
 		}
 		local target = targets[message.other_group]
 		if target then
+			if target == "MiniGame" and GameManager.hunger >= 100 then
+				-- Opzione A: Messaggio semplice in console per test
+				print("Lo yeti ha troppa fame per giocare!")
+
+				-- Opzione B: Invia un messaggio alla tua GUI per mostrare il popup
+				-- Assicurati di avere un sistema di popup/notifiche nella tua scena
+				msg.post("ui_handler#hud", "show_notification", { text_key = "err_too_hungry" })
+				return -- Blocca l'esecuzione, non cambia livello
+			end 
+
+			-- Se non è il minigame o se ha abbastanza energia, cambia livello
 			msg.post("main:/SceneParent#Main", "change_level", { target = target })
+			GameManager.last_house_pos = go.get_position()
 		end
 		GameManager.last_house_pos = go.get_position()
 	end

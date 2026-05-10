@@ -1,0 +1,140 @@
+image: "/_assets/yeti/Clothes/shirts.png"
+tile_width: 144
+tile_height: 144
+animations {
+  id: "Lime-back"
+  start_tile: 31
+  end_tile: 34
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Lime-front"
+  start_tile: 14
+  end_tile: 17
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Lime-idle"
+  start_tile: 14
+  end_tile: 14
+  fps: 5
+}
+animations {
+  id: "Lime-left"
+  start_tile: 48
+  end_tile: 51
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Lime-right"
+  start_tile: 65
+  end_tile: 68
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "PSU-back"
+  start_tile: 27
+  end_tile: 30
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "PSU-front"
+  start_tile: 10
+  end_tile: 13
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "PSU-idle"
+  start_tile: 10
+  end_tile: 10
+  fps: 5
+}
+animations {
+  id: "PSU-left"
+  start_tile: 44
+  end_tile: 47
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "PSU-right"
+  start_tile: 57
+  end_tile: 60
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Red-back"
+  start_tile: 19
+  end_tile: 22
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Red-front"
+  start_tile: 2
+  end_tile: 5
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Red-idle"
+  start_tile: 2
+  end_tile: 2
+  fps: 5
+}
+animations {
+  id: "Red-left"
+  start_tile: 36
+  end_tile: 39
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "Red-right"
+  start_tile: 53
+  end_tile: 56
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "SUPSI-back"
+  start_tile: 23
+  end_tile: 26
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "SUPSI-front"
+  start_tile: 6
+  end_tile: 9
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "SUPSI-idle"
+  start_tile: 6
+  end_tile: 6
+  fps: 5
+}
+animations {
+  id: "SUPSI-left"
+  start_tile: 40
+  end_tile: 43
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+animations {
+  id: "SUPSI-right"
+  start_tile: 61
+  end_tile: 64
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 5
+}
+extrude_borders: 2

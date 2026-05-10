@@ -23,18 +23,21 @@ M.cosmetics = {
 	hats = {
 		{ id = "none", price = 0 },
 		{ id = "ColorfulHat", price = 50 },
-		{ id = "PitVipers", price = 100 },
+		{ id = "PitVipers", price = 150 },
 		{ id = "TopHat", price = 50 },
 	},
 	shirts = {
 		{ id = "none", price = 0 },
-		{ id = "shirt", price = 80 }
+		{ id = "Red", price = 80 },
+		{ id = "PSU", price = 100 },
+		{ id = "SUPSI", price = 100 },
+		{ id = "Lime", price = 80 }
 	},
 	pants = {
 		{ id = "none", price = 0 },
-		{ id = "Jeans", price = 100 },
-		{ id = "Black", price = 100 },
-		{ id = "White", price = 100 }
+		{ id = "Jeans", price = 50 },
+		{ id = "Black", price = 130 },
+		{ id = "White", price = 80 }
 	}
 }
 

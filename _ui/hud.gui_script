@@ -10,12 +10,14 @@ function init(self)
 	self.options_open = false
 	self.leaderboard_open = false
 	self.selected_item_index = nil
+	self.error_open = false
 
 	-- Stato iniziale UI
 	gui.set_enabled(gui.get_node("inventory_bg"), false)
 	gui.set_enabled(gui.get_node("foodBox"), false)
 	gui.set_enabled(gui.get_node("OptionsBox"), false)
 	gui.set_enabled(gui.get_node("LeaderboardBox"), false)
+	gui.set_enabled(gui.get_node("errBox"), false)
 
 	local current_scene = data.get_current_level()
 	if current_scene == "StartPage" then
@@ -90,6 +92,17 @@ local function refresh_leaderboard(self)
 end
 
 --- --- UPDATE --- ---
+function on_message(self, message_id, message, sender)
+	if message_id == hash("show_notification") then
+		self.error_open = true
+		gui.set_enabled(gui.get_node("errBox"), true)
+		local translated_text = data.get_text(message.text_key)
+		gui.set_text(gui.get_node("errText"), translated_text)
+
+		local close_text = data.get_text("close")
+		gui.set_text(gui.get_node("closeErrText"), close_text)
+	end
+end
 
 function update(self, dt)
 	gui.set_text(gui.get_node("money_text"), math.floor(data.coins or 0))
@@ -109,6 +122,20 @@ end
 function on_input(self, action_id, action)
 	if action_id ~= hash("touch") or not action.pressed then return false end
 
+	-- GESTIONE POPUP ERRORE (Precedenza massima)
+	if self.error_open then
+		if gui.pick_node(gui.get_node("exitErr"), action.x, action.y) then
+			self.error_open = false
+			gui.set_enabled(gui.get_node("errBox"), false)
+			return true
+		end
+
+		-- Se il popup è aperto, cliccare altrove sul box non deve far passare l'input sotto
+		if gui.pick_node(gui.get_node("errBox"), action.x, action.y) then
+			return true
+		end
+	end
+	
 	local lb_btn = gui.get_node("leaderBoard")
 	if gui.is_enabled(lb_btn) and gui.pick_node(lb_btn, action.x, action.y) then
 		self.leaderboard_open = true
