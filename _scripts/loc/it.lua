@@ -41,7 +41,8 @@ M.strings = {
 	msg_saving = "Salvataggio in corso",
 	msg_save_ok = "Gioco Salvato!",
 	msg_save_error = "Errore Salvataggio!",
-	story_text = "YETI SUSTAINABILITY PROJECT\nIl cibo sprecato sottrae energia alla montagna e danneggia l'equilibrio del villaggio.\n\nMECCANICHE DI GIOCO:\n1. SKI LIFT: Raccogli monete e Punti Conoscenza schivando gli ostacoli.\n2. MOOD SYSTEM: Lo stato emotivo del Yeti influenza la sua fame. Se è furioso, il gioco si blocca.\n3. MARKET: Acquista cibo dai mentor, ma attenzione alla data di scadenza per evitare sprechi.\n4. SCHOOL: Consulta Professor Owl per ottenere Fun Facts e aumentare il tuo livello.\n\nCollabora con i mentor della montagna per salvare il villaggio e nutrire il Yeti in modo sostenibile!",
+	story_text = "YETI SUSTAINABILITY PROJECT\nIl cibo sprecato sottrae energia alla montagna e danneggia l'equilibrio del villaggio.\n\nMECCANICHE DI GIOCO:\n1. SKI LIFT: Raccogli monete e Punti Conoscenza schivando gli ostacoli.\n2. MOOD SYSTEM: Lo stato emotivo del Yeti influenza la sua fame. Se diventa furioso, il gioco si blocca.\n3. MARKET: Acquista cibo dai mentor alla Mugros, ma attenzione alla data di scadenza per evitare sprechi.\n4. SCHOOL: Consulta Professor Owl per ottenere Fun Facts e aumentare il tuo livello.\n\nCollabora con i mentor della montagna per salvare il villaggio e nutrire il Yeti in modo sostenibile!",
+	creditsNames = "SVILUPPATO DA: GRUPPO 6 \n SUPSI x PSU \n\n MANANGER DEL PROGETTO: Arnav Mehta \n\n MANAGER DEL MARKETING: Diana Deleon \n\n MANAGER DELL'ESPERIENZA UTENTE: Braeden Rubin \n\n MANAGER DEL PROCESSO DI DESIGN: Ben Ginder \n\n SVILUPPATORI:\n Davide Cecini\n Andrea Calzari",
 	school_guide = [[
 	BENVENUTO A SCUOLA!
 

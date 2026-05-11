@@ -192,7 +192,7 @@ function on_input(self, action_id, action)
 				-- --- NUOVA LOGICA CREDITS ---
 			elseif gui.pick_node(gui.get_node("CreditsButton"), action.x, action.y) then
 				-- Mostra il popup con i crediti
-				local msg = "DEVELOPED BY: GROUP 6 \n SUPSI x PSU"
+				local msg = gm.get_text("creditsNames")
 				show_popup(self, msg)
 				return true
 			end
