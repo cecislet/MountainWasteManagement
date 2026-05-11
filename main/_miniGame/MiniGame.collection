@@ -23,8 +23,8 @@ instances {
     z: 0.1
   }
   scale3 {
-    x: 0.3
-    y: 0.3
+    x: 0.4
+    y: 0.4
   }
 }
 scale_along_z: 0
