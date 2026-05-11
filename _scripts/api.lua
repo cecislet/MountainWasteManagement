@@ -126,28 +126,38 @@ function M.save(self, callback)
 end
 
 function M.get_leaderboard(self, callback)
+	-- Appwrite 1.9+ vuole le query come JSON stringified
+	-- Query.orderDesc("high_score") -> {"method":"orderDesc","attribute":"high_score"}
+	-- Query.limit(10) -> {"method":"limit","values":[10]}
+
+	local q1 = '{"method":"orderDesc","attribute":"high_score"}'
+	local q2 = '{"method":"limit","values":[10]}'
+
+	-- URL encode manuale dei JSON
+	local function urlencode(str)
+		return str:gsub('[^%w%-_%.~]', function(c)
+			return string.format('%%%02X', string.byte(c))
+		end)
+	end
+
 	local url = BASE_URL .. "/databases/" .. DATABASE_ID .. "/collections/" .. COLLECTION_ID .. "/documents"
+	.. "?queries[]=" .. urlencode(q1)
+	.. "&queries[]=" .. urlencode(q2)
+
 	local headers = {
-		["X-Appwrite-Project"] = PROJECT_ID
+		["X-Appwrite-Project"] = PROJECT_ID,
+		["Content-Type"] = "application/json"
 	}
+
 	http.request(url, "GET", function(self, id, response)
 		if response.status == 200 then
 			local data = json.decode(response.response)
-			local docs = data.documents or {}
-
-			table.sort(docs, function(a, b)
-				return (a.high_score or 0) > (b.high_score or 0)
-			end)
-
-			local top10 = {}
-			for i = 1, math.min(10, #docs) do
-				table.insert(top10, docs[i])
-			end
-
+			local top10 = data.documents or {}
 			if callback then 
 				callback(true, top10) 
 			end
 		else
+			print("Errore Leaderboard: " .. response.status .. " - " .. tostring(response.response))
 			if callback then callback(false, nil) end
 		end
 	end, headers)

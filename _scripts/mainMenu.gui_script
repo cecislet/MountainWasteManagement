@@ -33,6 +33,11 @@ local function appwrite_login(self, username, password, quiet)
 			gm.player_id = data.userId
 			gm.name = username
 			gm.high_score = 0
+			gm.knowledge_amount = 0
+			gm.coins = 0
+
+			print("mood: " .. gm.mood)
+			
 			self.is_logged_in = true
 
 			gui.hide_keyboard() 
@@ -71,7 +76,10 @@ local function appwrite_register(self, username, password)
 	http.request(url, "POST", function(self, id, response)
 		if response.status == 201 then
 			print("Registrazione OK, entro nel gioco...")
-			appwrite_login(self, username, password, false) 
+			appwrite_login(self, username, password, false)
+			gm.hunger = 51
+			gm.mood = 95
+			gm.high_score = 0
 		else
 			local err = json.decode(response.response)
 			show_popup(self, gm.get_text("registration_failed") or ("ERROR: " .. (err.message or "Registration faailed")))
