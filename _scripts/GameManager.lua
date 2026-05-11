@@ -202,10 +202,15 @@ end
 
 function M.reset_player_data()
 	M.player_id = nil
+	M.name = nil
 	M.high_score = 0
 	M.coins = 0
-	M.mood = 100
+	M.mood = 70
 	M.knowledge_amount = 0
+	M.hunger = 51
+	M.inventory = {}
+	M.equipped = { hat = "none", shirt = "none", pants = "none" }
+	M.unlocked_items = { "none" }
 end
 
 return M

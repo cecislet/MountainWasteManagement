@@ -22,6 +22,7 @@ end
 -- 1. LOGIN + CARICAMENTO DATI + ENTRATA DIRETTA
 -- Nel MainMenu.lua
 local function appwrite_login(self, username, password, quiet)
+	gm.reset_player_data()
 	local email = username .. SUFFIX
 	local url = BASE_URL .. "/account/sessions/email"
 	local payload = { email = email, password = password }
@@ -32,9 +33,6 @@ local function appwrite_login(self, username, password, quiet)
 			local data = json.decode(response.response)
 			gm.player_id = data.userId
 			gm.name = username
-			gm.high_score = 0
-			gm.knowledge_amount = 0
-			gm.coins = 0
 
 			print("mood: " .. gm.mood)
 			
@@ -77,8 +75,11 @@ local function appwrite_register(self, username, password)
 		if response.status == 201 then
 			print("Registrazione OK, entro nel gioco...")
 			appwrite_login(self, username, password, false)
+			gm.high_score = 0
+			gm.knowledge_amount = 0
+			gm.coins = 0
 			gm.hunger = 51
-			gm.mood = 95
+			gm.mood = 70
 			gm.high_score = 0
 		else
 			local err = json.decode(response.response)
@@ -277,3 +278,4 @@ function on_input(self, action_id, action)
 		end
 	end
 end
+
