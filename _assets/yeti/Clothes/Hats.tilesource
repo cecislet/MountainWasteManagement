@@ -2,6 +2,31 @@ image: "/_assets/yeti/Clothes/hats.png"
 tile_width: 144
 tile_height: 144
 animations {
+  id: "Cecio-back"
+  start_tile: 20
+  end_tile: 20
+}
+animations {
+  id: "Cecio-front"
+  start_tile: 17
+  end_tile: 17
+}
+animations {
+  id: "Cecio-idle"
+  start_tile: 17
+  end_tile: 17
+}
+animations {
+  id: "Cecio-left"
+  start_tile: 19
+  end_tile: 19
+}
+animations {
+  id: "Cecio-right"
+  start_tile: 18
+  end_tile: 18
+}
+animations {
   id: "ColorfulHat-back"
   start_tile: 6
   end_tile: 6
@@ -27,6 +52,56 @@ animations {
   end_tile: 14
 }
 animations {
+  id: "Cowboy-back"
+  start_tile: 24
+  end_tile: 24
+}
+animations {
+  id: "Cowboy-front"
+  start_tile: 21
+  end_tile: 21
+}
+animations {
+  id: "Cowboy-idle"
+  start_tile: 21
+  end_tile: 21
+}
+animations {
+  id: "Cowboy-left"
+  start_tile: 23
+  end_tile: 23
+}
+animations {
+  id: "Cowboy-right"
+  start_tile: 22
+  end_tile: 22
+}
+animations {
+  id: "Guy-back"
+  start_tile: 28
+  end_tile: 28
+}
+animations {
+  id: "Guy-front"
+  start_tile: 25
+  end_tile: 25
+}
+animations {
+  id: "Guy-idle"
+  start_tile: 25
+  end_tile: 25
+}
+animations {
+  id: "Guy-left"
+  start_tile: 27
+  end_tile: 27
+}
+animations {
+  id: "Guy-right"
+  start_tile: 26
+  end_tile: 26
+}
+animations {
   id: "PitVipers-back"
   start_tile: 8
   end_tile: 8
@@ -50,6 +125,31 @@ animations {
   id: "PitVipers-right"
   start_tile: 16
   end_tile: 16
+}
+animations {
+  id: "Thomas-back"
+  start_tile: 32
+  end_tile: 32
+}
+animations {
+  id: "Thomas-front"
+  start_tile: 29
+  end_tile: 29
+}
+animations {
+  id: "Thomas-idle"
+  start_tile: 29
+  end_tile: 29
+}
+animations {
+  id: "Thomas-left"
+  start_tile: 30
+  end_tile: 30
+}
+animations {
+  id: "Thomas-right"
+  start_tile: 31
+  end_tile: 31
 }
 animations {
   id: "TopHat-back"

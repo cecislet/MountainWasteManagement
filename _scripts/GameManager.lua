@@ -25,6 +25,10 @@ M.cosmetics = {
 		{ id = "ColorfulHat", price = 50 },
 		{ id = "PitVipers", price = 150 },
 		{ id = "TopHat", price = 50 },
+		{ id = "Guy", price = 350 },
+		{ id = "Cecio", price = 10000 },
+		{ id = "Thomas", price = 500 },
+		{ id = "Cowboy", price = 100 },
 	},
 	shirts = {
 		{ id = "none", price = 0 },

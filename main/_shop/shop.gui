@@ -158,9 +158,10 @@ nodes {
 }
 nodes {
   type: TYPE_BOX
-  texture: "hats/ColorfulHat-idle"
+  texture: "hats/Thomas-front"
   id: "hat"
   parent: "npcImage"
+  layer: "ui"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }

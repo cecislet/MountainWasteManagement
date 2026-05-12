@@ -91,27 +91,9 @@ function update(self, dt)
 
 	-- 4. Z-Sorting dinamico (Yeti nel mondo)
 	local pos = go.get_position()
-	-- Moltiplichiamo per 0.1 per far sì che lo Yeti resti sempre tra Z 0.0 e 0.1
-	-- Così non raggiungerà mai il limite di 1.0 della telecamera
 	local base_z = (1 - (pos.y / 10000)) * 0.1 
 	pos.z = base_z
 	go.set_position(pos)
-
-	-- 5. FORZA I VESTITI SOPRA IL CORPO
-	-- Usiamo un valore piccolissimo per non rischiare di uscire dal range
-	local offset_z = 0.001 
-
-	local head_pos = go.get_position("head")
-	head_pos.z = offset_z
-	go.set_position(head_pos, "head")
-
-	local shirt_pos = go.get_position("shirt")
-	shirt_pos.z = offset_z
-	go.set_position(shirt_pos, "shirt")
-
-	local pants_pos = go.get_position("pants")
-	pants_pos.z = offset_z
-	go.set_position(pants_pos, "pants")
 end
 
 local function update_direction(self, axis, value, is_pressed)
